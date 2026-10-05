@@ -9,15 +9,15 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from typing import Annotated
 
-from fastapi import FastAPI, HTTPException, Path, Query
-from fastapi.responses import PlainTextResponse
+from fastapi import FastAPI, HTTPException, Path, Query, Request
+from fastapi.responses import JSONResponse, PlainTextResponse
 
 from .api_models import CreateRunOut, ReportOut, RunStatusOut, RunSummary
 from .config import load_settings, settings_problem
 from .dispatch import make_dispatcher
 from .render_md import render_markdown
 from .runs import RUN_ID_PATTERN, CapacityError, RunRequest, create_run, run_key
-from .store import make_store
+from .store import StorageNotConfigured, make_store
 
 log = logging.getLogger(__name__)
 RunId = Annotated[str, Path(pattern=RUN_ID_PATTERN)]
@@ -38,6 +38,11 @@ def create_app(*, store=None, settings=None, deps=None, dispatcher=None) -> Fast
     app = FastAPI(title="Battlecard intel API", version="1.0.0", separate_input_output_schemas=False)
     ctx = SimpleNamespace(store=store, settings=settings, deps=deps, dispatcher=dispatcher)
     app.state.ctx = ctx
+
+    @app.exception_handler(StorageNotConfigured)
+    def storage_missing(_req: Request, exc: StorageNotConfigured) -> JSONResponse:
+        log.error("%s", exc)
+        return JSONResponse({"detail": str(exc)}, status_code=503)
 
     def get_settings():
         if ctx.settings is None:

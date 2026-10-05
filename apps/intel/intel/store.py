@@ -114,7 +114,19 @@ def data_dir() -> Path:
     return Path(os.getenv("DATA_DIR") or Path(__file__).resolve().parents[1] / "data")
 
 
+BLOB_TOKEN_VARS = ("BLOB_READ_WRITE_TOKEN", "VERCEL_BLOB_READ_WRITE_TOKEN")  # the names the Blob SDK reads
+
+
+class StorageNotConfigured(RuntimeError):
+    """On Vercel without a Blob token: the filesystem is read-only, so there is nowhere to save runs."""
+
+
 def make_store() -> Store:
-    if os.getenv("BLOB_READ_WRITE_TOKEN"):
+    if any(os.getenv(v) for v in BLOB_TOKEN_VARS):
         return BlobStore()
+    if os.getenv("VERCEL"):
+        raise StorageNotConfigured(
+            "Storage isn't connected. In Vercel, create a Blob store (Storage tab), connect it to this "
+            "project for Production, then redeploy. BLOB_READ_WRITE_TOKEN must appear in Environment Variables."
+        )
     return LocalStore(data_dir())

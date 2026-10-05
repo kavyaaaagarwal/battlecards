@@ -103,3 +103,14 @@ def test_stalled_run_is_redispatched_on_resubmit(store, offline, monkeypatch):
     store.put_json(f"runs/{run_id}.json", doc)
     assert client.post("/v1/runs", json=BODY).json()["reused"] is True
     assert dispatcher.started == [run_id, run_id]
+
+
+def test_missing_blob_storage_on_vercel_is_a_clear_503(monkeypatch):
+    for k in ("BLOB_READ_WRITE_TOKEN", "VERCEL_BLOB_READ_WRITE_TOKEN"):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setenv("VERCEL", "1")
+    monkeypatch.setenv("LLM_PROVIDER", "anthropic")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    monkeypatch.setenv("SEARCH_PROVIDER", "ddg")
+    r = TestClient(create_app(settings=load_settings("/nonexistent"))).post("/v1/runs", json=BODY)
+    assert r.status_code == 503 and "Blob store" in r.json()["detail"]

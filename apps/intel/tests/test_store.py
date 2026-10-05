@@ -80,3 +80,18 @@ def test_blob_store_round_trip(monkeypatch):
     assert s.list_keys("runs/") == ["runs/a.json"]
     # run documents change after every stage - reads must never come from a cache
     assert all(k == {"access": "private", "use_cache": False} for k in client.get_kwargs)
+
+
+def test_make_store_picks_blob_local_or_refuses(tmp_path, monkeypatch):
+    from intel.store import BlobStore, StorageNotConfigured, make_store
+
+    for k in ("BLOB_READ_WRITE_TOKEN", "VERCEL_BLOB_READ_WRITE_TOKEN", "VERCEL"):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setenv("DATA_DIR", str(tmp_path))
+    assert isinstance(make_store(), LocalStore)
+    monkeypatch.setenv("VERCEL", "1")  # read-only filesystem: never fall back to local files
+    with pytest.raises(StorageNotConfigured):
+        make_store()
+    monkeypatch.setenv("VERCEL_BLOB_READ_WRITE_TOKEN", "vercel_blob_rw_test_x")
+    monkeypatch.setattr("intel.store.BlobStore.__init__", lambda self, client=None: None)
+    assert isinstance(make_store(), BlobStore)
