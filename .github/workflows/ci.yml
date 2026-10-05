@@ -1,0 +1,41 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  intel:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: apps/intel } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync
+      - run: uv run ruff check .
+      - run: uv run pytest -q
+
+  web:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: apps/web } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm, cache-dependency-path: apps/web/package-lock.json }
+      - run: npm ci
+      - name: Contract types are up to date
+        run: npm run gen:contracts && git diff --exit-code src/lib/intel-api.d.ts
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - run: npm test
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: [intel, web]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm, cache-dependency-path: apps/web/package-lock.json }
+      - run: cd apps/intel && uv sync
+      - run: cd apps/web && npm ci && npx playwright install --with-deps chromium
+      - run: cd apps/web && npm run e2e

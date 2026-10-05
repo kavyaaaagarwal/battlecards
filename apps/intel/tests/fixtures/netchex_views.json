@@ -1,0 +1,1264 @@
+{
+  "cards": [
+    {
+      "axis_lo": 2.5,
+      "evidence": {
+        "independent": 6,
+        "pct": 38,
+        "total": 16
+      },
+      "known": 8,
+      "ratings": [
+        {
+          "site": "G2",
+          "them": null,
+          "us": {
+            "out_of": 5.0,
+            "rating": 4.6,
+            "review_count": 358,
+            "site": "G2",
+            "source": "S20"
+          }
+        },
+        {
+          "site": "Software Advice",
+          "them": null,
+          "us": {
+            "out_of": 5.0,
+            "rating": 4.5,
+            "review_count": 165,
+            "site": "Software Advice",
+            "source": "S17"
+          }
+        },
+        {
+          "site": "TrustRadius",
+          "them": {
+            "out_of": 10.0,
+            "rating": 9.0,
+            "review_count": null,
+            "site": "TrustRadius",
+            "source": "S45"
+          },
+          "us": {
+            "out_of": 10.0,
+            "rating": 9.0,
+            "review_count": 31,
+            "site": "TrustRadius",
+            "source": "S19"
+          }
+        },
+        {
+          "site": "Trustpilot",
+          "them": null,
+          "us": {
+            "out_of": 5.0,
+            "rating": 3.0,
+            "review_count": 29,
+            "site": "Trustpilot",
+            "source": "S21"
+          }
+        },
+        {
+          "site": "Gartner Peer Insights",
+          "them": {
+            "out_of": 5.0,
+            "rating": 4.2,
+            "review_count": 48,
+            "site": "Gartner Peer Insights",
+            "source": "S48"
+          },
+          "us": null
+        }
+      ],
+      "rows": [
+        {
+          "name": "Time and attendance integration",
+          "them": {
+            "company": "Paylocity",
+            "note": "Separate module, connects via integration",
+            "self": false,
+            "sources": [
+              "S119"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Native scheduling-payroll integration",
+            "self": false,
+            "sources": [
+              "S119"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Hiring and onboarding tools",
+          "them": {
+            "company": "Paylocity",
+            "note": "Candidate management is add-on functionality",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Netchex Recruit with Text-to-Apply",
+            "self": true,
+            "sources": [
+              "S8",
+              "S31",
+              "S32"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Customer support quality",
+          "them": {
+            "company": "Paylocity",
+            "note": "Inconsistent account representatives cause delays",
+            "self": false,
+            "sources": [
+              "S47",
+              "S51"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "90% of calls answered in under one minute",
+            "self": true,
+            "sources": [
+              "S8",
+              "S9",
+              "S10",
+              "S11"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Payroll for hourly workforces",
+          "them": {
+            "company": "Paylocity",
+            "note": "Built for office workers, not hourly shift-based teams",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Native support for tipped wages, shift differentials",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Ease of use and interface",
+          "them": {
+            "company": "Paylocity",
+            "note": "Ease of use and intuitive interface frequently praised",
+            "self": false,
+            "sources": [
+              "S45",
+              "S46",
+              "S47",
+              "S51",
+              "S52",
+              "S53"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Ease of use and user-friendly interface frequently highlighted",
+            "self": false,
+            "sources": [
+              "S17",
+              "S19"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "Implementation speed and support",
+          "them": {
+            "company": "Paylocity",
+            "note": "Implementation takes 3 to 4 months, costs exceed $50,000",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Free white-glove implementation in about 6 weeks",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Pricing transparency",
+          "them": {
+            "company": "Paylocity",
+            "note": "Pricing is not publicly published; custom quotes",
+            "self": true,
+            "sources": [
+              "S36",
+              "S37"
+            ],
+            "status": "none"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Pricing is not public; available upon request",
+            "self": false,
+            "sources": [
+              "S18"
+            ],
+            "status": "none"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "AI and automation features",
+          "them": {
+            "company": "Paylocity",
+            "note": "AI-powered automation for recruiting, onboarding, performance",
+            "self": true,
+            "sources": [
+              "S34",
+              "S35",
+              "S39",
+              "S41"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Mesh AI HR Teammates: six AI specialists",
+            "self": true,
+            "sources": [
+              "S16"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        }
+      ],
+      "tally": {
+        "behind": 0,
+        "even": 3,
+        "lead": 5,
+        "unknown": 0
+      }
+    },
+    {
+      "axis_lo": 2.5,
+      "evidence": {
+        "independent": 9,
+        "pct": 47,
+        "total": 19
+      },
+      "known": 7,
+      "ratings": [
+        {
+          "site": "G2",
+          "them": null,
+          "us": {
+            "out_of": 5.0,
+            "rating": 4.6,
+            "review_count": 358,
+            "site": "G2",
+            "source": "S20"
+          }
+        },
+        {
+          "site": "Software Advice",
+          "them": null,
+          "us": {
+            "out_of": 5.0,
+            "rating": 4.5,
+            "review_count": 165,
+            "site": "Software Advice",
+            "source": "S17"
+          }
+        },
+        {
+          "site": "TrustRadius",
+          "them": {
+            "out_of": 10.0,
+            "rating": 7.4,
+            "review_count": 345,
+            "site": "TrustRadius",
+            "source": "S76"
+          },
+          "us": {
+            "out_of": 10.0,
+            "rating": 9.0,
+            "review_count": 31,
+            "site": "TrustRadius",
+            "source": "S19"
+          }
+        },
+        {
+          "site": "Trustpilot",
+          "them": null,
+          "us": {
+            "out_of": 5.0,
+            "rating": 3.0,
+            "review_count": 29,
+            "site": "Trustpilot",
+            "source": "S21"
+          }
+        },
+        {
+          "site": "Gartner Peer Insights",
+          "them": {
+            "out_of": 5.0,
+            "rating": 4.2,
+            "review_count": 55,
+            "site": "Gartner Peer Insights",
+            "source": "S79"
+          },
+          "us": null
+        }
+      ],
+      "rows": [
+        {
+          "name": "Time and attendance integration",
+          "them": {
+            "company": "isolved",
+            "note": "Workforce management for time tracking",
+            "self": true,
+            "sources": [
+              "S5"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Native scheduling-payroll integration",
+            "self": false,
+            "sources": [
+              "S119"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "Hiring and onboarding tools",
+          "them": {
+            "company": "isolved",
+            "note": "Talent acquisition and onboarding included",
+            "self": true,
+            "sources": [
+              "S5"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Netchex Recruit with Text-to-Apply",
+            "self": true,
+            "sources": [
+              "S8",
+              "S31",
+              "S32"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "Customer support quality",
+          "them": {
+            "company": "isolved",
+            "note": "Users report poor customer support and delays",
+            "self": false,
+            "sources": [
+              "S81"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "90% of calls answered in under one minute",
+            "self": true,
+            "sources": [
+              "S8",
+              "S9",
+              "S10",
+              "S11"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Payroll for hourly workforces",
+          "them": {
+            "company": "isolved",
+            "note": "Integrated payroll processing with real-time AI monitoring",
+            "self": true,
+            "sources": [
+              "S5"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Native support for tipped wages, shift differentials",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "Ease of use and interface",
+          "them": {
+            "company": "isolved",
+            "note": "Users report system is user-friendly with clean layout",
+            "self": false,
+            "sources": [
+              "S75",
+              "S76"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Ease of use and user-friendly interface frequently highlighted",
+            "self": false,
+            "sources": [
+              "S17",
+              "S19"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "Implementation speed and support",
+          "them": {
+            "company": "isolved",
+            "note": "",
+            "self": false,
+            "sources": [],
+            "status": "unknown"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Free white-glove implementation in about 6 weeks",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "full"
+          },
+          "verdict": "unknown"
+        },
+        {
+          "name": "Pricing transparency",
+          "them": {
+            "company": "isolved",
+            "note": "Pricing is not publicly listed; book demo or contact sales",
+            "self": true,
+            "sources": [
+              "S5",
+              "S63"
+            ],
+            "status": "none"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Pricing is not public; available upon request",
+            "self": false,
+            "sources": [
+              "S18"
+            ],
+            "status": "none"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "AI and automation features",
+          "them": {
+            "company": "isolved",
+            "note": "Autonomous AI agents for specific HR and payroll outcomes",
+            "self": false,
+            "sources": [
+              "S74"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Mesh AI HR Teammates: six AI specialists",
+            "self": true,
+            "sources": [
+              "S16"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        }
+      ],
+      "tally": {
+        "behind": 0,
+        "even": 6,
+        "lead": 1,
+        "unknown": 1
+      }
+    },
+    {
+      "axis_lo": 1.0,
+      "evidence": {
+        "independent": 8,
+        "pct": 62,
+        "total": 13
+      },
+      "known": 7,
+      "ratings": [
+        {
+          "site": "G2",
+          "them": null,
+          "us": {
+            "out_of": 5.0,
+            "rating": 4.6,
+            "review_count": 358,
+            "site": "G2",
+            "source": "S20"
+          }
+        },
+        {
+          "site": "Software Advice",
+          "them": {
+            "out_of": 5.0,
+            "rating": 4.3,
+            "review_count": 3074,
+            "site": "Software Advice",
+            "source": "S105"
+          },
+          "us": {
+            "out_of": 5.0,
+            "rating": 4.5,
+            "review_count": 165,
+            "site": "Software Advice",
+            "source": "S17"
+          }
+        },
+        {
+          "site": "TrustRadius",
+          "them": null,
+          "us": {
+            "out_of": 10.0,
+            "rating": 9.0,
+            "review_count": 31,
+            "site": "TrustRadius",
+            "source": "S19"
+          }
+        },
+        {
+          "site": "Trustpilot",
+          "them": {
+            "out_of": 5.0,
+            "rating": 1.6,
+            "review_count": 165,
+            "site": "Trustpilot",
+            "source": "S102"
+          },
+          "us": {
+            "out_of": 5.0,
+            "rating": 3.0,
+            "review_count": 29,
+            "site": "Trustpilot",
+            "source": "S21"
+          }
+        },
+        {
+          "site": "Gartner Peer Insights",
+          "them": {
+            "out_of": 5.0,
+            "rating": 4.4,
+            "review_count": 12,
+            "site": "Gartner Peer Insights",
+            "source": "S104"
+          },
+          "us": null
+        }
+      ],
+      "rows": [
+        {
+          "name": "Time and attendance integration",
+          "them": {
+            "company": "Paycor",
+            "note": "Sold as separate add-on purchase",
+            "self": false,
+            "sources": [
+              "S119"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Native scheduling-payroll integration",
+            "self": false,
+            "sources": [
+              "S119"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Hiring and onboarding tools",
+          "them": {
+            "company": "Paycor",
+            "note": "Find and hire high-quality talent faster",
+            "self": true,
+            "sources": [
+              "S87"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Netchex Recruit with Text-to-Apply",
+            "self": true,
+            "sources": [
+              "S8",
+              "S31",
+              "S32"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "Customer support quality",
+          "them": {
+            "company": "Paycor",
+            "note": "Nearly half report long resolution times and slow follow-ups",
+            "self": false,
+            "sources": [
+              "S101",
+              "S107"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "90% of calls answered in under one minute",
+            "self": true,
+            "sources": [
+              "S8",
+              "S9",
+              "S10",
+              "S11"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Payroll for hourly workforces",
+          "them": {
+            "company": "Paycor",
+            "note": "Requires configuration for shift differentials, limited piece rates",
+            "self": false,
+            "sources": [
+              "S119"
+            ],
+            "status": "partial"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Native support for tipped wages, shift differentials",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "full"
+          },
+          "verdict": "lead"
+        },
+        {
+          "name": "Ease of use and interface",
+          "them": {
+            "company": "Paycor",
+            "note": "Reviewers commend its user-friendly interface",
+            "self": false,
+            "sources": [
+              "S101",
+              "S107"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Ease of use and user-friendly interface frequently highlighted",
+            "self": false,
+            "sources": [
+              "S17",
+              "S19"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "Implementation speed and support",
+          "them": {
+            "company": "Paycor",
+            "note": "",
+            "self": false,
+            "sources": [],
+            "status": "unknown"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Free white-glove implementation in about 6 weeks",
+            "self": false,
+            "sources": [
+              "S115"
+            ],
+            "status": "full"
+          },
+          "verdict": "unknown"
+        },
+        {
+          "name": "Pricing transparency",
+          "them": {
+            "company": "Paycor",
+            "note": "Pricing is not publicly published; contact sales for custom quotes",
+            "self": false,
+            "sources": [
+              "S103"
+            ],
+            "status": "none"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Pricing is not public; available upon request",
+            "self": false,
+            "sources": [
+              "S18"
+            ],
+            "status": "none"
+          },
+          "verdict": "even"
+        },
+        {
+          "name": "AI and automation features",
+          "them": {
+            "company": "Paycor",
+            "note": "AI-powered workforce insights and predictions",
+            "self": true,
+            "sources": [
+              "S87"
+            ],
+            "status": "full"
+          },
+          "us": {
+            "company": "Netchex",
+            "note": "Mesh AI HR Teammates: six AI specialists",
+            "self": true,
+            "sources": [
+              "S16"
+            ],
+            "status": "full"
+          },
+          "verdict": "even"
+        }
+      ],
+      "tally": {
+        "behind": 0,
+        "even": 4,
+        "lead": 3,
+        "unknown": 1
+      }
+    }
+  ],
+  "market_ratings": [
+    {
+      "by_site": {
+        "G2": {
+          "out_of": 5.0,
+          "rating": 4.6,
+          "review_count": 358,
+          "site": "G2",
+          "source": "S20"
+        },
+        "Software Advice": {
+          "out_of": 5.0,
+          "rating": 4.5,
+          "review_count": 165,
+          "site": "Software Advice",
+          "source": "S17"
+        },
+        "TrustRadius": {
+          "out_of": 10.0,
+          "rating": 9.0,
+          "review_count": 31,
+          "site": "TrustRadius",
+          "source": "S19"
+        },
+        "Trustpilot": {
+          "out_of": 5.0,
+          "rating": 3.0,
+          "review_count": 29,
+          "site": "Trustpilot",
+          "source": "S21"
+        }
+      },
+      "name": "Netchex"
+    },
+    {
+      "by_site": {
+        "Gartner Peer Insights": {
+          "out_of": 5.0,
+          "rating": 4.2,
+          "review_count": 48,
+          "site": "Gartner Peer Insights",
+          "source": "S48"
+        },
+        "TrustRadius": {
+          "out_of": 10.0,
+          "rating": 9.0,
+          "review_count": null,
+          "site": "TrustRadius",
+          "source": "S45"
+        }
+      },
+      "name": "Paylocity"
+    },
+    {
+      "by_site": {
+        "Gartner Peer Insights": {
+          "out_of": 5.0,
+          "rating": 4.2,
+          "review_count": 55,
+          "site": "Gartner Peer Insights",
+          "source": "S79"
+        },
+        "TrustRadius": {
+          "out_of": 10.0,
+          "rating": 7.4,
+          "review_count": 345,
+          "site": "TrustRadius",
+          "source": "S76"
+        }
+      },
+      "name": "isolved"
+    },
+    {
+      "by_site": {
+        "Gartner Peer Insights": {
+          "out_of": 5.0,
+          "rating": 4.4,
+          "review_count": 12,
+          "site": "Gartner Peer Insights",
+          "source": "S104"
+        },
+        "Software Advice": {
+          "out_of": 5.0,
+          "rating": 4.3,
+          "review_count": 3074,
+          "site": "Software Advice",
+          "source": "S105"
+        },
+        "Trustpilot": {
+          "out_of": 5.0,
+          "rating": 1.6,
+          "review_count": 165,
+          "site": "Trustpilot",
+          "source": "S102"
+        }
+      },
+      "name": "Paycor"
+    }
+  ],
+  "matrix": [
+    {
+      "cells": [
+        {
+          "company": "Netchex",
+          "note": "Native scheduling-payroll integration",
+          "self": false,
+          "sources": [
+            "S119"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paylocity",
+          "note": "Separate module, connects via integration",
+          "self": false,
+          "sources": [
+            "S119"
+          ],
+          "status": "partial"
+        },
+        {
+          "company": "isolved",
+          "note": "Workforce management for time tracking",
+          "self": true,
+          "sources": [
+            "S5"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paycor",
+          "note": "Sold as separate add-on purchase",
+          "self": false,
+          "sources": [
+            "S119"
+          ],
+          "status": "partial"
+        }
+      ],
+      "name": "Time and attendance integration"
+    },
+    {
+      "cells": [
+        {
+          "company": "Netchex",
+          "note": "Netchex Recruit with Text-to-Apply",
+          "self": true,
+          "sources": [
+            "S8",
+            "S31",
+            "S32"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paylocity",
+          "note": "Candidate management is add-on functionality",
+          "self": false,
+          "sources": [
+            "S115"
+          ],
+          "status": "partial"
+        },
+        {
+          "company": "isolved",
+          "note": "Talent acquisition and onboarding included",
+          "self": true,
+          "sources": [
+            "S5"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paycor",
+          "note": "Find and hire high-quality talent faster",
+          "self": true,
+          "sources": [
+            "S87"
+          ],
+          "status": "full"
+        }
+      ],
+      "name": "Hiring and onboarding tools"
+    },
+    {
+      "cells": [
+        {
+          "company": "Netchex",
+          "note": "90% of calls answered in under one minute",
+          "self": true,
+          "sources": [
+            "S8",
+            "S9",
+            "S10",
+            "S11"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paylocity",
+          "note": "Inconsistent account representatives cause delays",
+          "self": false,
+          "sources": [
+            "S47",
+            "S51"
+          ],
+          "status": "partial"
+        },
+        {
+          "company": "isolved",
+          "note": "Users report poor customer support and delays",
+          "self": false,
+          "sources": [
+            "S81"
+          ],
+          "status": "partial"
+        },
+        {
+          "company": "Paycor",
+          "note": "Nearly half report long resolution times and slow follow-ups",
+          "self": false,
+          "sources": [
+            "S101",
+            "S107"
+          ],
+          "status": "partial"
+        }
+      ],
+      "name": "Customer support quality"
+    },
+    {
+      "cells": [
+        {
+          "company": "Netchex",
+          "note": "Native support for tipped wages, shift differentials",
+          "self": false,
+          "sources": [
+            "S115"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paylocity",
+          "note": "Built for office workers, not hourly shift-based teams",
+          "self": false,
+          "sources": [
+            "S115"
+          ],
+          "status": "partial"
+        },
+        {
+          "company": "isolved",
+          "note": "Integrated payroll processing with real-time AI monitoring",
+          "self": true,
+          "sources": [
+            "S5"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paycor",
+          "note": "Requires configuration for shift differentials, limited piece rates",
+          "self": false,
+          "sources": [
+            "S119"
+          ],
+          "status": "partial"
+        }
+      ],
+      "name": "Payroll for hourly workforces"
+    },
+    {
+      "cells": [
+        {
+          "company": "Netchex",
+          "note": "Ease of use and user-friendly interface frequently highlighted",
+          "self": false,
+          "sources": [
+            "S17",
+            "S19"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paylocity",
+          "note": "Ease of use and intuitive interface frequently praised",
+          "self": false,
+          "sources": [
+            "S45",
+            "S46",
+            "S47",
+            "S51",
+            "S52",
+            "S53"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "isolved",
+          "note": "Users report system is user-friendly with clean layout",
+          "self": false,
+          "sources": [
+            "S75",
+            "S76"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paycor",
+          "note": "Reviewers commend its user-friendly interface",
+          "self": false,
+          "sources": [
+            "S101",
+            "S107"
+          ],
+          "status": "full"
+        }
+      ],
+      "name": "Ease of use and interface"
+    },
+    {
+      "cells": [
+        {
+          "company": "Netchex",
+          "note": "Free white-glove implementation in about 6 weeks",
+          "self": false,
+          "sources": [
+            "S115"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paylocity",
+          "note": "Implementation takes 3 to 4 months, costs exceed $50,000",
+          "self": false,
+          "sources": [
+            "S115"
+          ],
+          "status": "partial"
+        },
+        {
+          "company": "isolved",
+          "note": "",
+          "self": false,
+          "sources": [],
+          "status": "unknown"
+        },
+        {
+          "company": "Paycor",
+          "note": "",
+          "self": false,
+          "sources": [],
+          "status": "unknown"
+        }
+      ],
+      "name": "Implementation speed and support"
+    },
+    {
+      "cells": [
+        {
+          "company": "Netchex",
+          "note": "Pricing is not public; available upon request",
+          "self": false,
+          "sources": [
+            "S18"
+          ],
+          "status": "none"
+        },
+        {
+          "company": "Paylocity",
+          "note": "Pricing is not publicly published; custom quotes",
+          "self": true,
+          "sources": [
+            "S36",
+            "S37"
+          ],
+          "status": "none"
+        },
+        {
+          "company": "isolved",
+          "note": "Pricing is not publicly listed; book demo or contact sales",
+          "self": true,
+          "sources": [
+            "S5",
+            "S63"
+          ],
+          "status": "none"
+        },
+        {
+          "company": "Paycor",
+          "note": "Pricing is not publicly published; contact sales for custom quotes",
+          "self": false,
+          "sources": [
+            "S103"
+          ],
+          "status": "none"
+        }
+      ],
+      "name": "Pricing transparency"
+    },
+    {
+      "cells": [
+        {
+          "company": "Netchex",
+          "note": "Mesh AI HR Teammates: six AI specialists",
+          "self": true,
+          "sources": [
+            "S16"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paylocity",
+          "note": "AI-powered automation for recruiting, onboarding, performance",
+          "self": true,
+          "sources": [
+            "S34",
+            "S35",
+            "S39",
+            "S41"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "isolved",
+          "note": "Autonomous AI agents for specific HR and payroll outcomes",
+          "self": false,
+          "sources": [
+            "S74"
+          ],
+          "status": "full"
+        },
+        {
+          "company": "Paycor",
+          "note": "AI-powered workforce insights and predictions",
+          "self": true,
+          "sources": [
+            "S87"
+          ],
+          "status": "full"
+        }
+      ],
+      "name": "AI and automation features"
+    }
+  ],
+  "names": [
+    "Netchex",
+    "Paylocity",
+    "isolved",
+    "Paycor"
+  ],
+  "sites": [
+    "G2",
+    "Software Advice",
+    "TrustRadius",
+    "Trustpilot",
+    "Gartner Peer Insights"
+  ]
+}

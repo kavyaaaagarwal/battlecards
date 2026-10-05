@@ -1,0 +1,9 @@
+anthropic>=0.40
+openai>=1.50
+ddgs>=9.0
+trafilatura>=1.12
+markdown>=3.5
+pydantic>=2.6
+python-dotenv>=1.0
+rapidfuzz>=3.0
+requests>=2.31

@@ -1,0 +1,2961 @@
+{
+  "run_date": "2026-10-02",
+  "company": "Netchex",
+  "competitors": [
+    "Paylocity",
+    "isolved",
+    "Paycor"
+  ],
+  "category": "HCM software",
+  "model": "nvidia/nemotron-3-super-120b-a12b:free, qwen/qwen3.8-27b:free",
+  "search_provider": "tavily",
+  "previous_run": null,
+  "profiles": {
+    "Netchex": {
+      "name": "Netchex",
+      "domain": "netchex.com",
+      "positioning": {
+        "text": "Payroll & HR for the floor, not just the desk.",
+        "sources": [
+          "S3"
+        ]
+      },
+      "target_customers": [
+        {
+          "text": "Businesses with 50 to 5,000 employees, particularly hourly, multi-location operations with lean HR teams.",
+          "sources": [
+            "S8",
+            "S9",
+            "S10"
+          ]
+        },
+        {
+          "text": "Industries including restaurants, hotels, dealerships, healthcare, retail, and construction.",
+          "sources": [
+            "S16",
+            "S9",
+            "S30"
+          ]
+        }
+      ],
+      "key_capabilities": [
+        {
+          "text": "OneScreen payroll that runs a full cycle in about 15 minutes, with automated tax filing for all 50 states.",
+          "sources": [
+            "S10",
+            "S11"
+          ]
+        },
+        {
+          "text": "Time and attendance with mobile punching, geofencing, and shift differentials that connect directly to payroll.",
+          "sources": [
+            "S3",
+            "S8"
+          ]
+        },
+        {
+          "text": "Integrated benefits administration including health, dental, FSA, 401(k), EWA, and COBRA with automated ACA compliance.",
+          "sources": [
+            "S3",
+            "S8",
+            "S9"
+          ]
+        },
+        {
+          "text": "Recruiting and onboarding via Netchex Recruit (powered by HigherMe) with Text-to-Apply and direct flow into payroll.",
+          "sources": [
+            "S8",
+            "S31",
+            "S32"
+          ]
+        },
+        {
+          "text": "US-based, FPC-certified support team with a dedicated account manager and 90% of calls answered in under one minute.",
+          "sources": [
+            "S8",
+            "S9",
+            "S10",
+            "S11"
+          ]
+        },
+        {
+          "text": "Mesh AI HR Teammates: six AI specialists that proactively handle payroll, compliance, scheduling, and HR work.",
+          "sources": [
+            "S16"
+          ]
+        }
+      ],
+      "pricing_summary": {
+        "text": "Pricing is not public; available upon request.",
+        "sources": [
+          "S18"
+        ]
+      },
+      "pricing_tiers": [],
+      "recent_changes": [
+        {
+          "text": "Launched Mesh, a team of AI HR teammates for the deskless workforce, on July 20, 2026.",
+          "sources": [
+            "S16"
+          ]
+        },
+        {
+          "text": "Acquired Mesh.ai, a Y Combinator backed, AI-first performance and engagement platform.",
+          "sources": [
+            "S16"
+          ]
+        }
+      ],
+      "review_strengths": [
+        {
+          "text": "Responsive and high-quality customer service is a recurring theme, with users praising the dedicated support team.",
+          "sources": [
+            "S17",
+            "S19"
+          ]
+        },
+        {
+          "text": "Ease of use and user-friendly interface are frequently highlighted by reviewers.",
+          "sources": [
+            "S17",
+            "S19"
+          ]
+        },
+        {
+          "text": "Smooth implementation and integration into existing systems.",
+          "sources": [
+            "S19"
+          ]
+        }
+      ],
+      "review_weaknesses": [
+        {
+          "text": "Some users report that the system layout feels outdated.",
+          "sources": [
+            "S17"
+          ]
+        },
+        {
+          "text": "Lack of a feature to request a missed punch, requiring manual entry by managers.",
+          "sources": [
+            "S17"
+          ]
+        },
+        {
+          "text": "Incredibly slow load times for all pages, often timing out and requiring logging out and back in.",
+          "sources": [
+            "S23"
+          ]
+        }
+      ],
+      "hiring_signals": [
+        {
+          "text": "21 open roles including Business Development Representatives, Client Support Representatives, and Product Support Specialists in Bengaluru, India.",
+          "sources": [
+            "S31"
+          ]
+        }
+      ],
+      "ratings": [
+        {
+          "site": "G2",
+          "rating": 4.6,
+          "out_of": 5.0,
+          "review_count": 358,
+          "source": "S20"
+        },
+        {
+          "site": "Software Advice",
+          "rating": 4.5,
+          "out_of": 5.0,
+          "review_count": 165,
+          "source": "S17"
+        },
+        {
+          "site": "TrustRadius",
+          "rating": 9.0,
+          "out_of": 10.0,
+          "review_count": 31,
+          "source": "S19"
+        },
+        {
+          "site": "Trustpilot",
+          "rating": 3.0,
+          "out_of": 5.0,
+          "review_count": 29,
+          "source": "S21"
+        }
+      ],
+      "quotes": [
+        {
+          "quote": "There is no feature to request a missed punch, so managers (or me) have to manually enter missed punches.",
+          "sentiment": "pain",
+          "source": "S17"
+        },
+        {
+          "quote": "Incredibly slow load times for all pages, often timing out and requiring logging out and back in; issues with time clock-not set up to handle 24 hr shifts-no",
+          "sentiment": "pain",
+          "source": "S23"
+        },
+        {
+          "quote": "I LOVE THE EASE OF THE TIMECLOCK AND PULLING INTO PAYROLL. PREVIOUSLY I HAD TIME CLOCK ON MY DMS AND PAYROLL THROUGH PAYCHEX. IT DIDNT INTEGRATE SO I HAD TO KEY IN EVERY SINGLE TIMESHEET....THIS IS SO MUCH EASIER.",
+          "sentiment": "switching",
+          "source": "S19"
+        }
+      ]
+    },
+    "Paylocity": {
+      "name": "Paylocity",
+      "domain": "paylocity.com",
+      "positioning": {
+        "text": "Paylocity, a leading provider of cloud-based HR, payroll and spend management solutions.",
+        "sources": [
+          "S33"
+        ]
+      },
+      "target_customers": [
+        {
+          "text": "From growing teams to established enterprises, Paylocity is built for you.",
+          "sources": [
+            "S35",
+            "S36",
+            "S37"
+          ]
+        },
+        {
+          "text": "Paylocity is best for HR and finance leaders at mid-size and enterprise companies who want talent management built into their payroll platform, not bolted on through an integration.",
+          "sources": [
+            "S36"
+          ]
+        }
+      ],
+      "key_capabilities": [
+        {
+          "text": "Unified HCM and finance platform integrating payroll, HR, time tracking, benefits, and spend management.",
+          "sources": [
+            "S33",
+            "S34"
+          ]
+        },
+        {
+          "text": "AI-powered automation for recruiting, onboarding, performance management, and expense reporting.",
+          "sources": [
+            "S34",
+            "S35",
+            "S39",
+            "S41"
+          ]
+        },
+        {
+          "text": "Mobile app enabling employees to complete onboarding, time tracking, expense submission, and benefits access.",
+          "sources": [
+            "S34",
+            "S37",
+            "S40",
+            "S41"
+          ]
+        },
+        {
+          "text": "Integrations with ERP and accounting systems such as NetSuite, QuickBooks, MS Dynamics, and Sage Intacct.",
+          "sources": [
+            "S33",
+            "S34",
+            "S39"
+          ]
+        },
+        {
+          "text": "Analytics and reporting with out-of-the-box reports and custom dashboards for workforce insights.",
+          "sources": [
+            "S34",
+            "S35"
+          ]
+        },
+        {
+          "text": "Workflow automation to reduce administrative burden across HR, payroll, and finance processes.",
+          "sources": [
+            "S34",
+            "S35",
+            "S39"
+          ]
+        },
+        {
+          "text": "Dedicated client partnership and support, including implementation assistance and ongoing service.",
+          "sources": [
+            "S34",
+            "S42"
+          ]
+        },
+        {
+          "text": "Employee self-service portal for updating personal information, viewing pay stubs, and managing time off.",
+          "sources": [
+            "S34",
+            "S37",
+            "S45",
+            "S46"
+          ]
+        }
+      ],
+      "pricing_summary": {
+        "text": "Pricing is not publicly published; Paylocity uses a per employee per month model with custom quotes based on modules and company size.",
+        "sources": [
+          "S36",
+          "S37"
+        ]
+      },
+      "pricing_tiers": [],
+      "recent_changes": [
+        {
+          "text": "Launched Paylocity for Finance on July 22, 2025, integrating Airbase spend management to unify HR and finance through a single system of record.",
+          "sources": [
+            "S33"
+          ]
+        },
+        {
+          "text": "Announced Elevate Solutions on April 21, 2026, combining the unified platform with dedicated HR and payroll experts to reduce administrative burden.",
+          "sources": [
+            "S42"
+          ]
+        },
+        {
+          "text": "Released What's New Blog updates in May 2026 featuring smarter scheduling templates, AI-driven data insights, General Ledger sync with Microsoft Dynamics 365 Business Central, and enhanced video captions.",
+          "sources": [
+            "S39"
+          ]
+        },
+        {
+          "text": "Released What's New Blog updates in April 2025 including Employee Voice enhancements, mobile punch location forecaster, role-based learning journeys, and PARIM integration for shift planning.",
+          "sources": [
+            "S41"
+          ]
+        },
+        {
+          "text": "Released What's New Blog updates in July 2024 featuring mobile onboarding tasks, automated new hire announcements, enhanced recognition with media, interview scheduling via calendar sync, flexible training selection, and overtime insights dashboard.",
+          "sources": [
+            "S40"
+          ]
+        }
+      ],
+      "review_strengths": [
+        {
+          "text": "Ease of use and intuitive interface frequently praised by users across reviews.",
+          "sources": [
+            "S45",
+            "S46",
+            "S47",
+            "S51",
+            "S52",
+            "S53"
+          ]
+        },
+        {
+          "text": "All-in-one platform consolidating payroll, HR, time tracking, benefits, and recruiting reduces need for multiple systems.",
+          "sources": [
+            "S45",
+            "S46",
+            "S47",
+            "S51",
+            "S52",
+            "S53"
+          ]
+        },
+        {
+          "text": "Strong customer support and implementation assistance noted as helpful and responsive.",
+          "sources": [
+            "S45",
+            "S46",
+            "S51",
+            "S52"
+          ]
+        },
+        {
+          "text": "Mobile app enables employees to access pay stubs, submit time off, and complete tasks on the go.",
+          "sources": [
+            "S45",
+            "S46",
+            "S47",
+            "S52",
+            "S53"
+          ]
+        },
+        {
+          "text": "Automated processes such as time tracking, payroll, and onboarding reduce manual work and errors.",
+          "sources": [
+            "S45",
+            "S46",
+            "S47",
+            "S51",
+            "S52",
+            "S53"
+          ]
+        }
+      ],
+      "review_weaknesses": [
+        {
+          "text": "Inconsistent or changing account representatives cause delays in issue resolution and require customers to re-explain problems.",
+          "sources": [
+            "S47",
+            "S51"
+          ]
+        },
+        {
+          "text": "Limited flexibility in configuring workflows, checklists, and compensation elements such as stock or shares.",
+          "sources": [
+            "S47",
+            "S54"
+          ]
+        },
+        {
+          "text": "Benefit file transfers and PTO tracking cited as areas needing improvement.",
+          "sources": [
+            "S45",
+            "S46"
+          ]
+        },
+        {
+          "text": "Learning and development module lacks sufficient options and customization.",
+          "sources": [
+            "S45",
+            "S46"
+          ]
+        },
+        {
+          "text": "Recent declines in software stability and support quality reported, including random glitches and unresponsive or incorrect help from representatives.",
+          "sources": [
+            "S55"
+          ]
+        }
+      ],
+      "hiring_signals": [],
+      "ratings": [
+        {
+          "site": "TrustRadius",
+          "rating": 9.0,
+          "out_of": 10.0,
+          "review_count": null,
+          "source": "S45"
+        },
+        {
+          "site": "Gartner Peer Insights",
+          "rating": 4.2,
+          "out_of": 5.0,
+          "review_count": 48,
+          "source": "S48"
+        }
+      ],
+      "quotes": [
+        {
+          "quote": "Community is fantastic, love it.",
+          "sentiment": "praise",
+          "source": "S47"
+        },
+        {
+          "quote": "Service - our rep changes all the time, and they don't even tell us. They take FOREVER to answer issues if you email them.",
+          "sentiment": "pain",
+          "source": "S47"
+        },
+        {
+          "quote": "Training docs - they lost them all and just recently got them back.",
+          "sentiment": "pain",
+          "source": "S47"
+        }
+      ]
+    },
+    "isolved": {
+      "name": "isolved",
+      "domain": "isolvedhcm.com",
+      "positioning": {
+        "text": "isolved People Cloud™ is a platform that connects HR, payroll, benefits, and talent management with AI to manage every worker, human or agentic, on a single system of record.",
+        "sources": [
+          "S5",
+          "S63",
+          "S74"
+        ]
+      },
+      "target_customers": [
+        {
+          "text": "Small and mid-sized businesses, specifically organizations with 25 to 5,000 employees.",
+          "sources": [
+            "S67",
+            "S84"
+          ]
+        },
+        {
+          "text": "Industries including healthcare, professional and business services, manufacturing, distribution, technology, and construction.",
+          "sources": [
+            "S67",
+            "S76"
+          ]
+        },
+        {
+          "text": "Partner networks including benefit services brokers, service bureaus, professional employer organizations (PEO), and administrative services organizations (ASO).",
+          "sources": [
+            "S64",
+            "S84"
+          ]
+        }
+      ],
+      "key_capabilities": [
+        {
+          "text": "Integrated payroll processing with real-time AI monitoring to catch errors before runs close.",
+          "sources": [
+            "S63",
+            "S74"
+          ]
+        },
+        {
+          "text": "Benefits administration with AI-driven personalized recommendations and plan comparison during open enrollment.",
+          "sources": [
+            "S5",
+            "S63",
+            "S74"
+          ]
+        },
+        {
+          "text": "Workforce management for time tracking, scheduling, and attendance for remote or hybrid employees.",
+          "sources": [
+            "S63",
+            "S64"
+          ]
+        },
+        {
+          "text": "Talent acquisition and management including applicant tracking, automated onboarding, and performance management.",
+          "sources": [
+            "S63",
+            "S64"
+          ]
+        },
+        {
+          "text": "Autonomous AI agents (The Guardian, The Advisor, The Signal, The Orchestrator, The Watchdog, The Helper) designed to own specific HR and payroll outcomes.",
+          "sources": [
+            "S74"
+          ]
+        },
+        {
+          "text": "Employee experience features including a Learning Experience Platform with over 95,000 courses and financial wellness tools like on-demand pay.",
+          "sources": [
+            "S65"
+          ]
+        }
+      ],
+      "pricing_summary": {
+        "text": "Pricing is not publicly listed on the website; customers are directed to book a demo or contact sales.",
+        "sources": [
+          "S5",
+          "S63"
+        ]
+      },
+      "pricing_tiers": [],
+      "recent_changes": [
+        {
+          "text": "Launched The Guardian, an AI agent for payroll that analyzes runs and flags errors, in August 2026.",
+          "sources": [
+            "S71",
+            "S74"
+          ]
+        },
+        {
+          "text": "Introduced autonomous AI agents and launched the isolved Connector for Claude in June 2026.",
+          "sources": [
+            "S74"
+          ]
+        },
+        {
+          "text": "Named a leader in the Nucleus Research HCM Value Matrix for small and mid-sized businesses for the second consecutive year.",
+          "sources": [
+            "S5"
+          ]
+        },
+        {
+          "text": "Partnered with Electric to launch the isolved IT Asset Hub in September 2026.",
+          "sources": [
+            "S73"
+          ]
+        },
+        {
+          "text": "Announced Shane Whittington as Chief Financial Officer in September 2026.",
+          "sources": [
+            "S71"
+          ]
+        }
+      ],
+      "review_strengths": [
+        {
+          "text": "Robust payroll processing capabilities, including tax filings and compliance, are cited by 57% of reviewers as a core strength.",
+          "sources": [
+            "S76",
+            "S77"
+          ]
+        },
+        {
+          "text": "Users report the system is user-friendly, with a clean layout and more configuration options compared to other providers.",
+          "sources": [
+            "S75",
+            "S76"
+          ]
+        },
+        {
+          "text": "Automation of HR tasks leads to significant time savings and increased efficiency for HR teams.",
+          "sources": [
+            "S76",
+            "S77"
+          ]
+        },
+        {
+          "text": "Customer service is frequently described as responsive, knowledgeable, and personalized, with dedicated support teams.",
+          "sources": [
+            "S76"
+          ]
+        }
+      ],
+      "review_weaknesses": [
+        {
+          "text": "Users express frustration with poor customer support, including inefficient response times and unresolved inquiries.",
+          "sources": [
+            "S81"
+          ]
+        },
+        {
+          "text": "Reporting functionalities are seen as limited in customization and clarity, making it hard to get specific data from canned reports.",
+          "sources": [
+            "S76",
+            "S77"
+          ]
+        },
+        {
+          "text": "Some users report occasional delays in customer support responsiveness, particularly during busy periods.",
+          "sources": [
+            "S76",
+            "S77"
+          ]
+        },
+        {
+          "text": "There is a desire for improved integration with third-party systems and more extensive customization options.",
+          "sources": [
+            "S76"
+          ]
+        }
+      ],
+      "hiring_signals": [],
+      "ratings": [
+        {
+          "site": "Gartner Peer Insights",
+          "rating": 4.2,
+          "out_of": 5.0,
+          "review_count": 55,
+          "source": "S79"
+        },
+        {
+          "site": "TrustRadius",
+          "rating": 7.4,
+          "out_of": 10.0,
+          "review_count": 345,
+          "source": "S76"
+        }
+      ],
+      "quotes": [
+        {
+          "quote": "Overall iSolved has the cleanest layout, more options/configurations, and is user friendly compared to other providers. iSolved stays on top of fraud protection",
+          "sentiment": "praise",
+          "source": "S75"
+        },
+        {
+          "quote": "The only improvement would be reporting within the HRIS. Sometimes it's hard to get exactly what you need from canned reports.",
+          "sentiment": "pain",
+          "source": "S76"
+        },
+        {
+          "quote": "Not even in the same ballpark. Vfficient was an exercise in frustration and a poorly designed system with very little flexibility. isolved was the exact opposite and was excactly what we needed from the minute it was installed.",
+          "sentiment": "switching",
+          "source": "S76"
+        },
+        {
+          "quote": "I find it very odd that the PTO/Vacation accrual tracking uses the information from the timecard instead of the actual final PTO/Vac from the payroll check....",
+          "sentiment": "pain",
+          "source": "S79"
+        },
+        {
+          "quote": "Kathy is the best! She is responsive, kind and intelligent. She can solve any problem with the utmost professionalism and a touch of humor.",
+          "sentiment": "praise",
+          "source": "S76"
+        }
+      ]
+    },
+    "Paycor": {
+      "name": "Paycor",
+      "domain": "paycor.com",
+      "positioning": {
+        "text": "HR & Payroll Solutions\nHR Solutions that Empower Leaders to Drive Business Results\nWe’re helping businesses succeed and empowering leaders with the most comprehensive, flexible, and innovative HCM solutions in the market.",
+        "sources": [
+          "S6"
+        ]
+      },
+      "target_customers": [
+        {
+          "text": "Stress-free HR & Payroll for Medium & Small Businesses\nSee Why More Than 40,000 businesses Nationwide Trust Paycor*",
+          "sources": [
+            "S87",
+            "S88",
+            "S89",
+            "S90",
+            "S91",
+            "S92",
+            "S93",
+            "S94",
+            "S95",
+            "S96",
+            "S97",
+            "S98",
+            "S99",
+            "S100",
+            "S101",
+            "S102",
+            "S103",
+            "S104",
+            "S105",
+            "S106",
+            "S107",
+            "S108",
+            "S109",
+            "S110",
+            "S111",
+            "S112",
+            "S113",
+            "S114"
+          ]
+        },
+        {
+          "text": "Owners\n1-49 Employees\n50-1000 Employees\n1000+ Employees",
+          "sources": [
+            "S87",
+            "S88",
+            "S89",
+            "S90",
+            "S91",
+            "S92",
+            "S93",
+            "S94",
+            "S95",
+            "S96",
+            "S97",
+            "S98",
+            "S99",
+            "S100",
+            "S101",
+            "S102",
+            "S103",
+            "S104",
+            "S105",
+            "S106",
+            "S107",
+            "S108",
+            "S109",
+            "S110",
+            "S111",
+            "S112",
+            "S113",
+            "S114"
+          ]
+        },
+        {
+          "text": "Healthcare\nProfessional Services\nManufacturing\nNonprofits\nRestaurants\nEducation\nRetail\nTechnology\nFinance\nHR\nPayroll\nIT\nRecruiting",
+          "sources": [
+            "S87",
+            "S88",
+            "S89",
+            "S90",
+            "S91",
+            "S92",
+            "S93",
+            "S94",
+            "S95",
+            "S96",
+            "S97",
+            "S98",
+            "S99",
+            "S100",
+            "S101",
+            "S102",
+            "S103",
+            "S104",
+            "S105",
+            "S106",
+            "S107",
+            "S108",
+            "S109",
+            "S110",
+            "S111",
+            "S112",
+            "S113",
+            "S114"
+          ]
+        }
+      ],
+      "key_capabilities": [
+        {
+          "text": "Unified HR platform with unlimited workflows",
+          "sources": [
+            "S87"
+          ]
+        },
+        {
+          "text": "AI-powered workforce insights and predictions",
+          "sources": [
+            "S87"
+          ]
+        },
+        {
+          "text": "Find and hire high-quality talent faster & smarter",
+          "sources": [
+            "S87"
+          ]
+        },
+        {
+          "text": "Increase engagement & build a culture where people thrive",
+          "sources": [
+            "S87"
+          ]
+        },
+        {
+          "text": "Reduce labor expenses with one powerful platform",
+          "sources": [
+            "S87"
+          ]
+        },
+        {
+          "text": "Empower employees while cutting down admin work",
+          "sources": [
+            "S87"
+          ]
+        },
+        {
+          "text": "Stay ahead of changing regulations with compliance solutions that see around corners",
+          "sources": [
+            "S87"
+          ]
+        },
+        {
+          "text": "Seamlessly connect Paycor with your existing tools and systems through our comprehensive integration solutions",
+          "sources": [
+            "S87"
+          ]
+        }
+      ],
+      "pricing_summary": {
+        "text": "Pricing is not publicly published; contact sales for custom quotes based on product bundle and company size.",
+        "sources": [
+          "S103"
+        ]
+      },
+      "pricing_tiers": [],
+      "recent_changes": [
+        {
+          "text": "Paycor Debuts New Features to Streamline Payroll Process\nLast Updated: August 4, 2022\nNew Payroll AutoRun and Intelligent Tax Recommendations enables HR leaders and administrators to automate and optimize time-consuming processes",
+          "sources": [
+            "S93"
+          ]
+        },
+        {
+          "text": "Paycor Unveils Innovative Features to Redefine Time-Off Management\nLast Updated: September 24, 2024\nSuite of innovative features designed to transform time-off management for the modern workforce",
+          "sources": [
+            "S94"
+          ]
+        },
+        {
+          "text": "Paycor Launches New Expense Management Product, Further Streamlining HR Processes for Today’s Workplace\nLast Updated: May 3, 2022\nNew feature allows leaders to easily reimburse employee expenses utilizing the same unified Paycor platform used to pay, hire, onboard, manage, grow, and recognize talent",
+          "sources": [
+            "S95"
+          ]
+        },
+        {
+          "text": "Paycor Unveils Embedded HCM Solution\nLast Updated: August 28, 2023\nPaycor HCM, Inc. (“Paycor”) (Nasdaq: PYCR), a leading provider of human capital management (HCM) software, today announced the Company’s Embedded HCM solution, which enables technology partners to integrate Paycor’s suite of HCM solutions into their software platforms.",
+          "sources": [
+            "S89"
+          ]
+        },
+        {
+          "text": "Announcing the WISE AI Platform for an Agentic Digital Workforce\nPublished: Tue, 19 May 2026 00:00:00 GMT\nPaychex launches groundbreaking agentic AI platform that seamlessly anticipates, advises, and acts across HCM workflows, backed by trusted expertise.",
+          "sources": [
+            "S97"
+          ]
+        }
+      ],
+      "review_strengths": [
+        {
+          "text": "Paycor functions as a comprehensive Human Capital Management (HCM) system, primarily utilized for payroll processing and various HR functions. Organizations leverage it for core payroll, tax filings, benefits administration, and streamlining recruiting and onboarding. In TrustRadius reviews, 80% of users highlight its effectiveness in payroll processing, with many also commending its user-friendly interface for both administrators and employees.",
+          "sources": [
+            "S101"
+          ]
+        },
+        {
+          "text": "Reviewers also noted improvements in reporting tools and efficient onboarding processes.",
+          "sources": [
+            "S101"
+          ]
+        },
+        {
+          "text": "Paycor functions as a comprehensive Human Capital Management (HCM) system, primarily utilized for payroll processing and various HR functions. Organizations leverage it for core payroll, tax filings, benefits administration, and streamlining recruiting and onboarding. In TrustRadius reviews, 80% of users highlight its effectiveness in payroll processing, with many also commending its user-friendly interface for both administrators and employees.",
+          "sources": [
+            "S107"
+          ]
+        },
+        {
+          "text": "Reviewers also noted improvements in reporting tools and efficient onboarding processes.",
+          "sources": [
+            "S107"
+          ]
+        },
+        {
+          "text": "Paycor serves organizations in the Other Services sector by streamlining critical human capital functions, particularly focusing on efficient talent acquisition and onboarding. Reviewers frequently highlight its ease of use, which is vital for service firms where staff often manage multiple roles without dedicated HR specialists. The platform also provides reliable payroll processing for diverse pay structures, including hourly and part-time employees, which is common in this industry.",
+          "sources": [
+            "S106"
+          ]
+        }
+      ],
+      "review_weaknesses": [
+        {
+          "text": "However, a significant concern is customer support, with nearly half of reviewers reporting long resolution times and slow follow-ups. Other drawbacks include limitations in reporting customization, system flexibility, and occasional technical issues.",
+          "sources": [
+            "S101"
+          ]
+        },
+        {
+          "text": "However, a significant concern is customer support, with nearly half of reviewers reporting long resolution times and slow follow-ups. Other drawbacks include limitations in reporting customization, system flexibility, and occasional technical issues.",
+          "sources": [
+            "S107"
+          ]
+        },
+        {
+          "text": "Some users report challenges with its reporting capabilities, with 3 of 6 reviewers noting difficulties in customization for client-specific data analysis. Additionally, customer support responsiveness and problem resolution effectiveness are areas identified for improvement, impacting operational continuity.",
+          "sources": [
+            "S106"
+          ]
+        },
+        {
+          "text": "Reviewers highlight negative aspects of price, consistently reporting frustration with unexpected charges and constantly increasing prices, and extra charges that made managing budgets difficult.",
+          "sources": [
+            "S102"
+          ]
+        },
+        {
+          "text": "Customers consistently note negative experiences with customer service, describing it as an absolute... See more\nReviewers mention negative feedback about service, highlighting prolonged delays and significant... See more\nCustomers had negative experiences with staff, highlighting ongoing frustration with support representatives... See more\nUsers describe profound frustration with response times, citing long delays and unreturned calls. Consumers... See more",
+          "sources": [
+            "S102"
+          ]
+        }
+      ],
+      "hiring_signals": [],
+      "ratings": [
+        {
+          "site": "Software Advice",
+          "rating": 4.3,
+          "out_of": 5.0,
+          "review_count": 3074,
+          "source": "S105"
+        },
+        {
+          "site": "Gartner Peer Insights",
+          "rating": 4.4,
+          "out_of": 5.0,
+          "review_count": 12,
+          "source": "S104"
+        },
+        {
+          "site": "Trustpilot",
+          "rating": 1.6,
+          "out_of": 5.0,
+          "review_count": 165,
+          "source": "S102"
+        }
+      ],
+      "quotes": [
+        {
+          "quote": "Support is NOT helpful or knowledgeable anymore. The chat bot is a horrible change. Everything keeps breaking or no longer working and support blame...",
+          "sentiment": "pain",
+          "source": "S102"
+        },
+        {
+          "quote": "Was very happy with Paycor until the last 6 months. Support is NOT helpful or knowledgeable anymore. The chat bot is a horrible change. Everything keeps breaking or no longer working and support blame...",
+          "sentiment": "pain",
+          "source": "S102"
+        },
+        {
+          "quote": "I am a company admin for our company as I have been for the last 4 years. Since being purchased by PayChex, the support I have received has been subpar. Including being cut off during a chat conversat...",
+          "sentiment": "pain",
+          "source": "S102"
+        }
+      ]
+    }
+  },
+  "battlecards": [
+    {
+      "competitor": "Paylocity",
+      "overview": "Paylocity provides cloud-based HR and payroll for mid-size to enterprise companies with salaried workforces.",
+      "tldr": "We win when the prospect has hourly, multi-location, high-turnover teams needing integrated hiring and scheduling. We lose when they want a polished, all-in-one HCM suite for office-based, salaried staff.",
+      "quick_dismiss": "Paylocity offers a unified platform with strong mobile access, but it assumes salaried, office workers and adds hiring as an afterthought. Netchex is built for hourly teams with native hiring, scheduling, and payroll in one system.",
+      "where_we_win": [
+        {
+          "headline": "Native hiring integrated with payroll and scheduling",
+          "detail": "Netchex Recruit lets hourly workers apply by QR code and text, with AI screening and mobile onboarding that flows directly into payroll.",
+          "sources": [
+            "S115"
+          ]
+        },
+        {
+          "headline": "Scheduling and payroll talk natively",
+          "detail": "In Netchex, scheduled hours automatically appear in payroll; no manual reconciliation needed between modules.",
+          "sources": [
+            "S115"
+          ]
+        },
+        {
+          "headline": "Faster, lighter implementation",
+          "detail": "Netchex delivers white-glove setup in about 6 weeks with a dedicated account manager; Paylocity takes 3-4 months and needs heavy IT coordination.",
+          "sources": [
+            "S115"
+          ]
+        }
+      ],
+      "where_we_lose": [
+        {
+          "headline": "Unified HCM and finance platform",
+          "detail": "Paylocity integrates payroll, HR, time tracking, benefits, and spend management in one system.",
+          "sources": [
+            "S33",
+            "S34"
+          ],
+          "counter": "We focus on hourly workforce needs; for complex finance or ERP integrations, we connect via partners."
+        },
+        {
+          "headline": "Mobile app for employee self-service",
+          "detail": "Paylocity’s app lets employees clock in, submit expenses, access pay stubs, and manage time off from anywhere.",
+          "sources": [
+            "S34",
+            "S37",
+            "S40",
+            "S41"
+          ],
+          "counter": "Our mobile punching and geofencing work for hourly teams; we prioritize time capture over broad employee self-service."
+        }
+      ],
+      "landmines": [
+        {
+          "question": "How often does your account representative change, and what happens when they do?",
+          "why": "Inconsistent reps cause delays and force customers to re-explain issues.",
+          "sources": [
+            "S47",
+            "S51"
+          ]
+        },
+        {
+          "question": "Can you easily configure workflows for non-standard compensation like tips or shift differentials?",
+          "why": "Limited flexibility in configuring workflows and compensation elements such as stock or shares.",
+          "sources": [
+            "S47",
+            "S54"
+          ]
+        },
+        {
+          "question": "How stable has the platform been recently, and what support issues have you seen?",
+          "why": "Recent declines in software stability and support quality, including random glitches and unresponsive help.",
+          "sources": [
+            "S55"
+          ]
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Paylocity has a better mobile app for employees.",
+          "response": "Our mobile punching with geofencing is built for hourly teams clocking in at multiple locations; we ensure time hits payroll correctly, not just broad self-service.",
+          "sources": [
+            "S3",
+            "S8",
+            "S34",
+            "S37"
+          ]
+        },
+        {
+          "objection": "Paylocity is an all-in-one platform that reduces system sprawl.",
+          "response": "We unify hiring, scheduling, time, and payroll for hourly work—where the real complexity lives—so you don’t bolt on tools that don’t fit shift work.",
+          "sources": [
+            "S115"
+          ]
+        },
+        {
+          "objection": "Paylocity’s AI automation is more advanced.",
+          "response": "Our Mesh AI HR Teammates handle payroll, compliance, and scheduling for deskless workers—AI built for your actual workflow, not just office tasks.",
+          "sources": [
+            "S16",
+            "S34",
+            "S35",
+            "S39",
+            "S41"
+          ]
+        }
+      ],
+      "pricing_comparison": {
+        "text": "Paylocity’s per-employee-per-month pricing typically runs $15-40, which can reach $4,500-12,000/month for a 300-employee restaurant franchise.",
+        "sources": [
+          "S115"
+        ]
+      },
+      "proof_quotes": [
+        {
+          "quote": "Service - our rep changes all the time, and they don't even tell us. They take FOREVER to answer issues if you email them.",
+          "sentiment": "pain",
+          "source": "S47"
+        },
+        {
+          "quote": "There is no feature to request a missed punch, so managers (or me) have to manually enter missed punches.",
+          "sentiment": "pain",
+          "source": "S17"
+        }
+      ]
+    },
+    {
+      "competitor": "isolved",
+      "overview": "isolved provides HCM software for small and mid-sized businesses with 25-5,000 employees.",
+      "tldr": "We win when prospects need fast payroll and deskless workforce tools. We lose when they prioritize AI agents and broad third-party integrations.",
+      "quick_dismiss": "isolved offers strong AI-driven features and clean UI, but their reporting is limited and support can be slow during peak times. Netchex delivers faster payroll, better deskless tools, and responsive US-based support.",
+      "where_we_win": [
+        {
+          "headline": "Faster payroll processing",
+          "detail": "Netchex runs full payroll in ~15 minutes with OneScreen; isolved does not specify speed.",
+          "sources": [
+            "S10",
+            "S11"
+          ]
+        },
+        {
+          "headline": "Built for deskless, hourly teams",
+          "detail": "Netchex targets hourly, multi-location ops with lean HR; isolved serves broader SMBs without deskless focus.",
+          "sources": [
+            "S8",
+            "S9",
+            "S67",
+            "S84"
+          ]
+        },
+        {
+          "headline": "Responsive US-based support",
+          "detail": "Netchex has 90% of calls answered in under one minute; isolved reports slow support during busy periods.",
+          "sources": [
+            "S8",
+            "S9",
+            "S10",
+            "S11",
+            "S76",
+            "S77",
+            "S81"
+          ]
+        }
+      ],
+      "where_we_lose": [
+        {
+          "headline": "AI agent capabilities",
+          "detail": "isolved offers six autonomous AI agents for HR/payroll outcomes; Netchex has AI teammates but less autonomy.",
+          "sources": [
+            "S74"
+          ],
+          "counter": "Frame our AI as practical helpers for deskless work, not autonomous agents needing oversight."
+        },
+        {
+          "headline": "Third-party ecosystem",
+          "detail": "isolved highlights partner networks with PEOs, ASOs, and benefit brokers; Netchex does not emphasize this.",
+          "sources": [
+            "S64",
+            "S84"
+          ],
+          "counter": "Note our deep integrations in payroll, time, and benefits that eliminate need for complex partner chains."
+        }
+      ],
+      "landmines": [
+        {
+          "question": "How often do users report delays in getting support during peak payroll periods?",
+          "why": "Exposes slow support responsiveness during busy times.",
+          "sources": [
+            "S76",
+            "S77",
+            "S81"
+          ]
+        },
+        {
+          "question": "Can you easily get custom data from reports, or are you limited to canned options?",
+          "why": "Highlights limited reporting customization and clarity.",
+          "sources": [
+            "S76",
+            "S77"
+          ]
+        },
+        {
+          "question": "How well does the system integrate with your existing third-party HR or accounting tools?",
+          "why": "Reveals desire for improved third-party integration and customization.",
+          "sources": [
+            "S76"
+          ]
+        }
+      ],
+      "objections": [
+        {
+          "objection": "isolved has cleaner layout and more config options.",
+          "response": "True, but Netchex prioritizes speed and simplicity for hourly teams—less config, faster payroll.",
+          "sources": [
+            "S75",
+            "S8",
+            "S9",
+            "S10",
+            "S11"
+          ]
+        },
+        {
+          "objection": "isolved’s AI agents sound more advanced.",
+          "response": "Our AI teammates handle real deskless tasks like scheduling and compliance—no oversight needed.",
+          "sources": [
+            "S16",
+            "S74"
+          ]
+        },
+        {
+          "objection": "isolved has stronger partner networks for benefits and PEOs.",
+          "response": "We integrate directly with carriers and payroll—fewer middlemen, faster setup, lower cost.",
+          "sources": [
+            "S3",
+            "S8",
+            "S9",
+            "S64",
+            "S84"
+          ]
+        }
+      ],
+      "pricing_comparison": {
+        "text": "Both Netchex and isolved do not publish pricing; require a sales call for quotes.",
+        "sources": [
+          "S5",
+          "S18",
+          "S63"
+        ]
+      },
+      "proof_quotes": [
+        {
+          "quote": "There is no feature to request a missed punch, so managers (or me) have to manually enter missed punches.",
+          "sentiment": "pain",
+          "source": "S17"
+        },
+        {
+          "quote": "Incredibly slow load times for all pages, often timing out and requiring logging out and back in",
+          "sentiment": "pain",
+          "source": "S23"
+        }
+      ]
+    },
+    {
+      "competitor": "Paycor",
+      "overview": "Paycor provides HCM and payroll solutions for small to mid-sized businesses across industries.",
+      "tldr": "We win when prospects need native hourly pay rules and transparent pricing. We lose when they prioritize broad brand recognition or extensive third-party integrations.",
+      "quick_dismiss": "Paycor offers a wide feature set, but core hourly tools like shift differentials and time tracking are costly add-ons. Netchex includes these natively, reducing setup and surprise costs for deskless teams.",
+      "where_we_win": [
+        {
+          "headline": "Native shift differentials and piece rate pay",
+          "detail": "Netchex includes shift differentials and piece rate pay in core platform; Paycor requires configuration and offers limited piece rates, increasing setup risk.",
+          "sources": [
+            "S119"
+          ]
+        },
+        {
+          "headline": "Included OSHA tracking and multilingual self-service",
+          "detail": "Netchex provides OSHA safety tracking and multilingual self-service standard; Paycor does not offer OSHA tracking and sells multilingual as an add-on.",
+          "sources": [
+            "S119"
+          ]
+        },
+        {
+          "headline": "Earned wage access and time tracking included",
+          "detail": "Netchex includes earned wage access and time/scheduling tools core; Paycor sells these as separate add-ons, with reported mobile time clock glitches.",
+          "sources": [
+            "S119"
+          ]
+        }
+      ],
+      "where_we_lose": [
+        {
+          "headline": "Broader third-party ecosystem",
+          "detail": "Paycor emphasizes extensive third-party integrations and global capabilities, which may appeal to complex, multinational enterprises.",
+          "sources": [
+            "S87"
+          ],
+          "counter": "Highlight Netchex’s deep integrations with POS and timeclock systems used in hourly, multi-location industries like restaurants and retail."
+        },
+        {
+          "headline": "Larger scale and market presence",
+          "detail": "Paycor serves over 1.8 million employees vs. Netchex’s 148,200, reflecting greater scalability and brand recognition in mid-market and enterprise segments.",
+          "sources": [
+            "S120"
+          ],
+          "counter": "Focus on Netchex’s purpose-built fit for deskless, hourly workforces where Paycor’s breadth adds complexity without value."
+        }
+      ],
+      "landmines": [
+        {
+          "question": "Does Paycor charge extra for time tracking and scheduling tools?",
+          "why": "Exposes Paycor’s add-on pricing for core workforce management features.",
+          "sources": [
+            "S119"
+          ]
+        },
+        {
+          "question": "Are there reports of unexpected fees or billing after cancellation with Paycor?",
+          "why": "Highlights Paycor’s pattern of hidden fees and billing surprises noted in independent reviews.",
+          "sources": [
+            "S119",
+            "S102"
+          ]
+        },
+        {
+          "question": "How does Paycor handle OSHA and safety tracking for hourly teams?",
+          "why": "Reveals Paycor lacks OSHA tracking entirely, while Netchex includes it standard.",
+          "sources": [
+            "S119"
+          ]
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Paycor has stronger brand recognition and more integrations.",
+          "response": "True, but for hourly, multi-location teams, Netchex’s native pay rules and time tools reduce cost and complexity—where Paycor charges extra.",
+          "sources": [
+            "S119",
+            "S87",
+            "S120"
+          ]
+        },
+        {
+          "objection": "Paycor’s platform feels more modern and user-friendly.",
+          "response": "Our users consistently praise ease of use and responsive support—key for deskless teams needing fast, reliable HR tools without friction.",
+          "sources": [
+            "S17",
+            "S19",
+            "S121"
+          ]
+        },
+        {
+          "objection": "I’m worried Netchex won’t scale with my growth.",
+          "response": "Netchex supports businesses up to 5,000 employees with dedicated AI HR teammates and 90% first-call resolution—built to scale with your deskless workforce.",
+          "sources": [
+            "S8",
+            "S9",
+            "S10",
+            "S16"
+          ]
+        }
+      ],
+      "pricing_comparison": {
+        "text": "Pricing is not public for either; Netchex avoids Paycor’s pattern of surprise fees and add-on costs for core features like time tracking.",
+        "sources": [
+          "S18",
+          "S103",
+          "S119"
+        ]
+      },
+      "proof_quotes": [
+        {
+          "quote": "Support is NOT helpful or knowledgeable anymore. The chat bot is a horrible change. Everything keeps breaking or no longer working and support blame...",
+          "sentiment": "pain",
+          "source": "S102"
+        },
+        {
+          "quote": "I LOVE THE EASE OF THE TIMECLOCK AND PULLING INTO PAYROLL. PREVIOUSLY I HAD TIME CLOCK ON MY DMS AND PAYROLL THROUGH PAYCHEX. IT DIDNT INTEGRATE SO I HAD TO KEY IN EVERY SINGLE TIMESHEET....THIS IS SO MUCH EASIER.",
+          "sentiment": "switching",
+          "source": "S19"
+        }
+      ]
+    }
+  ],
+  "positioning": {
+    "table_stakes": [
+      {
+        "theme": "Unified HR and payroll platform",
+        "companies": [
+          "Netchex",
+          "Paylocity",
+          "isolved",
+          "Paycor"
+        ],
+        "sources": [
+          "S3",
+          "S8",
+          "S33",
+          "S34",
+          "S5",
+          "S63",
+          "S74",
+          "S6",
+          "S87"
+        ]
+      },
+      {
+        "theme": "AI-powered automation and insights",
+        "companies": [
+          "Netchex",
+          "Paylocity",
+          "isolved",
+          "Paycor"
+        ],
+        "sources": [
+          "S16",
+          "S34",
+          "S35",
+          "S39",
+          "S41",
+          "S74",
+          "S63",
+          "S87"
+        ]
+      },
+      {
+        "theme": "Mobile access for employees",
+        "companies": [
+          "Netchex",
+          "Paylocity",
+          "isolved",
+          "Paycor"
+        ],
+        "sources": [
+          "S3",
+          "S8",
+          "S34",
+          "S37",
+          "S40",
+          "S41",
+          "S63",
+          "S64",
+          "S87"
+        ]
+      },
+      {
+        "theme": "Dedicated customer support",
+        "companies": [
+          "Netchex",
+          "Paylocity",
+          "isolved",
+          "Paycor"
+        ],
+        "sources": [
+          "S8",
+          "S9",
+          "S10",
+          "S11",
+          "S34",
+          "S42",
+          "S76",
+          "S101",
+          "S107"
+        ]
+      },
+      {
+        "theme": "Automated tax filing and compliance",
+        "companies": [
+          "Netchex",
+          "Paylocity",
+          "isolved",
+          "Paycor"
+        ],
+        "sources": [
+          "S10",
+          "S11",
+          "S33",
+          "S34",
+          "S63",
+          "S74",
+          "S87",
+          "S101",
+          "S107"
+        ]
+      }
+    ],
+    "white_space": [
+      {
+        "opportunity": "Transparent, predictable pricing for mid-market businesses",
+        "evidence": "Pricing is not public; available upon request.",
+        "sources": [
+          "S18"
+        ]
+      },
+      {
+        "opportunity": "Reliable system performance with minimal downtime or slow load times",
+        "evidence": "Incredibly slow load times for all pages, often timing out and requiring logging out and back in.",
+        "sources": [
+          "S23"
+        ]
+      },
+      {
+        "opportunity": "Modern, intuitive user interface that feels current and easy to navigate",
+        "evidence": "Some users report that the system layout feels outdated.",
+        "sources": [
+          "S17"
+        ]
+      },
+      {
+        "opportunity": "Simple missed punch correction without manager manual entry",
+        "evidence": "There is no feature to request a missed punch, so managers (or me) have to manually enter missed punches.",
+        "sources": [
+          "S17"
+        ]
+      }
+    ],
+    "recommended_angle": {
+      "text": "Netchex can own 'HR technology built for the deskless workforce' by emphasizing its OneScreen payroll speed, mobile punching with geofencing, and Mesh AI HR Teammates tailored for hourly, multi-location industries like restaurants, healthcare, and construction.",
+      "sources": [
+        "S3",
+        "S8",
+        "S10",
+        "S11",
+        "S16"
+      ]
+    }
+  },
+  "matrix": {
+    "capabilities": [
+      {
+        "name": "Time and attendance integration",
+        "cells": [
+          {
+            "company": "Netchex",
+            "status": "full",
+            "note": "Native scheduling-payroll integration",
+            "sources": [
+              "S119"
+            ]
+          },
+          {
+            "company": "Paylocity",
+            "status": "partial",
+            "note": "Separate module, connects via integration",
+            "sources": [
+              "S119"
+            ]
+          },
+          {
+            "company": "isolved",
+            "status": "full",
+            "note": "Workforce management for time tracking",
+            "sources": [
+              "S5"
+            ]
+          },
+          {
+            "company": "Paycor",
+            "status": "partial",
+            "note": "Sold as separate add-on purchase",
+            "sources": [
+              "S119"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Hiring and onboarding tools",
+        "cells": [
+          {
+            "company": "Netchex",
+            "status": "full",
+            "note": "Netchex Recruit with Text-to-Apply",
+            "sources": [
+              "S8",
+              "S31",
+              "S32"
+            ]
+          },
+          {
+            "company": "Paylocity",
+            "status": "partial",
+            "note": "Candidate management is add-on functionality",
+            "sources": [
+              "S115"
+            ]
+          },
+          {
+            "company": "isolved",
+            "status": "full",
+            "note": "Talent acquisition and onboarding included",
+            "sources": [
+              "S5"
+            ]
+          },
+          {
+            "company": "Paycor",
+            "status": "full",
+            "note": "Find and hire high-quality talent faster",
+            "sources": [
+              "S87"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Customer support quality",
+        "cells": [
+          {
+            "company": "Netchex",
+            "status": "full",
+            "note": "90% of calls answered in under one minute",
+            "sources": [
+              "S8",
+              "S9",
+              "S10",
+              "S11"
+            ]
+          },
+          {
+            "company": "Paylocity",
+            "status": "partial",
+            "note": "Inconsistent account representatives cause delays",
+            "sources": [
+              "S47",
+              "S51"
+            ]
+          },
+          {
+            "company": "isolved",
+            "status": "partial",
+            "note": "Users report poor customer support and delays",
+            "sources": [
+              "S81"
+            ]
+          },
+          {
+            "company": "Paycor",
+            "status": "partial",
+            "note": "Nearly half report long resolution times and slow follow-ups",
+            "sources": [
+              "S101",
+              "S107"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Payroll for hourly workforces",
+        "cells": [
+          {
+            "company": "Netchex",
+            "status": "full",
+            "note": "Native support for tipped wages, shift differentials",
+            "sources": [
+              "S115"
+            ]
+          },
+          {
+            "company": "Paylocity",
+            "status": "partial",
+            "note": "Built for office workers, not hourly shift-based teams",
+            "sources": [
+              "S115"
+            ]
+          },
+          {
+            "company": "isolved",
+            "status": "full",
+            "note": "Integrated payroll processing with real-time AI monitoring",
+            "sources": [
+              "S5"
+            ]
+          },
+          {
+            "company": "Paycor",
+            "status": "partial",
+            "note": "Requires configuration for shift differentials, limited piece rates",
+            "sources": [
+              "S119"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Ease of use and interface",
+        "cells": [
+          {
+            "company": "Netchex",
+            "status": "full",
+            "note": "Ease of use and user-friendly interface frequently highlighted",
+            "sources": [
+              "S17",
+              "S19"
+            ]
+          },
+          {
+            "company": "Paylocity",
+            "status": "full",
+            "note": "Ease of use and intuitive interface frequently praised",
+            "sources": [
+              "S45",
+              "S46",
+              "S47",
+              "S51",
+              "S52",
+              "S53"
+            ]
+          },
+          {
+            "company": "isolved",
+            "status": "full",
+            "note": "Users report system is user-friendly with clean layout",
+            "sources": [
+              "S75",
+              "S76"
+            ]
+          },
+          {
+            "company": "Paycor",
+            "status": "full",
+            "note": "Reviewers commend its user-friendly interface",
+            "sources": [
+              "S101",
+              "S107"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Implementation speed and support",
+        "cells": [
+          {
+            "company": "Netchex",
+            "status": "full",
+            "note": "Free white-glove implementation in about 6 weeks",
+            "sources": [
+              "S115"
+            ]
+          },
+          {
+            "company": "Paylocity",
+            "status": "partial",
+            "note": "Implementation takes 3 to 4 months, costs exceed $50,000",
+            "sources": [
+              "S115"
+            ]
+          },
+          {
+            "company": "isolved",
+            "status": "unknown",
+            "note": "",
+            "sources": []
+          },
+          {
+            "company": "Paycor",
+            "status": "unknown",
+            "note": "",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "name": "Pricing transparency",
+        "cells": [
+          {
+            "company": "Netchex",
+            "status": "none",
+            "note": "Pricing is not public; available upon request",
+            "sources": [
+              "S18"
+            ]
+          },
+          {
+            "company": "Paylocity",
+            "status": "none",
+            "note": "Pricing is not publicly published; custom quotes",
+            "sources": [
+              "S36",
+              "S37"
+            ]
+          },
+          {
+            "company": "isolved",
+            "status": "none",
+            "note": "Pricing is not publicly listed; book demo or contact sales",
+            "sources": [
+              "S5",
+              "S63"
+            ]
+          },
+          {
+            "company": "Paycor",
+            "status": "none",
+            "note": "Pricing is not publicly published; contact sales for custom quotes",
+            "sources": [
+              "S103"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "AI and automation features",
+        "cells": [
+          {
+            "company": "Netchex",
+            "status": "full",
+            "note": "Mesh AI HR Teammates: six AI specialists",
+            "sources": [
+              "S16"
+            ]
+          },
+          {
+            "company": "Paylocity",
+            "status": "full",
+            "note": "AI-powered automation for recruiting, onboarding, performance",
+            "sources": [
+              "S34",
+              "S35",
+              "S39",
+              "S41"
+            ]
+          },
+          {
+            "company": "isolved",
+            "status": "full",
+            "note": "Autonomous AI agents for specific HR and payroll outcomes",
+            "sources": [
+              "S74"
+            ]
+          },
+          {
+            "company": "Paycor",
+            "status": "full",
+            "note": "AI-powered workforce insights and predictions",
+            "sources": [
+              "S87"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "facts": {
+    "Paylocity": {
+      "wikipedia": "https://en.wikipedia.org/wiki/Paylocity",
+      "founded": "1997",
+      "headquarters": "Schaumburg"
+    }
+  },
+  "changes": null,
+  "sources": [
+    {
+      "id": "S1",
+      "company": "Paylocity",
+      "category": "company_facts",
+      "url": "https://en.wikipedia.org/wiki/Paylocity",
+      "title": "Paylocity - Wikipedia",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S2",
+      "company": "Paylocity",
+      "category": "community",
+      "url": "https://news.ycombinator.com/item?id=49215140",
+      "title": "Hacker News comment on Paylocity",
+      "published": "2026-08-07",
+      "origin": "independent"
+    },
+    {
+      "id": "S3",
+      "company": "Netchex",
+      "category": "positioning",
+      "url": "https://netchex.com",
+      "title": "Netchex homepage",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S4",
+      "company": "Paylocity",
+      "category": "positioning",
+      "url": "https://paylocity.com",
+      "title": "Paylocity homepage",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S5",
+      "company": "isolved",
+      "category": "positioning",
+      "url": "https://isolvedhcm.com",
+      "title": "isolved homepage",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S6",
+      "company": "Paycor",
+      "category": "positioning",
+      "url": "https://paycor.com",
+      "title": "Paycor homepage",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S7",
+      "company": "Netchex",
+      "category": "positioning",
+      "url": "https://netchex.com/blog/payroll-software-features-what-to-look-for-and-how-netchex-delivers",
+      "title": "Essential Payroll Software Features for Efficient Business Management | Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S8",
+      "company": "Netchex",
+      "category": "positioning",
+      "url": "https://netchex.com/blog/netchex-vs-auris-heartland-payroll",
+      "title": "Netchex vs. Auris (Heartland Payroll): 2026 Comparison",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S9",
+      "company": "Netchex",
+      "category": "positioning",
+      "url": "https://netchex.com/blog/netchex-vs-foundation-software",
+      "title": "Netchex vs. Foundation Software: 2026 Comparison",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S10",
+      "company": "Netchex",
+      "category": "pricing",
+      "url": "https://netchex.com/blog/payroll-software-comparison-2026-netchex-vs-adp-vs-paychex-vs-paylocity-vs-rippling",
+      "title": "Payroll Software Comparison 2026 | Netchex - Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S11",
+      "company": "Netchex",
+      "category": "pricing",
+      "url": "https://netchex.com/blog/5-best-payroll-software-platforms-for-convenience-stores-in-2026",
+      "title": "Best Payroll Software for Convenience Stores | Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S12",
+      "company": "Netchex",
+      "category": "pricing",
+      "url": "https://netchex.com/paychex-alternative",
+      "title": "Paychex Alternative: Netchex vs. Paychex (2026)",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S13",
+      "company": "Netchex",
+      "category": "product_updates",
+      "url": "https://netchex.com/category/artificial-intelligence-ai/feed",
+      "title": "Artificial Intelligence (AI) Archives - Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S14",
+      "company": "Netchex",
+      "category": "product_updates",
+      "url": "https://netchex.com/blog/better-workflows-across-your-ecosystem",
+      "title": "HR Automation That Connects Your Ecosystem - Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S15",
+      "company": "Netchex",
+      "category": "product_updates",
+      "url": "https://netchex.com/tag/applicant-tracking-system/feed",
+      "title": "Applicant Tracking System Archives - Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S16",
+      "company": "Netchex",
+      "category": "news",
+      "url": "https://www.globenewswire.com/news-release/2026/07/20/3329776/0/en/netchex-launches-mesh-ai-hr-teammates-for-the-deskless-workforce.html",
+      "title": "Netchex Launches Mesh: AI HR Teammates for the Deskless",
+      "published": "Mon, 20 Jul 2026 00:00:00 GMT",
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S17",
+      "company": "Netchex",
+      "category": "reviews",
+      "url": "https://www.softwareadvice.com/hr/netchex-profile/reviews",
+      "title": "Netchex Reviews, Pros and Cons",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S18",
+      "company": "Netchex",
+      "category": "reviews",
+      "url": "https://www.softwareadvice.com/hr/netchex-profile",
+      "title": "Netchex Software Reviews, Demo & Pricing",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S19",
+      "company": "Netchex",
+      "category": "reviews",
+      "url": "https://www.trustradius.com/products/netchex/reviews",
+      "title": "Netchex Reviews from Real Users | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S20",
+      "company": "Netchex",
+      "category": "ratings",
+      "url": "https://www.g2.com/products/netchex/reviews",
+      "title": "Netchex Reviews 2026: Details, Pricing, & Features",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S21",
+      "company": "Netchex",
+      "category": "ratings",
+      "url": "https://uk.trustpilot.com/review/www.netchex.com",
+      "title": "Read Customer Service Reviews of www.netchex.com",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S22",
+      "company": "Netchex",
+      "category": "ratings",
+      "url": "https://www.trustpilot.com/review/www.netchex.com?page=2",
+      "title": "Read Customer Service Reviews of www.netchex.com",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S23",
+      "company": "Netchex",
+      "category": "complaints",
+      "url": "https://www.capterra.com/p/162115/Netchex/reviews",
+      "title": "Netchex Reviews 2026. Verified Reviews, Pros & Cons",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S24",
+      "company": "Netchex",
+      "category": "community",
+      "url": "https://www.reddit.com/r/Bookkeeping/comments/1nkwkq2/from_your_experience_do_aipowered_payroll_systems",
+      "title": "From your experience, do AI-powered payroll systems reduce errors or it's just hype? : r/Bookkeeping",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S25",
+      "company": "Netchex",
+      "category": "community",
+      "url": "https://www.reddit.com/r/steelseries/comments/1i6i4p7/what_was_your_honest_experience_with_steelseries",
+      "title": "What was your honest experience with steelseries? : r/steelseries",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S26",
+      "company": "Netchex",
+      "category": "community",
+      "url": "https://www.reddit.com/r/TheOnePlus15/comments/1p0d5td/my_oneplus_15_experience_switched_from_xiaomi_15",
+      "title": "My oneplus 15 experience( switched from xiaomi 15 ultra)",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S27",
+      "company": "Netchex",
+      "category": "alternatives",
+      "url": "https://www.cbinsights.com/company/netchex/alternatives-competitors",
+      "title": "Top Netchex Alternatives, Competitors",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S28",
+      "company": "Netchex",
+      "category": "alternatives",
+      "url": "https://www.6sense.com/tech/payroll-management/netchex-market-share",
+      "title": "Netchex - Market Share, Competitor Insights in Payroll Management",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S29",
+      "company": "Netchex",
+      "category": "alternatives",
+      "url": "https://www.workstream.us/blog/best-netchex-alternatives",
+      "title": "7 Best Netchex Alternatives for Multi-Unit HR & Payroll in 2026",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S30",
+      "company": "Netchex",
+      "category": "hiring",
+      "url": "https://netchex.com/solutions/hiring",
+      "title": "Hiring Software | Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S31",
+      "company": "Netchex",
+      "category": "hiring",
+      "url": "https://netchex.com/careers",
+      "title": "Job Listings Archive - Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S32",
+      "company": "Netchex",
+      "category": "hiring",
+      "url": "https://netchex.com/blog/7-best-harri-alternatives-for-restaurant-hiring-in-2026",
+      "title": "7 Best Harri Alternatives for Restaurant Hiring | Netchex",
+      "published": null,
+      "origin": "vendor:Netchex"
+    },
+    {
+      "id": "S33",
+      "company": "Paylocity",
+      "category": "positioning",
+      "url": "https://www.paylocity.com/company/about-us/newsroom/press-releases/paylocity-advances-one-unified-hcm-and-finance-platform-with-launch-of-integrated-spend-management-solution",
+      "title": "Paylocity Advances One Unified HCM and Finance Platform with Launch of Integrated Spend Management Solution | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S34",
+      "company": "Paylocity",
+      "category": "positioning",
+      "url": "https://www.paylocity.com/products/hr",
+      "title": "HCM Software | HR HCM System | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S35",
+      "company": "Paylocity",
+      "category": "positioning",
+      "url": "https://www.paylocity.com/resources/learn/articles/what-is-human-capital-management",
+      "title": "What is Human Capital Management & HCM Software?   | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S36",
+      "company": "Paylocity",
+      "category": "pricing",
+      "url": "https://www.paylocity.com/why-paylocity/compare/lists/talent-management-software",
+      "title": "Best Talent Management Software: Top 10 Tools [2026]  | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S37",
+      "company": "Paylocity",
+      "category": "pricing",
+      "url": "https://www.paylocity.com/who-we-serve/company-size/small/payroll",
+      "title": "Payroll Software for Small Business | Unified Payroll Solution | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S38",
+      "company": "Paylocity",
+      "category": "pricing",
+      "url": "https://www.paylocity.com/content/dam/paylocity/media/other/po-terms---cond/pcty-additional-service-terms-online.pdf",
+      "title": "Service Specific Terms",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S39",
+      "company": "Paylocity",
+      "category": "product_updates",
+      "url": "https://www.paylocity.com/resources/learn/blogs/whats-new-may-2026",
+      "title": "What’s New Blog | May 2026 | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S40",
+      "company": "Paylocity",
+      "category": "product_updates",
+      "url": "https://www.paylocity.com/resources/learn/blogs/whats-new-blog-july-2024",
+      "title": "What's New Blog | July 2024 | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S41",
+      "company": "Paylocity",
+      "category": "product_updates",
+      "url": "https://www.paylocity.com/resources/learn/blogs/whats-new-blog-april-2025",
+      "title": "What’s New Blog | April 2025 | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S42",
+      "company": "Paylocity",
+      "category": "news",
+      "url": "https://www.globenewswire.com/news-release/2026/04/21/3277981/0/en/paylocity-launches-elevate-solutions-to-help-hr-and-payroll-teams-scale-more-efficiently.html",
+      "title": "Paylocity Launches Elevate Solutions to Help HR and Payroll",
+      "published": "Tue, 21 Apr 2026 13:00:00 GMT",
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S43",
+      "company": "Paylocity",
+      "category": "news",
+      "url": "https://www.globenewswire.com/news-release/2026/08/04/3338801/0/en/paylocity-announces-fourth-quarter-and-fiscal-2026-financial-results.html",
+      "title": "Paylocity Announces Fourth Quarter and Fiscal 2026",
+      "published": "Tue, 04 Aug 2026 20:05:00 GMT",
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S44",
+      "company": "Paylocity",
+      "category": "news",
+      "url": "https://www.crowdfundinsider.com/tag/rodolphe-mulliez",
+      "title": "Rodolphe Mulliez - All News And Posts By Crowdfund Insider",
+      "published": "Tue, 21 Oct 2025 00:00:00 GMT",
+      "origin": "independent"
+    },
+    {
+      "id": "S45",
+      "company": "Paylocity",
+      "category": "reviews",
+      "url": "https://www.trustradius.com/reviews/paylocity-2024-09-25-14-32-22",
+      "title": "Paylocity Review | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S46",
+      "company": "Paylocity",
+      "category": "reviews",
+      "url": "https://www.trustradius.com/reviews/paylocity-2024-03-22-10-37-12",
+      "title": "Paylocity review | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S47",
+      "company": "Paylocity",
+      "category": "reviews",
+      "url": "https://www.trustradius.com/reviews/paylocity-2023-10-26-15-27-35",
+      "title": "Pros and Cons. | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S48",
+      "company": "Paylocity",
+      "category": "ratings",
+      "url": "https://www.gartner.com/reviews/market/expense-management-software/compare/paylocity-vs-rippling",
+      "title": "Paylocity vs Rippling 2026 | Gartner Peer Insights",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S49",
+      "company": "Paylocity",
+      "category": "ratings",
+      "url": "https://www.gartner.com/reviews/market/cloud-hcm-suites-for-1000-employees/compare/product/paylocity-1942203380-vs-rippling-1139883183",
+      "title": "Paylocity vs Rippling 2026 | Gartner Peer Insights",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S50",
+      "company": "Paylocity",
+      "category": "ratings",
+      "url": "https://www.gartner.com/reviews/market/cloud-hcm-suites-for-regional-and-or-sub-1000-employee-enterprises/compare/adp-vs-paylocity",
+      "title": "ADP vs Paylocity 2026 | Gartner Peer Insights",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S51",
+      "company": "Paylocity",
+      "category": "complaints",
+      "url": "https://www.trustradius.com/reviews/paylocity-2025-09-12-10-42-52",
+      "title": "Paylocity Lover | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S52",
+      "company": "Paylocity",
+      "category": "complaints",
+      "url": "https://www.trustradius.com/reviews/paylocity-2024-09-26-10-26-59",
+      "title": "Paylocity is great for us | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S53",
+      "company": "Paylocity",
+      "category": "complaints",
+      "url": "https://www.trustradius.com/reviews/paylocity-2026-03-06-08-47-14",
+      "title": "Paylocity 2026 Review | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S54",
+      "company": "Paylocity",
+      "category": "community",
+      "url": "https://www.reddit.com/r/humanresources/comments/y26acb/hris_switch_options_paycor_paylocity_namely",
+      "title": "Paycor, Paylocity, Namely, Paycom, ADP, SuitePeople. Any warnings/advice? : r/humanresources",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S55",
+      "company": "Paylocity",
+      "category": "community",
+      "url": "https://www.reddit.com/r/Payroll/comments/1vfouqk/paylocity_sucks",
+      "title": "Paylocity sucks?! : r/Payroll",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S56",
+      "company": "Paylocity",
+      "category": "community",
+      "url": "https://www.reddit.com/r/humanresources/comments/1w77l4x/paylocity_vs_workday_na",
+      "title": "Paylocity vs Workday [N/A] : r/humanresources",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S57",
+      "company": "Paylocity",
+      "category": "alternatives",
+      "url": "https://www.rippling.com/blog/paylocity-alternatives",
+      "title": "8 of the best Paylocity competitors and alternatives for scaling companies",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S58",
+      "company": "Paylocity",
+      "category": "alternatives",
+      "url": "https://www.techrepublic.com/article/paylocity-competitors",
+      "title": "Top 6 Paylocity Competitors and Alternatives",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S59",
+      "company": "Paylocity",
+      "category": "alternatives",
+      "url": "https://peoplemanagingpeople.com/tools/best-paylocity-alternatives",
+      "title": "10 Best Paylocity Competitors for Payroll & HR in 2026",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S60",
+      "company": "Paylocity",
+      "category": "hiring",
+      "url": "https://www.paylocity.com/company/careers",
+      "title": "Careers | Paylocity | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S61",
+      "company": "Paylocity",
+      "category": "hiring",
+      "url": "https://www.paylocity.com/company/careers/sales-marketing-careers",
+      "title": "Sales Marketing Careers | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S62",
+      "company": "Paylocity",
+      "category": "hiring",
+      "url": "https://www.paylocity.com/company/careers/international/czech-republic",
+      "title": "Czech Republic | Careers | Paylocity",
+      "published": null,
+      "origin": "vendor:Paylocity"
+    },
+    {
+      "id": "S63",
+      "company": "isolved",
+      "category": "positioning",
+      "url": "https://www.isolvedhcm.com/what-we-offer",
+      "title": "HCM Software | Human Capital Management | HR & Payroll Software | isolved HCM",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S64",
+      "company": "isolved",
+      "category": "positioning",
+      "url": "https://www.isolvedhcm.com/media-center/press-releases/isolved-launches-people-cloud",
+      "title": "Employee Engagement Platform | Transforming the Future of Work | isolved HCM",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S65",
+      "company": "isolved",
+      "category": "positioning",
+      "url": "https://www.isolvedhcm.com/media-center/press-releases/isolved-connects-employee-experience-results-that-matter",
+      "title": "Improve Employee Experience | Connected HR Solutions That Deliver | isolved HCM",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S66",
+      "company": "isolved",
+      "category": "pricing",
+      "url": "https://www.isolvedhcm.com/terms-of-use",
+      "title": "Terms of Use | isolved HCM | isolved HCM",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S67",
+      "company": "isolved",
+      "category": "pricing",
+      "url": "https://visit.isolvedhcm.com/hubfs/isolvedNetwork/PDF/nucleus-research-roi-guidebook-of-isolved-people-cloud.pdf",
+      "title": "ROI GUIDEBOOK ISOLVED PEOPLE CLOUD",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S68",
+      "company": "isolved",
+      "category": "pricing",
+      "url": "https://www.isolvedhcm.com/blog/nucleus-research-report",
+      "title": "HR Tech Review: Why People Cloud Is the Platform That Pays for Itself | isolved HCM",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S69",
+      "company": "isolved",
+      "category": "product_updates",
+      "url": "https://visit.isolvedhcm.com/hubfs/Network%20PDFs/Adaptive%20Employee%20Experience%20Employee%20Guide%20April%202022.pdf",
+      "title": "Adaptive Employee Experience",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S70",
+      "company": "isolved",
+      "category": "product_updates",
+      "url": "https://visit.isolvedhcm.com/hubfs/Network%20PDFs/Adaptive%20Employee%20Experience%20Manager%20Guide%20April%202022.pdf",
+      "title": "Adaptive Employee Experience",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S71",
+      "company": "isolved",
+      "category": "product_updates",
+      "url": "https://www.isolvedhcm.com/media-center",
+      "title": "Media Center | isolved HCM",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S72",
+      "company": "isolved",
+      "category": "news",
+      "url": "https://finance.yahoo.com/technology/ai/articles/isolved-named-time-top-worktech-130500304.html",
+      "title": "isolved Named by TIME as Top WorkTech Company 2026",
+      "published": "Wed, 17 Jun 2026 13:05:00 GMT",
+      "origin": "independent"
+    },
+    {
+      "id": "S73",
+      "company": "isolved",
+      "category": "news",
+      "url": "https://www.prnewswire.com/news-releases/electric-partners-with-isolved-to-automate-it-management-for-small-and-growing-businesses-302887682.html",
+      "title": "Electric Partners with isolved to Automate IT Management for Small and Growing Businesses",
+      "published": "Wed, 23 Sep 2026 13:05:00 GMT",
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S74",
+      "company": "isolved",
+      "category": "news",
+      "url": "https://techrseries.com/hrtechnology/isolved-introduces-autonomous-ai-agents-built-to-own-hr-outcomes-brings-unified-hcm-platform-to-anthropics-claude-connectors-directory",
+      "title": "isolved Introduces Autonomous AI Agents Built to Own HR Outcomes — Brings Unified HCM Platform to Anthropic’s Claude Connectors Directory",
+      "published": "Wed, 17 Jun 2026 11:11:57 GMT",
+      "origin": "independent"
+    },
+    {
+      "id": "S75",
+      "company": "isolved",
+      "category": "reviews",
+      "url": "https://www.softwareadvice.com/hr/isolved-profile/reviews",
+      "title": "isolved Reviews, Pros and Cons",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S76",
+      "company": "isolved",
+      "category": "reviews",
+      "url": "https://www.trustradius.com/products/isolved/reviews/all?industry=construction",
+      "title": "isolved Reviews from Construction Users | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S77",
+      "company": "isolved",
+      "category": "reviews",
+      "url": "https://www.trustradius.com/products/isolved/reviews",
+      "title": "isolved Reviews from Real Users | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S78",
+      "company": "isolved",
+      "category": "ratings",
+      "url": "https://www.gartner.com/reviews/market/cloud-hcm-suites-for-1000-employees/vendor/isolved/product/isolved-people-cloud",
+      "title": "isolved People Cloud Reviews, Ratings & Features 2025 | Gartner Peer Insights",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S79",
+      "company": "isolved",
+      "category": "ratings",
+      "url": "https://www.gartner.com/reviews/market/cloud-hcm-suites-for-1000-employees/compare/adp-vs-isolved",
+      "title": "ADP vs isolved 2026 | Gartner Peer Insights",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S80",
+      "company": "isolved",
+      "category": "ratings",
+      "url": "https://www.peerspot.com/products/comparisons/isolved_vs_sap-hcm",
+      "title": "SAP HCM vs isolved (2026)",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S81",
+      "company": "isolved",
+      "category": "complaints",
+      "url": "https://www.g2.com/products/isolved/reviews?qs=pros-and-cons",
+      "title": "isolved Pros and Cons | User Likes & Dislikes",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S82",
+      "company": "isolved",
+      "category": "community",
+      "url": "https://www.reddit.com/r/Payroll/comments/1ta3y3m/ukg_v_isolved_v_adp",
+      "title": "UKG v iSolved v ADP : r/Payroll",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S83",
+      "company": "isolved",
+      "category": "alternatives",
+      "url": "https://technologycounter.com/products/isolved-hcm/alternatives",
+      "title": "Top isolved HCM Alternatives in 2026",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S84",
+      "company": "isolved",
+      "category": "alternatives",
+      "url": "https://tabulera.com/blog/what-is-isolved-people-cloud-complete-software-overview",
+      "title": "What is isolved People Cloud: Complete Software Overview | Tabulera",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S85",
+      "company": "isolved",
+      "category": "alternatives",
+      "url": "https://www.softwarereviews.com/categories/164/products/680/alternatives",
+      "title": "isolved People Cloud Alternatives and Competitors | Payroll |...",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S86",
+      "company": "isolved",
+      "category": "hiring",
+      "url": "https://www.isolvedhcm.com/login",
+      "title": "Login | isolved People Cloud | isolved HCM | isolved HCM",
+      "published": null,
+      "origin": "vendor:isolved"
+    },
+    {
+      "id": "S87",
+      "company": "Paycor",
+      "category": "positioning",
+      "url": "https://www.paycor.com/hcm-software",
+      "title": "HCM Software: Human Capital Management Solutions by Paycor",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S88",
+      "company": "Paycor",
+      "category": "positioning",
+      "url": "https://www.paycor.com/resource-center/articles/what-is-human-capital-management-hcm",
+      "title": "What is Human Capital Management (HCM)?",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S89",
+      "company": "Paycor",
+      "category": "positioning",
+      "url": "https://www.paycor.com/company/news-press/paycor-unveils-embedded-hcm-solution",
+      "title": "Paycor Unveils Embedded HCM Solution",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S90",
+      "company": "Paycor",
+      "category": "pricing",
+      "url": "https://www.paycor.com/plans-pricing/small-business",
+      "title": "Paycor Pricing Plans | Businesses with Under 50 Employees",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S91",
+      "company": "Paycor",
+      "category": "pricing",
+      "url": "https://www.paycor.com/overagefees",
+      "title": "Paycor Subscription Overage Fees",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S92",
+      "company": "Paycor",
+      "category": "pricing",
+      "url": "https://www.paycor.com/plans-pricing/mid-market",
+      "title": "Paycor Plans | Medium-sized Businesses",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S93",
+      "company": "Paycor",
+      "category": "product_updates",
+      "url": "https://www.paycor.com/company/news-press/paycor-debuts-new-features-to-streamline-payroll-process%EF%BF%BC",
+      "title": "Paycor Debuts New Features to Streamline Payroll Process",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S94",
+      "company": "Paycor",
+      "category": "product_updates",
+      "url": "https://www.paycor.com/company/news-press/paycor-unveils-innovative-features-to-redefine-time-off-management",
+      "title": "Paycor Unveils Innovative Features to Redefine Time-Off Management",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S95",
+      "company": "Paycor",
+      "category": "product_updates",
+      "url": "https://www.paycor.com/company/news-press/paycor-launches-new-expense-management-product-further-streamlining-hr-processes-for-todays-workplace",
+      "title": "Paycor Launches New Expense Management Product, Further Streamlining HR Processes for Today’s Workplace",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S96",
+      "company": "Paycor",
+      "category": "news",
+      "url": "https://www.quiverquant.com/news/Paychex+Launches+Paycor+Perks+to+Expand+Voluntary+Benefits+for+Paycor+Clients",
+      "title": "Paychex Launches Paycor Perks to Expand Voluntary Benefits for Paycor Clients | Quiver Quantitative",
+      "published": "Mon, 24 Aug 2026 00:00:00 GMT",
+      "origin": "independent"
+    },
+    {
+      "id": "S97",
+      "company": "Paycor",
+      "category": "news",
+      "url": "https://www.businesswire.com/news/home/20260519707364/en/Announcing-the-WISE-AI-Platform-for-an-Agentic-Digital-Workforce",
+      "title": "Announcing the WISE AI Platform for an Agentic Digital Workforce",
+      "published": "Tue, 19 May 2026 00:00:00 GMT",
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S98",
+      "company": "Paycor",
+      "category": "news",
+      "url": "https://www.bengals.com/news/2026-paycor-stadium-renovations-first-look",
+      "title": "First Look: Paycor Stadium Renovations Elevate Fan Experience",
+      "published": "Tue, 21 Jul 2026 00:00:00 GMT",
+      "origin": "independent"
+    },
+    {
+      "id": "S99",
+      "company": "Paycor",
+      "category": "reviews",
+      "url": "https://www.g2.com/products/paycor/reviews",
+      "title": "Paycor Reviews, Pros + Cons, and Top Rated Features",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S100",
+      "company": "Paycor",
+      "category": "reviews",
+      "url": "https://www.softwareadvice.com/hr/paycor-perform-profile/reviews",
+      "title": "Paycor Reviews, Pros and Cons - 2026 Software Advice",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S101",
+      "company": "Paycor",
+      "category": "reviews",
+      "url": "https://www.trustradius.com/products/paycor/reviews",
+      "title": "Paycor Reviews from Real Users | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S102",
+      "company": "Paycor",
+      "category": "ratings",
+      "url": "https://www.trustpilot.com/review/paycor.com?page=4",
+      "title": "Paycor is rated \"Bad\" with 1.6 / 5 on Trustpilot",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S103",
+      "company": "Paycor",
+      "category": "ratings",
+      "url": "https://www.trustradius.com/compare-products/jazz-hr-vs-paycor",
+      "title": "JazzHR vs Paycor | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S104",
+      "company": "Paycor",
+      "category": "ratings",
+      "url": "https://www.gartner.com/reviews/product/paycor-onboarding-software",
+      "title": "Paycor Onboarding Software Reviews & Ratings 2026 | Gartner Peer Insights",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S105",
+      "company": "Paycor",
+      "category": "complaints",
+      "url": "https://www.softwareadvice.com/hr/paycor-perform-profile",
+      "title": "Paycor Software Overview 2026 - Features & Pricing",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S106",
+      "company": "Paycor",
+      "category": "complaints",
+      "url": "https://www.trustradius.com/products/paycor/reviews/industry/other-services",
+      "title": "Paycor Reviews: Other Services (except Public Administration) Perspective | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S107",
+      "company": "Paycor",
+      "category": "complaints",
+      "url": "https://www.trustradius.com/products/paycor/reviews/all?industry=finance-and-insurance",
+      "title": "Paycor Reviews from Finance and Insurance Users | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S108",
+      "company": "Paycor",
+      "category": "community",
+      "url": "https://www.reddit.com/r/humanresources/comments/1b8apii/paycor_implementation",
+      "title": "Paycor implementation? : r/humanresources",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S109",
+      "company": "Paycor",
+      "category": "community",
+      "url": "https://www.reddit.com/r/Payroll/comments/1dh8u5h/working_at_paycor",
+      "title": "Working at Paycor : r/Payroll",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S110",
+      "company": "Paycor",
+      "category": "alternatives",
+      "url": "https://www.imocha.io/blog/paycor-alternatives-competitors",
+      "title": "Top 11 Paycor Competitors & Alternatives in 2026",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S111",
+      "company": "Paycor",
+      "category": "alternatives",
+      "url": "https://www.sloneek.com/blog/paycor-competitors",
+      "title": "Top Paycor Alternatives for HR Software | Sloneek",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S112",
+      "company": "Paycor",
+      "category": "hiring",
+      "url": "https://www.paycor.com/resource-center/articles/paycor-recruiting-find-quality-candidates-and-fill-open-positions-fast",
+      "title": "Paycor Recruiting: Find Quality Candidates and Fill Open Positions Fast",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S113",
+      "company": "Paycor",
+      "category": "hiring",
+      "url": "https://www.paycor.com/hcm-software/recruiting-software",
+      "title": "HR Recruitment and Management Software | ATS | Paycor​",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S114",
+      "company": "Paycor",
+      "category": "hiring",
+      "url": "https://www.paycor.com/resource-center/articles/remote-hiring-a-step-by-step-guide",
+      "title": "A Guide to Remote Hiring",
+      "published": null,
+      "origin": "vendor:Paycor"
+    },
+    {
+      "id": "S115",
+      "company": "Paylocity",
+      "category": "comparison",
+      "url": "https://higherme.com/blog/paylocity-vs.-netchex-mid-market-hr-platforms-compared",
+      "title": "Paylocity vs. Netchex: Mid-Market HR Platforms Compared",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S116",
+      "company": "Paylocity",
+      "category": "comparison",
+      "url": "https://sourceforge.net/software/compare/ADP-Workforce-Now-vs-Netchex-vs-Paylocity",
+      "title": "ADP Workforce Now vs. Netchex vs. Paylocity Comparison",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S117",
+      "company": "isolved",
+      "category": "comparison",
+      "url": "https://www.topadvisor.com/compare/netchex-vs-isolved-hr",
+      "title": "Netchex vs. isolved: Which is Best? - TopAdvisor",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S118",
+      "company": "isolved",
+      "category": "comparison",
+      "url": "https://www.appsandreports.com/compare/netchex-vs-isolved",
+      "title": "Netchex vs iSolved comparison 2026",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S119",
+      "company": "Paycor",
+      "category": "comparison",
+      "url": "https://higherme.com/blog/paycor-vs.-netchex-payroll-platforms-for-multi-location-hourly-workforces?hs_amp=true",
+      "title": "Paycor vs. Netchex: Payroll Platforms for Multi-Location, Hourly Workforces",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S120",
+      "company": "Paycor",
+      "category": "comparison",
+      "url": "https://www.myshortlister.com/compare/netchex-vs-paycor",
+      "title": "One Vs One - Shortlister",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S121",
+      "company": "Paycor",
+      "category": "comparison",
+      "url": "https://www.trustradius.com/compare-products/netchex-vs-paycor",
+      "title": "Compare Netchex vs Paycor 2026 | TrustRadius",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S122",
+      "company": "_market",
+      "category": "market",
+      "url": "https://www.softwareworld.co/top-hcm-software/comparison",
+      "title": "Top 10 Human Capital Management (HCM) Software Comparison 2025 | SoftwareWorld",
+      "published": null,
+      "origin": "independent"
+    },
+    {
+      "id": "S123",
+      "company": "_market",
+      "category": "market",
+      "url": "https://www.itbusinessedge.com/applications/best-hcm-software",
+      "title": "Best HCM Software for 2021 | HCM Software Comparison",
+      "published": null,
+      "origin": "independent"
+    }
+  ],
+  "stats": {
+    "claims_dropped": 0,
+    "quotes_dropped": 0,
+    "bad_ids_removed": 0,
+    "vendor_quotes_dropped": 9,
+    "rival_only_dropped": 0
+  },
+  "usage": {
+    "calls": 10,
+    "input_tokens": 229335,
+    "output_tokens": 16596
+  },
+  "notes": {}
+}

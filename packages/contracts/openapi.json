@@ -1,0 +1,1742 @@
+{
+  "components": {
+    "schemas": {
+      "Battlecard": {
+        "properties": {
+          "competitor": {
+            "title": "Competitor",
+            "type": "string"
+          },
+          "landmines": {
+            "items": {
+              "$ref": "#/components/schemas/Landmine"
+            },
+            "title": "Landmines",
+            "type": "array"
+          },
+          "objections": {
+            "items": {
+              "$ref": "#/components/schemas/Objection"
+            },
+            "title": "Objections",
+            "type": "array"
+          },
+          "overview": {
+            "default": "",
+            "description": "One sentence: who they are and who they sell to",
+            "title": "Overview",
+            "type": "string"
+          },
+          "pricing_comparison": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Claim"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "proof_quotes": {
+            "items": {
+              "$ref": "#/components/schemas/Quote"
+            },
+            "title": "Proof Quotes",
+            "type": "array"
+          },
+          "quick_dismiss": {
+            "default": "",
+            "description": "Talk track, max 50 words: acknowledge their strength, name the limit, pivot to our value",
+            "title": "Quick Dismiss",
+            "type": "string"
+          },
+          "tldr": {
+            "description": "Two short sentences: when we win, when we usually lose",
+            "title": "Tldr",
+            "type": "string"
+          },
+          "where_we_lose": {
+            "items": {
+              "$ref": "#/components/schemas/Threat"
+            },
+            "title": "Where We Lose",
+            "type": "array"
+          },
+          "where_we_win": {
+            "items": {
+              "$ref": "#/components/schemas/Point"
+            },
+            "title": "Where We Win",
+            "type": "array"
+          }
+        },
+        "required": [
+          "competitor",
+          "tldr"
+        ],
+        "title": "Battlecard",
+        "type": "object"
+      },
+      "CapRow": {
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "them": {
+            "$ref": "#/components/schemas/CellView"
+          },
+          "us": {
+            "$ref": "#/components/schemas/CellView"
+          },
+          "verdict": {
+            "enum": [
+              "lead",
+              "even",
+              "behind",
+              "unknown"
+            ],
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "us",
+          "them",
+          "verdict"
+        ],
+        "title": "CapRow",
+        "type": "object"
+      },
+      "Capability": {
+        "properties": {
+          "cells": {
+            "items": {
+              "$ref": "#/components/schemas/Cell"
+            },
+            "title": "Cells",
+            "type": "array"
+          },
+          "name": {
+            "description": "Buyer-facing capability, max 5 words",
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "Capability",
+        "type": "object"
+      },
+      "CapabilityMatrix": {
+        "properties": {
+          "capabilities": {
+            "items": {
+              "$ref": "#/components/schemas/Capability"
+            },
+            "title": "Capabilities",
+            "type": "array"
+          }
+        },
+        "title": "CapabilityMatrix",
+        "type": "object"
+      },
+      "CapabilityView": {
+        "properties": {
+          "cells": {
+            "items": {
+              "$ref": "#/components/schemas/CellView"
+            },
+            "title": "Cells",
+            "type": "array"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "cells"
+        ],
+        "title": "CapabilityView",
+        "type": "object"
+      },
+      "CardView": {
+        "properties": {
+          "axis_lo": {
+            "title": "Axis Lo",
+            "type": "number"
+          },
+          "evidence": {
+            "$ref": "#/components/schemas/Evidence"
+          },
+          "known": {
+            "title": "Known",
+            "type": "integer"
+          },
+          "ratings": {
+            "items": {
+              "$ref": "#/components/schemas/RatingPair"
+            },
+            "title": "Ratings",
+            "type": "array"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/CapRow"
+            },
+            "title": "Rows",
+            "type": "array"
+          },
+          "tally": {
+            "$ref": "#/components/schemas/Tally"
+          }
+        },
+        "required": [
+          "rows",
+          "tally",
+          "known",
+          "ratings",
+          "axis_lo",
+          "evidence"
+        ],
+        "title": "CardView",
+        "type": "object"
+      },
+      "Cell": {
+        "properties": {
+          "company": {
+            "title": "Company",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "description": "Max 8 words, e.g. 'Add-on, extra cost'",
+            "title": "Note",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "status": {
+            "default": "unknown",
+            "enum": [
+              "full",
+              "partial",
+              "none",
+              "unknown"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "company"
+        ],
+        "title": "Cell",
+        "type": "object"
+      },
+      "CellView": {
+        "properties": {
+          "company": {
+            "default": "",
+            "title": "Company",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "self": {
+            "default": false,
+            "title": "Self",
+            "type": "boolean"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "status": {
+            "default": "unknown",
+            "enum": [
+              "full",
+              "partial",
+              "none",
+              "unknown"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "title": "CellView",
+        "type": "object"
+      },
+      "Change": {
+        "properties": {
+          "change": {
+            "title": "Change",
+            "type": "string"
+          },
+          "company": {
+            "title": "Company",
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ],
+            "title": "Severity",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "why_it_matters": {
+            "title": "Why It Matters",
+            "type": "string"
+          }
+        },
+        "required": [
+          "company",
+          "change",
+          "why_it_matters",
+          "severity"
+        ],
+        "title": "Change",
+        "type": "object"
+      },
+      "ChangeReport": {
+        "properties": {
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/Change"
+            },
+            "title": "Changes",
+            "type": "array"
+          }
+        },
+        "title": "ChangeReport",
+        "type": "object"
+      },
+      "Claim": {
+        "properties": {
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "Claim",
+        "type": "object"
+      },
+      "CompanyFacts": {
+        "properties": {
+          "employees": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Employees"
+          },
+          "founded": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Founded"
+          },
+          "headquarters": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Headquarters"
+          },
+          "owner": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Owner"
+          },
+          "wikipedia": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wikipedia"
+          }
+        },
+        "title": "CompanyFacts",
+        "type": "object"
+      },
+      "CompanyIn": {
+        "properties": {
+          "domain": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domain"
+          },
+          "name": {
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "CompanyIn",
+        "type": "object"
+      },
+      "CompanyProfile": {
+        "properties": {
+          "domain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domain"
+          },
+          "hiring_signals": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Hiring Signals",
+            "type": "array"
+          },
+          "key_capabilities": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Key Capabilities",
+            "type": "array"
+          },
+          "name": {
+            "default": "",
+            "title": "Name",
+            "type": "string"
+          },
+          "positioning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Claim"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How the company describes itself, in one line"
+          },
+          "pricing_summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Claim"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pricing_tiers": {
+            "items": {
+              "$ref": "#/components/schemas/PriceTier"
+            },
+            "title": "Pricing Tiers",
+            "type": "array"
+          },
+          "quotes": {
+            "items": {
+              "$ref": "#/components/schemas/Quote"
+            },
+            "title": "Quotes",
+            "type": "array"
+          },
+          "ratings": {
+            "items": {
+              "$ref": "#/components/schemas/Rating"
+            },
+            "title": "Ratings",
+            "type": "array"
+          },
+          "recent_changes": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Recent Changes",
+            "type": "array"
+          },
+          "review_strengths": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Review Strengths",
+            "type": "array"
+          },
+          "review_weaknesses": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Review Weaknesses",
+            "type": "array"
+          },
+          "target_customers": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Target Customers",
+            "type": "array"
+          }
+        },
+        "title": "CompanyProfile",
+        "type": "object"
+      },
+      "CreateRunOut": {
+        "properties": {
+          "reused": {
+            "title": "Reused",
+            "type": "boolean"
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "partial",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "status",
+          "reused"
+        ],
+        "title": "CreateRunOut",
+        "type": "object"
+      },
+      "Evidence": {
+        "properties": {
+          "independent": {
+            "title": "Independent",
+            "type": "integer"
+          },
+          "pct": {
+            "title": "Pct",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "independent",
+          "pct"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Landmine": {
+        "properties": {
+          "question": {
+            "description": "A question our rep asks that exposes a competitor weakness",
+            "title": "Question",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "why": {
+            "title": "Why",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question",
+          "why"
+        ],
+        "title": "Landmine",
+        "type": "object"
+      },
+      "MarketRating": {
+        "properties": {
+          "by_site": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Rating"
+            },
+            "title": "By Site",
+            "type": "object"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "by_site"
+        ],
+        "title": "MarketRating",
+        "type": "object"
+      },
+      "Objection": {
+        "properties": {
+          "objection": {
+            "description": "What a prospect says in favour of the competitor",
+            "title": "Objection",
+            "type": "string"
+          },
+          "response": {
+            "title": "Response",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "objection",
+          "response"
+        ],
+        "title": "Objection",
+        "type": "object"
+      },
+      "Point": {
+        "properties": {
+          "detail": {
+            "default": "",
+            "description": "One supporting sentence, max 25 words",
+            "title": "Detail",
+            "type": "string"
+          },
+          "headline": {
+            "description": "Scannable takeaway, max 10 words",
+            "title": "Headline",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "headline"
+        ],
+        "title": "Point",
+        "type": "object"
+      },
+      "PositioningAnalysis": {
+        "properties": {
+          "recommended_angle": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Claim"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A positioning angle our company could credibly own"
+          },
+          "table_stakes": {
+            "description": "Themes most players claim - not differentiating",
+            "items": {
+              "$ref": "#/components/schemas/SharedClaim"
+            },
+            "title": "Table Stakes",
+            "type": "array"
+          },
+          "white_space": {
+            "description": "Buyer needs (from reviews) nobody clearly owns",
+            "items": {
+              "$ref": "#/components/schemas/WhiteSpace"
+            },
+            "title": "White Space",
+            "type": "array"
+          }
+        },
+        "title": "PositioningAnalysis",
+        "type": "object"
+      },
+      "PriceTier": {
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "notable": {
+            "default": "",
+            "title": "Notable",
+            "type": "string"
+          },
+          "price": {
+            "description": "As stated, e.g. '$49/agent/month billed annually' or 'Contact sales'",
+            "title": "Price",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "price"
+        ],
+        "title": "PriceTier",
+        "type": "object"
+      },
+      "ProgressItem": {
+        "properties": {
+          "at": {
+            "title": "At",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "stage": {
+            "title": "Stage",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "running",
+              "done",
+              "skipped",
+              "retrying",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stage",
+          "status",
+          "at"
+        ],
+        "title": "ProgressItem",
+        "type": "object"
+      },
+      "Quote": {
+        "properties": {
+          "quote": {
+            "description": "Verbatim text copied exactly from the source",
+            "title": "Quote",
+            "type": "string"
+          },
+          "sentiment": {
+            "enum": [
+              "praise",
+              "pain",
+              "switching"
+            ],
+            "title": "Sentiment",
+            "type": "string"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "quote",
+          "sentiment",
+          "source"
+        ],
+        "title": "Quote",
+        "type": "object"
+      },
+      "Rating": {
+        "properties": {
+          "out_of": {
+            "default": 5,
+            "title": "Out Of",
+            "type": "number"
+          },
+          "rating": {
+            "description": "Average star rating exactly as shown in the source",
+            "title": "Rating",
+            "type": "number"
+          },
+          "review_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Number of reviews, only if stated",
+            "title": "Review Count"
+          },
+          "site": {
+            "description": "Review site, e.g. 'G2', 'Capterra'",
+            "title": "Site",
+            "type": "string"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "site",
+          "rating",
+          "source"
+        ],
+        "title": "Rating",
+        "type": "object"
+      },
+      "RatingPair": {
+        "properties": {
+          "site": {
+            "title": "Site",
+            "type": "string"
+          },
+          "them": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Rating"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "us": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Rating"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "site"
+        ],
+        "title": "RatingPair",
+        "type": "object"
+      },
+      "ReportOut": {
+        "properties": {
+          "battlecards": {
+            "items": {
+              "$ref": "#/components/schemas/Battlecard"
+            },
+            "title": "Battlecards",
+            "type": "array"
+          },
+          "category": {
+            "default": "",
+            "title": "Category",
+            "type": "string"
+          },
+          "changes": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChangeReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "company": {
+            "title": "Company",
+            "type": "string"
+          },
+          "competitors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Competitors",
+            "type": "array"
+          },
+          "degraded": {
+            "default": false,
+            "title": "Degraded",
+            "type": "boolean"
+          },
+          "facts": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CompanyFacts"
+            },
+            "title": "Facts",
+            "type": "object"
+          },
+          "featured": {
+            "default": false,
+            "title": "Featured",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "matrix": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CapabilityMatrix"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "model": {
+            "default": "",
+            "title": "Model",
+            "type": "string"
+          },
+          "notes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Notes",
+            "type": "object"
+          },
+          "positioning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PositioningAnalysis"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "previous_run": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Run"
+          },
+          "profiles": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CompanyProfile"
+            },
+            "title": "Profiles",
+            "type": "object"
+          },
+          "run_date": {
+            "title": "Run Date",
+            "type": "string"
+          },
+          "search_provider": {
+            "default": "",
+            "title": "Search Provider",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceOut"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "stats": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Stats",
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "partial",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "usage": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Usage",
+            "type": "object"
+          },
+          "views": {
+            "$ref": "#/components/schemas/Views"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "run_date",
+          "company",
+          "competitors",
+          "profiles",
+          "battlecards",
+          "sources",
+          "views"
+        ],
+        "title": "ReportOut",
+        "type": "object"
+      },
+      "RunRequest": {
+        "properties": {
+          "category": {
+            "default": "",
+            "maxLength": 80,
+            "title": "Category",
+            "type": "string"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CompanyIn"
+          },
+          "competitors": {
+            "items": {
+              "$ref": "#/components/schemas/CompanyIn"
+            },
+            "maxItems": 4,
+            "minItems": 1,
+            "title": "Competitors",
+            "type": "array"
+          }
+        },
+        "required": [
+          "company",
+          "competitors"
+        ],
+        "title": "RunRequest",
+        "type": "object"
+      },
+      "RunStatusOut": {
+        "properties": {
+          "company": {
+            "title": "Company",
+            "type": "string"
+          },
+          "competitors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Competitors",
+            "type": "array"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "current_stage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Stage"
+          },
+          "degraded": {
+            "default": false,
+            "title": "Degraded",
+            "type": "boolean"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "progress": {
+            "items": {
+              "$ref": "#/components/schemas/ProgressItem"
+            },
+            "title": "Progress",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "partial",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "progress",
+          "created_at",
+          "company",
+          "competitors"
+        ],
+        "title": "RunStatusOut",
+        "type": "object"
+      },
+      "RunSummary": {
+        "properties": {
+          "category": {
+            "default": "",
+            "title": "Category",
+            "type": "string"
+          },
+          "company": {
+            "title": "Company",
+            "type": "string"
+          },
+          "competitors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Competitors",
+            "type": "array"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "featured": {
+            "default": false,
+            "title": "Featured",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "run_date": {
+            "title": "Run Date",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "partial",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "created_at",
+          "run_date",
+          "company",
+          "competitors"
+        ],
+        "title": "RunSummary",
+        "type": "object"
+      },
+      "SharedClaim": {
+        "properties": {
+          "companies": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Companies",
+            "type": "array"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "theme": {
+            "title": "Theme",
+            "type": "string"
+          }
+        },
+        "required": [
+          "theme",
+          "companies"
+        ],
+        "title": "SharedClaim",
+        "type": "object"
+      },
+      "SourceOut": {
+        "properties": {
+          "category": {
+            "title": "Category",
+            "type": "string"
+          },
+          "company": {
+            "title": "Company",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "origin": {
+            "default": "independent",
+            "title": "Origin",
+            "type": "string"
+          },
+          "published": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published"
+          },
+          "title": {
+            "default": "",
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "company",
+          "category",
+          "url"
+        ],
+        "title": "SourceOut",
+        "type": "object"
+      },
+      "Tally": {
+        "properties": {
+          "behind": {
+            "title": "Behind",
+            "type": "integer"
+          },
+          "even": {
+            "title": "Even",
+            "type": "integer"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "integer"
+          },
+          "unknown": {
+            "title": "Unknown",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lead",
+          "even",
+          "behind",
+          "unknown"
+        ],
+        "title": "Tally",
+        "type": "object"
+      },
+      "Threat": {
+        "properties": {
+          "counter": {
+            "default": "",
+            "description": "How a rep neutralises this, max 20 words",
+            "title": "Counter",
+            "type": "string"
+          },
+          "detail": {
+            "default": "",
+            "description": "One supporting sentence, max 25 words",
+            "title": "Detail",
+            "type": "string"
+          },
+          "headline": {
+            "description": "Scannable takeaway, max 10 words",
+            "title": "Headline",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "headline"
+        ],
+        "title": "Threat",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "Views": {
+        "properties": {
+          "cards": {
+            "items": {
+              "$ref": "#/components/schemas/CardView"
+            },
+            "title": "Cards",
+            "type": "array"
+          },
+          "market_ratings": {
+            "items": {
+              "$ref": "#/components/schemas/MarketRating"
+            },
+            "title": "Market Ratings",
+            "type": "array"
+          },
+          "matrix": {
+            "items": {
+              "$ref": "#/components/schemas/CapabilityView"
+            },
+            "title": "Matrix",
+            "type": "array"
+          },
+          "names": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Names",
+            "type": "array"
+          },
+          "sites": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sites",
+            "type": "array"
+          }
+        },
+        "required": [
+          "cards",
+          "names",
+          "sites",
+          "market_ratings",
+          "matrix"
+        ],
+        "title": "Views",
+        "type": "object"
+      },
+      "WhiteSpace": {
+        "properties": {
+          "evidence": {
+            "title": "Evidence",
+            "type": "string"
+          },
+          "opportunity": {
+            "title": "Opportunity",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "opportunity",
+          "evidence"
+        ],
+        "title": "WhiteSpace",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Battlecard intel API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Health Health Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health"
+      }
+    },
+    "/v1/runs": {
+      "get": {
+        "operationId": "list_runs_v1_runs_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "featured",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Featured",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 50,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RunSummary"
+                  },
+                  "title": "Response List Runs V1 Runs Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Runs"
+      },
+      "post": {
+        "operationId": "start_run_v1_runs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRunOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start Run"
+      }
+    },
+    "/v1/runs/{run_id}": {
+      "get": {
+        "operationId": "get_status_v1_runs__run_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "pattern": "^[0-9a-f]{10}$",
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunStatusOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Status"
+      }
+    },
+    "/v1/runs/{run_id}/export.md": {
+      "get": {
+        "operationId": "export_md_v1_runs__run_id__export_md_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "pattern": "^[0-9a-f]{10}$",
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Export Md"
+      }
+    },
+    "/v1/runs/{run_id}/report": {
+      "get": {
+        "operationId": "get_report_v1_runs__run_id__report_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "pattern": "^[0-9a-f]{10}$",
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Report"
+      }
+    }
+  }
+}
