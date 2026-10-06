@@ -37,5 +37,8 @@ target-version = "py312"
 select = ["E", "F", "I", "B"]
 ignore = ["E501"]
 
+[tool.vercel]
+entrypoint = "intel.api:app"
+
 [[tool.vercel.subscribers]]
 entrypoint = "intel.worker"

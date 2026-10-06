@@ -7,7 +7,7 @@
     },
     "intel": {
       "root": "apps/intel",
-      "entrypoint": "intel.api:app"
+      "entrypoint": "pyproject.toml"
     }
   },
   "rewrites": [{ "source": "/(.*)", "destination": { "service": "web" } }]
