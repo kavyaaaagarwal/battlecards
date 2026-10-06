@@ -1,4 +1,4 @@
-"""Import POC snapshot.json files as featured runs, so the demo has content on day one.
+"""Import POC snapshot.json files as finished runs, so the demo has content on day one.
 
     uv run python -m intel.seed tests/fixtures/netchex_snapshot.json
 """
@@ -16,7 +16,7 @@ COPY = ("model", "search_provider", "previous_run", "facts", "sources", "profile
         "matrix", "positioning", "changes", "notes")
 
 
-def import_snapshot(store: Store, snapshot: dict, *, featured: bool = True) -> str:
+def import_snapshot(store: Store, snapshot: dict) -> str:
     profiles = snapshot.get("profiles") or {}
 
     def ci(name: str) -> CompanyIn:
@@ -33,7 +33,7 @@ def import_snapshot(store: Store, snapshot: dict, *, featured: bool = True) -> s
     doc["stats"] = {**doc["stats"], **(snapshot.get("stats") or {})}
     doc["usage"] = {**doc["usage"], **(snapshot.get("usage") or {})}
     doc["domains"] = {n: p.get("domain") for n, p in profiles.items()}
-    doc.update(status="succeeded", featured=featured, stages_done=list(STAGES), created_at=f"{day}T00:00:00+00:00")
+    doc.update(status="succeeded", stages_done=list(STAGES), created_at=f"{day}T00:00:00+00:00")
     for stage in STAGES:
         mark(doc, stage, "done", "Imported from an earlier run")
     doc["views"] = build_views(doc)
@@ -42,7 +42,7 @@ def import_snapshot(store: Store, snapshot: dict, *, featured: bool = True) -> s
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Import snapshot.json files as featured runs.")
+    ap = argparse.ArgumentParser(description="Import snapshot.json files as finished runs.")
     ap.add_argument("paths", nargs="+", type=Path)
     args = ap.parse_args()
     store = make_store()

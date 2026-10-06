@@ -45,7 +45,6 @@ class RunSummary(BaseModel):
     company: str
     competitors: list[str]
     category: str = ""
-    featured: bool = False
 
 
 class SourceOut(BaseModel):
@@ -139,7 +138,6 @@ class ReportOut(BaseModel):
     search_provider: str = ""
     previous_run: str | None = None
     degraded: bool = False
-    featured: bool = False
     profiles: dict[str, CompanyProfile]
     battlecards: list[Battlecard]
     matrix: CapabilityMatrix | None = None

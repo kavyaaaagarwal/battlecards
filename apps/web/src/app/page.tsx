@@ -5,7 +5,7 @@ import { intel } from "@/lib/intel";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const { data: featured } = await intel.GET("/v1/runs", { params: { query: { featured: true, limit: 6 } }, cache: "no-store" });
+  const { data: runs } = await intel.GET("/v1/runs", { params: { query: { limit: 50 } }, cache: "no-store" });
   return (
     <main>
       <section className="hero">
@@ -21,10 +21,10 @@ export default async function Home() {
         </div>
         <RunForm />
       </section>
-      <h2 style={{ fontSize: 18, marginBottom: 12 }}>Featured reports</h2>
+      <h2 style={{ fontSize: 18, marginBottom: 12 }}>Reports</h2>
       <div className="run-cards">
-        {(featured ?? []).map((r) => <RunCard key={r.id} run={r} />)}
-        {!featured?.length && <p className="empty">No featured reports yet.</p>}
+        {(runs ?? []).map((r) => <RunCard key={r.id} run={r} />)}
+        {!runs?.length && <p className="empty">No reports yet.</p>}
       </div>
     </main>
   );

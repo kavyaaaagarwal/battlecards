@@ -69,9 +69,9 @@ def test_missing_llm_config_returns_503(client):
     assert r.status_code == 503 and "ANTHROPIC_API_KEY" in r.json()["detail"]
 
 
-def test_gallery_lists_featured_seeded_run(client, store):
+def test_gallery_lists_seeded_run(client, store):
     run_id = import_snapshot(store, json.loads((FX / "netchex_snapshot.json").read_text()))
-    items = client.get("/v1/runs", params={"featured": True}).json()
+    items = client.get("/v1/runs").json()
     assert [i["id"] for i in items] == [run_id]
     report = client.get(f"/v1/runs/{run_id}/report").json()
     assert len(report["views"]["cards"]) == 3

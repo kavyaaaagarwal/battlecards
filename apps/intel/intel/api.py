@@ -84,9 +84,9 @@ def create_app(*, store=None, settings=None, deps=None, dispatcher=None) -> Fast
         return CreateRunOut(run_id=doc["id"], status=doc["status"], reused=reused)
 
     @app.get("/v1/runs", response_model=list[RunSummary])
-    def list_runs(featured: bool = False, limit: Annotated[int, Query(ge=1, le=50)] = 20) -> list[RunSummary]:
+    def list_runs(limit: Annotated[int, Query(ge=1, le=50)] = 20) -> list[RunSummary]:
         docs = [d for k in get_store().list_keys("runs/") if (d := get_store().get_json(k))]
-        docs = [d for d in docs if d.get("status") in DONE and (d.get("featured") or not featured)]
+        docs = [d for d in docs if d.get("status") in DONE]
         docs.sort(key=lambda d: d.get("created_at", ""), reverse=True)
         return [RunSummary(**d) for d in docs[:limit]]
 

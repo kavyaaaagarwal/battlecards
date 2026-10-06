@@ -81,7 +81,7 @@ def now_iso() -> str:
 def new_run_doc(run_id: str, req: RunRequest, day: str) -> dict:
     return {
         "id": run_id, "created_at": now_iso(), "status": "queued", "current_stage": None,
-        "featured": False, "degraded": False, "error": None,
+        "degraded": False, "error": None,
         "inputs": req.model_dump(), "company_key": company_key(req),
         "progress": [], "stages_done": [], "domains": {}, "models_used": [],
         # Report fields - same shape as the POC's snapshot.json
@@ -121,7 +121,7 @@ class CapacityError(RuntimeError):
     pass
 
 
-def create_run(store: Store, req: RunRequest, *, day: str | None = None, featured: bool = False,
+def create_run(store: Store, req: RunRequest, *, day: str | None = None,
                runs_per_day: int | None = None) -> tuple[dict, bool]:
     """Returns (run document, reused). Same request on the same day reuses the run unless it failed."""
     day = day or date.today().isoformat()
@@ -133,10 +133,9 @@ def create_run(store: Store, req: RunRequest, *, day: str | None = None, feature
     if runs_per_day is not None and budget.get()["runs"] >= runs_per_day:
         raise CapacityError(
             f"Today's limit of {runs_per_day} new research runs is used up. "
-            "Try again tomorrow, or explore the featured reports."
+            "Try again tomorrow, or browse the existing reports."
         )
     doc = new_run_doc(run_id, req, day)
-    doc["featured"] = featured
     store.put_json(run_key(run_id), doc)
     budget.add(runs=1)
     return doc, False

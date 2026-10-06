@@ -965,11 +965,6 @@
             "title": "Facts",
             "type": "object"
           },
-          "featured": {
-            "default": false,
-            "title": "Featured",
-            "type": "boolean"
-          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -1210,11 +1205,6 @@
           "created_at": {
             "title": "Created At",
             "type": "string"
-          },
-          "featured": {
-            "default": false,
-            "title": "Featured",
-            "type": "boolean"
           },
           "id": {
             "title": "Id",
@@ -1530,16 +1520,6 @@
       "get": {
         "operationId": "list_runs_v1_runs_get",
         "parameters": [
-          {
-            "in": "query",
-            "name": "featured",
-            "required": false,
-            "schema": {
-              "default": false,
-              "title": "Featured",
-              "type": "boolean"
-            }
-          },
           {
             "in": "query",
             "name": "limit",

@@ -107,7 +107,7 @@ apps/intel/notes/positioning.md    → under the positioning landscape
 ```
 apps/intel/intel/domain/   evidence, ratings, verification, scoring (pure)
 apps/intel/intel/stages.py the six research stages      runner.py  retries, resume
-apps/intel/intel/api.py    FastAPI /v1                   seed.py    featured runs
+apps/intel/intel/api.py    FastAPI /v1                   seed.py    demo runs
 apps/web/src/app/          landing, reports gallery, report page, /api/runs
 apps/web/src/components/   report components (charts are plain SVG/HTML)
 packages/contracts/        openapi.json

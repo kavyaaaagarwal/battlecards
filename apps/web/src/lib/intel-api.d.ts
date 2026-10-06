@@ -492,11 +492,6 @@ export interface components {
             facts?: {
                 [key: string]: components["schemas"]["CompanyFacts"];
             };
-            /**
-             * Featured
-             * @default false
-             */
-            featured: boolean;
             /** Id */
             id: string;
             matrix?: components["schemas"]["CapabilityMatrix"] | null;
@@ -591,11 +586,6 @@ export interface components {
             competitors: string[];
             /** Created At */
             created_at: string;
-            /**
-             * Featured
-             * @default false
-             */
-            featured: boolean;
             /** Id */
             id: string;
             /** Run Date */
@@ -740,7 +730,6 @@ export interface operations {
     list_runs_v1_runs_get: {
         parameters: {
             query?: {
-                featured?: boolean;
                 limit?: number;
             };
             header?: never;
