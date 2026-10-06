@@ -1,0 +1,14 @@
+# Keep local secrets and build junk out of `vercel deploy` uploads
+.env
+.env.*
+**/.env
+**/.env.*
+.vercel
+node_modules
+**/node_modules
+.venv
+**/.venv
+**/.next
+**/__pycache__
+apps/intel/.python-version
+apps/intel/data
