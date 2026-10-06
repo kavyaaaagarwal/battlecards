@@ -3,7 +3,6 @@
 Methods are synchronous; never call them from inside a running event loop."""
 from __future__ import annotations
 
-import asyncio
 import json
 import os
 from pathlib import Path
@@ -78,33 +77,34 @@ def _list_blobs(prefix: str) -> list[str]:
 
 
 class BlobStore:
-    """Vercel Blob (private). Sync wrapper over the async SDK; call from worker threads only."""
+    """Vercel Blob (private).
+
+    Uses the SDK's synchronous client. The async client must not be driven by a fresh
+    asyncio.run() per call: its pooled connections outlive the loop that opened them, and
+    closing one on a later loop raises "Event loop is closed"."""
 
     def __init__(self, client=None):
         if client is None:
-            from vercel.blob import AsyncBlobClient
+            from vercel.blob import BlobClient
 
-            client = AsyncBlobClient()
+            client = BlobClient()
         self.client = client
 
     def get_json(self, key: str) -> Any | None:
         from vercel.blob import BlobNotFoundError
 
-        async def go():
-            try:
-                # use_cache=False: run documents change after every stage
-                return await self.client.get(key, access="private", use_cache=False)
-            except BlobNotFoundError:
-                return None
-
-        res = asyncio.run(go())
+        try:
+            # use_cache=False: run documents change after every stage
+            res = self.client.get(key, access="private", use_cache=False)
+        except BlobNotFoundError:
+            return None
         if res is None or res.status_code != 200 or not res.content:
             return None
         return json.loads(res.content)
 
     def put_json(self, key: str, value: Any) -> None:
         body = json.dumps(value, ensure_ascii=False).encode()
-        asyncio.run(self.client.put(key, body, access="private", overwrite=True))
+        self.client.put(key, body, access="private", overwrite=True)
 
     def list_keys(self, prefix: str) -> list[str]:
         return _list_blobs(prefix)

@@ -54,15 +54,15 @@ from intel.store import BlobStore  # noqa: E402
 
 
 class FakeBlobClient:
-    """Mirrors vercel.blob.AsyncBlobClient: get() returns .content bytes, raises when missing."""
+    """Mirrors vercel.blob.BlobClient: get() returns .content bytes, raises when missing."""
 
     def __init__(self):
         self.objects, self.get_kwargs = {}, []
 
-    async def put(self, path, body, *, access, overwrite):
+    def put(self, path, body, *, access, overwrite):
         self.objects[path] = body
 
-    async def get(self, path, *, access, use_cache):
+    def get(self, path, *, access, use_cache):
         self.get_kwargs.append({"access": access, "use_cache": use_cache})
         if path not in self.objects:
             raise BlobNotFoundError()
