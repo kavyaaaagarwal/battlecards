@@ -11,15 +11,23 @@ export default async function Home() {
       <section className="hero">
         <div>
           <div className="eyebrow">AI competitive intelligence</div>
-          <h1>Sales battlecards an agent researches live - with every claim cited.</h1>
-          <p>Name a company and its competitors. The agent searches review sites, forums, news and the vendors&apos; own pages, then writes one-screen battlecards for sales reps.</p>
+          <h1>Skip the research scramble. Walk in with the facts.</h1>
+          <p>Enter your company and competitors. The agent researches public sources and builds concise, source-linked battlecards for your sales team.</p>
           <ul>
-            <li>Every point links to its source; uncited claims are deleted in code.</li>
-            <li>Customer quotes are checked word-for-word and must come from independent sites.</li>
-            <li>A vendor&apos;s own blog can&apos;t be the only evidence against a rival.</li>
+            <li>Every claim links to its source.</li>
+            <li>Customer quotes are checked word for word and drawn from independent sources.</li>
+            <li>Competitor claims are checked beyond their own websites.</li>
           </ul>
         </div>
         <RunForm />
+      </section>
+      <section className="note">
+        <h2>A concept, built to grow</h2>
+        <p>This version demonstrates the core experience: baseline research and competitor comparisons using public information. It can be tailored with your company data, sales priorities and specific use cases.</p>
+        <p>
+          Have feedback? <a href="mailto:kavya.agarwal829@gmail.com">Email Kavya</a> or connect on{" "}
+          <a href="https://www.linkedin.com/in/copycokavya/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+        </p>
       </section>
       <h2 style={{ fontSize: 18, marginBottom: 12 }}>Reports</h2>
       <div className="run-cards">
