@@ -1,6 +1,6 @@
 .env
 .cache/
-reports/
+/reports/
 __pycache__/
 *.pyc
 .venv/
