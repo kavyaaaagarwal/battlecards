@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import "./globals.css";
 import "./report.css";
 
@@ -14,7 +15,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <div className="wrap">
           <nav className="site-nav">
-            <Link href="/" className="brand">Battlecards</Link>
+            <Link href="/" className="brand"><Logo />Battlecards</Link>
             <Link href="/reports">All reports</Link>
           </nav>
           {children}

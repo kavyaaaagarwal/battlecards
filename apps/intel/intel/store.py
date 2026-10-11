@@ -13,6 +13,7 @@ class Store(Protocol):
     def get_json(self, key: str) -> Any | None: ...
     def put_json(self, key: str, value: Any) -> None: ...
     def list_keys(self, prefix: str) -> list[str]: ...
+    def delete(self, key: str) -> None: ...
 
 
 class LocalStore:
@@ -47,6 +48,9 @@ class LocalStore:
             return []
         return [p.relative_to(self.root).as_posix() for p in base.rglob("*.json")]
 
+    def delete(self, key: str) -> None:
+        self._path(key).unlink(missing_ok=True)
+
 
 class MemoryStore:
     """For tests."""
@@ -62,6 +66,9 @@ class MemoryStore:
 
     def list_keys(self, prefix: str) -> list[str]:
         return [k for k in self.data if k.startswith(prefix)]
+
+    def delete(self, key: str) -> None:
+        self.data.pop(key, None)
 
 
 def _list_blobs(prefix: str) -> list[str]:
@@ -108,6 +115,9 @@ class BlobStore:
 
     def list_keys(self, prefix: str) -> list[str]:
         return _list_blobs(prefix)
+
+    def delete(self, key: str) -> None:
+        self.client.delete(key)
 
 
 def data_dir() -> Path:

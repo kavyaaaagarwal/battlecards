@@ -72,6 +72,10 @@ class TransientLLMError(LLMError):
 
 
 class LLM:
+    # Models that refused reasoning "none" (e.g. Claude Sonnet 5.5). Shared by every client, so
+    # each stage and thread asks for "minimal" up front instead of re-learning it from a 400.
+    _needs_reasoning: set[str] = set()
+
     def __init__(self, cfg):
         self.provider = cfg.llm_provider
         self.deadline: float | None = None  # time.monotonic() by which the current stage must finish
@@ -157,7 +161,8 @@ class LLM:
         if self.provider == "openrouter":
             # Free models are mostly reasoning models; hidden thinking otherwise eats the
             # whole max_tokens budget, leaving empty or truncated JSON.
-            extra_body["reasoning"] = {"effort": "none"}
+            extra_body["reasoning"] = {"effort": "minimal" if models[0] in LLM._needs_reasoning else "none"}
+            extra_body["usage"] = {"include": True}  # the dollar cost of each call, for the run's usage
         if self._fallbacks:
             # OpenRouter tries these in order if the primary is down or rate-limited
             extra_body["models"] = models
@@ -167,7 +172,12 @@ class LLM:
         try:
             resp = self._create_with_rate_limit_wait(kwargs)
         except openai.BadRequestError as e:
-            if self._json_mode and "response_format" in str(e).lower():
+            if "reasoning is mandatory" in str(e).lower() and kwargs["extra_body"]["reasoning"]["effort"] == "none":
+                log.info("%s can't switch reasoning off; using minimal effort.", models[0])
+                LLM._needs_reasoning.add(models[0])
+                kwargs["extra_body"]["reasoning"] = {"effort": "minimal"}
+                resp = self._create_with_rate_limit_wait(kwargs)
+            elif self._json_mode and "response_format" in str(e).lower():
                 log.info("Endpoint rejected JSON mode; falling back to plain prompting.")
                 self._json_mode = False
                 kwargs.pop("response_format")
@@ -179,7 +189,7 @@ class LLM:
         if not resp.choices:
             raise TransientLLMError("Model returned no choices (provider hiccup).")
         if resp.usage:
-            self._track(resp.usage.prompt_tokens, resp.usage.completion_tokens)
+            self._track(resp.usage.prompt_tokens, resp.usage.completion_tokens, getattr(resp.usage, "cost", None))
         if getattr(resp, "model", None):
             self.models_used.add(resp.model)
             log.debug("Served by %s (finish=%s)", resp.model, resp.choices[0].finish_reason)
@@ -212,11 +222,13 @@ class LLM:
                     raise TransientLLMError("Rate limited and out of stage time") from e
                 time.sleep(wait)
 
-    def _track(self, inp: int, out: int) -> None:
+    def _track(self, inp: int, out: int, cost: float | None = None) -> None:
         with self._lock:
             self.usage["calls"] += 1
             self.usage["input_tokens"] += inp or 0
             self.usage["output_tokens"] += out or 0
+            if cost:  # OpenRouter reports what each call was billed
+                self.usage["cost_usd"] = round(self.usage.get("cost_usd", 0) + cost, 6)
 
     # ── structured output ─────────────────────────────────────
     def structured(self, system: str, prompt: str, schema: type[T], max_tokens: int = 8000) -> T:

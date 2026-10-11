@@ -111,6 +111,26 @@
       },
       "Capability": {
         "properties": {
+          "category": {
+            "anyOf": [
+              {
+                "enum": [
+                  "product",
+                  "pricing",
+                  "support",
+                  "implementation",
+                  "integrations",
+                  "voice"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The buying category this capability belongs to",
+            "title": "Category"
+          },
           "cells": {
             "items": {
               "$ref": "#/components/schemas/Cell"
@@ -145,6 +165,11 @@
       },
       "CapabilityView": {
         "properties": {
+          "category": {
+            "default": "product",
+            "title": "Category",
+            "type": "string"
+          },
           "cells": {
             "items": {
               "$ref": "#/components/schemas/CellView"
@@ -170,6 +195,20 @@
             "title": "Axis Lo",
             "type": "number"
           },
+          "edges": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "title": "Edges",
+            "type": "object"
+          },
           "evidence": {
             "$ref": "#/components/schemas/Evidence"
           },
@@ -191,6 +230,9 @@
             "title": "Rows",
             "type": "array"
           },
+          "tags": {
+            "$ref": "#/components/schemas/PointTags"
+          },
           "tally": {
             "$ref": "#/components/schemas/Tally"
           }
@@ -204,6 +246,93 @@
           "evidence"
         ],
         "title": "CardView",
+        "type": "object"
+      },
+      "CategoryView": {
+        "properties": {
+          "basis": {
+            "title": "Basis",
+            "type": "string"
+          },
+          "detail": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Detail",
+            "type": "object"
+          },
+          "id": {
+            "enum": [
+              "product",
+              "pricing",
+              "support",
+              "implementation",
+              "integrations",
+              "rating",
+              "voice"
+            ],
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "leader": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Leader"
+          },
+          "scores": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "title": "Scores",
+            "type": "object"
+          },
+          "thin": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Thin",
+            "type": "array"
+          },
+          "values": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "title": "Values",
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "basis",
+          "scores",
+          "detail"
+        ],
+        "title": "CategoryView",
         "type": "object"
       },
       "Cell": {
@@ -292,6 +421,12 @@
             "title": "Company",
             "type": "string"
           },
+          "rep_action": {
+            "default": "",
+            "description": "What a rep should do differently because of this, max 20 words",
+            "title": "Rep Action",
+            "type": "string"
+          },
           "severity": {
             "enum": [
               "high",
@@ -337,6 +472,13 @@
       },
       "Claim": {
         "properties": {
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Excerpt"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
           "sources": {
             "items": {
               "type": "string"
@@ -443,8 +585,55 @@
         "title": "CompanyIn",
         "type": "object"
       },
+      "CompanyMetrics": {
+        "properties": {
+          "independent": {
+            "default": 0,
+            "title": "Independent",
+            "type": "integer"
+          },
+          "ratings": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RatingPoint"
+            },
+            "title": "Ratings",
+            "type": "object"
+          },
+          "scorecard": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Scorecard"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sources": {
+            "default": 0,
+            "title": "Sources",
+            "type": "integer"
+          },
+          "tiers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Tiers",
+            "type": "object"
+          }
+        },
+        "title": "CompanyMetrics",
+        "type": "object"
+      },
       "CompanyProfile": {
         "properties": {
+          "customer_proof": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Customer Proof",
+            "type": "array"
+          },
           "domain": {
             "anyOf": [
               {
@@ -461,6 +650,20 @@
               "$ref": "#/components/schemas/Claim"
             },
             "title": "Hiring Signals",
+            "type": "array"
+          },
+          "implementation_support": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Implementation Support",
+            "type": "array"
+          },
+          "integrations": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "title": "Integrations",
             "type": "array"
           },
           "key_capabilities": {
@@ -585,8 +788,29 @@
             "title": "Independent",
             "type": "integer"
           },
+          "items": {
+            "default": 0,
+            "title": "Items",
+            "type": "integer"
+          },
           "pct": {
             "title": "Pct",
+            "type": "integer"
+          },
+          "top_site": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top Site"
+          },
+          "top_site_items": {
+            "default": 0,
+            "title": "Top Site Items",
             "type": "integer"
           },
           "total": {
@@ -602,6 +826,39 @@
         "title": "Evidence",
         "type": "object"
       },
+      "Excerpt": {
+        "description": "What a source actually says: copied verbatim, so a rep can check the claim at a glance.",
+        "properties": {
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "text": {
+            "description": "8-35 words copied VERBATIM from the source that prove the claim",
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "text"
+        ],
+        "title": "Excerpt",
+        "type": "object"
+      },
+      "FeaturesOut": {
+        "properties": {
+          "runs_enabled": {
+            "title": "Runs Enabled",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "runs_enabled"
+        ],
+        "title": "FeaturesOut",
+        "type": "object"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -615,8 +872,61 @@
         "title": "HTTPValidationError",
         "type": "object"
       },
+      "History": {
+        "properties": {
+          "points": {
+            "items": {
+              "$ref": "#/components/schemas/HistoryPoint"
+            },
+            "title": "Points",
+            "type": "array"
+          },
+          "signals": {
+            "items": {
+              "$ref": "#/components/schemas/Signal"
+            },
+            "title": "Signals",
+            "type": "array"
+          }
+        },
+        "title": "History",
+        "type": "object"
+      },
+      "HistoryPoint": {
+        "properties": {
+          "companies": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CompanyMetrics"
+            },
+            "title": "Companies",
+            "type": "object"
+          },
+          "run_date": {
+            "title": "Run Date",
+            "type": "string"
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "run_date",
+          "companies"
+        ],
+        "title": "HistoryPoint",
+        "type": "object"
+      },
       "Landmine": {
         "properties": {
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Excerpt"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
           "question": {
             "description": "A question our rep asks that exposes a competitor weakness",
             "title": "Question",
@@ -628,6 +938,23 @@
             },
             "title": "Sources",
             "type": "array"
+          },
+          "support": {
+            "anyOf": [
+              {
+                "enum": [
+                  "corroborated",
+                  "single_source",
+                  "vendor_claim",
+                  "cited_only"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Support"
           },
           "why": {
             "title": "Why",
@@ -664,6 +991,13 @@
       },
       "Objection": {
         "properties": {
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Excerpt"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
           "objection": {
             "description": "What a prospect says in favour of the competitor",
             "title": "Objection",
@@ -679,6 +1013,23 @@
             },
             "title": "Sources",
             "type": "array"
+          },
+          "support": {
+            "anyOf": [
+              {
+                "enum": [
+                  "corroborated",
+                  "single_source",
+                  "vendor_claim",
+                  "cited_only"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Support"
           }
         },
         "required": [
@@ -689,15 +1040,29 @@
         "type": "object"
       },
       "Point": {
+        "description": "One sales insight, in three visibly separate layers: what the sources say (evidence),\nwhat we conclude from it (analysis) and what a rep does with it (use).",
         "properties": {
+          "analysis": {
+            "default": "",
+            "description": "Our inference from the evidence, max 25 words",
+            "title": "Analysis",
+            "type": "string"
+          },
           "detail": {
             "default": "",
-            "description": "One supporting sentence, max 25 words",
+            "description": "Legacy: one supporting sentence (older runs)",
             "title": "Detail",
             "type": "string"
           },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Excerpt"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
           "headline": {
-            "description": "Scannable takeaway, max 10 words",
+            "description": "ONE claim, max 10 words",
             "title": "Headline",
             "type": "string"
           },
@@ -707,12 +1072,106 @@
             },
             "title": "Sources",
             "type": "array"
+          },
+          "support": {
+            "anyOf": [
+              {
+                "enum": [
+                  "corroborated",
+                  "single_source",
+                  "vendor_claim",
+                  "cited_only"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Support"
+          },
+          "use": {
+            "default": "",
+            "description": "What the rep says or asks, max 25 words",
+            "title": "Use",
+            "type": "string"
           }
         },
         "required": [
           "headline"
         ],
         "title": "Point",
+        "type": "object"
+      },
+      "PointTags": {
+        "description": "Category of each talk-track point, index-aligned with the battlecard's lists.",
+        "properties": {
+          "asks": {
+            "items": {
+              "enum": [
+                "product",
+                "pricing",
+                "support",
+                "implementation",
+                "integrations",
+                "rating",
+                "voice"
+              ],
+              "type": "string"
+            },
+            "title": "Asks",
+            "type": "array"
+          },
+          "losses": {
+            "items": {
+              "enum": [
+                "product",
+                "pricing",
+                "support",
+                "implementation",
+                "integrations",
+                "rating",
+                "voice"
+              ],
+              "type": "string"
+            },
+            "title": "Losses",
+            "type": "array"
+          },
+          "objections": {
+            "items": {
+              "enum": [
+                "product",
+                "pricing",
+                "support",
+                "implementation",
+                "integrations",
+                "rating",
+                "voice"
+              ],
+              "type": "string"
+            },
+            "title": "Objections",
+            "type": "array"
+          },
+          "wins": {
+            "items": {
+              "enum": [
+                "product",
+                "pricing",
+                "support",
+                "implementation",
+                "integrations",
+                "rating",
+                "voice"
+              ],
+              "type": "string"
+            },
+            "title": "Wins",
+            "type": "array"
+          }
+        },
+        "title": "PointTags",
         "type": "object"
       },
       "PositioningAnalysis": {
@@ -918,6 +1377,40 @@
         "title": "RatingPair",
         "type": "object"
       },
+      "RatingPoint": {
+        "properties": {
+          "out_of": {
+            "default": 5,
+            "title": "Out Of",
+            "type": "number"
+          },
+          "rating": {
+            "title": "Rating",
+            "type": "number"
+          },
+          "rating5": {
+            "title": "Rating5",
+            "type": "number"
+          },
+          "review_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Review Count"
+          }
+        },
+        "required": [
+          "rating",
+          "rating5"
+        ],
+        "title": "RatingPoint",
+        "type": "object"
+      },
       "ReportOut": {
         "properties": {
           "battlecards": {
@@ -964,6 +1457,9 @@
             },
             "title": "Facts",
             "type": "object"
+          },
+          "history": {
+            "$ref": "#/components/schemas/History"
           },
           "id": {
             "title": "Id",
@@ -1055,7 +1551,7 @@
           },
           "usage": {
             "additionalProperties": {
-              "type": "integer"
+              "type": "number"
             },
             "title": "Usage",
             "type": "object"
@@ -1076,6 +1572,66 @@
           "views"
         ],
         "title": "ReportOut",
+        "type": "object"
+      },
+      "ReportRequestIn": {
+        "description": "A visitor registering interest in beta access. Saved for review; nothing runs.",
+        "properties": {
+          "company": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Company",
+            "type": "string"
+          },
+          "competitors": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Competitors",
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 120,
+            "minLength": 3,
+            "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
+            "title": "Email",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "maxLength": 1000,
+            "title": "Note",
+            "type": "string"
+          },
+          "role": {
+            "default": "",
+            "maxLength": 80,
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "company"
+        ],
+        "title": "ReportRequestIn",
+        "type": "object"
+      },
+      "ReportRequestOut": {
+        "properties": {
+          "ok": {
+            "default": true,
+            "title": "Ok",
+            "type": "boolean"
+          }
+        },
+        "title": "ReportRequestOut",
         "type": "object"
       },
       "RunRequest": {
@@ -1237,6 +1793,34 @@
         "title": "RunSummary",
         "type": "object"
       },
+      "Scorecard": {
+        "properties": {
+          "behind": {
+            "title": "Behind",
+            "type": "integer"
+          },
+          "even": {
+            "title": "Even",
+            "type": "integer"
+          },
+          "known": {
+            "title": "Known",
+            "type": "integer"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lead",
+          "even",
+          "behind",
+          "known"
+        ],
+        "title": "Scorecard",
+        "type": "object"
+      },
       "SharedClaim": {
         "properties": {
           "companies": {
@@ -1265,6 +1849,50 @@
         "title": "SharedClaim",
         "type": "object"
       },
+      "Signal": {
+        "properties": {
+          "company": {
+            "title": "Company",
+            "type": "string"
+          },
+          "good_for_us": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Good For Us"
+          },
+          "kind": {
+            "enum": [
+              "rating",
+              "reviews",
+              "pricing"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "since": {
+            "title": "Since",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "company",
+          "kind",
+          "text",
+          "since"
+        ],
+        "title": "Signal",
+        "type": "object"
+      },
       "SourceOut": {
         "properties": {
           "category": {
@@ -1277,6 +1905,19 @@
           },
           "id": {
             "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "default": "analysis",
+            "enum": [
+              "review",
+              "community",
+              "news",
+              "reference",
+              "analysis",
+              "vendor"
+            ],
+            "title": "Kind",
             "type": "string"
           },
           "origin": {
@@ -1344,6 +1985,12 @@
       },
       "Threat": {
         "properties": {
+          "analysis": {
+            "default": "",
+            "description": "Our inference from the evidence, max 25 words",
+            "title": "Analysis",
+            "type": "string"
+          },
           "counter": {
             "default": "",
             "description": "How a rep neutralises this, max 20 words",
@@ -1352,12 +1999,19 @@
           },
           "detail": {
             "default": "",
-            "description": "One supporting sentence, max 25 words",
+            "description": "Legacy: one supporting sentence (older runs)",
             "title": "Detail",
             "type": "string"
           },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Excerpt"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
           "headline": {
-            "description": "Scannable takeaway, max 10 words",
+            "description": "ONE claim, max 10 words",
             "title": "Headline",
             "type": "string"
           },
@@ -1367,6 +2021,29 @@
             },
             "title": "Sources",
             "type": "array"
+          },
+          "support": {
+            "anyOf": [
+              {
+                "enum": [
+                  "corroborated",
+                  "single_source",
+                  "vendor_claim",
+                  "cited_only"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Support"
+          },
+          "use": {
+            "default": "",
+            "description": "What the rep says or asks, max 25 words",
+            "title": "Use",
+            "type": "string"
           }
         },
         "required": [
@@ -1422,6 +2099,13 @@
               "$ref": "#/components/schemas/CardView"
             },
             "title": "Cards",
+            "type": "array"
+          },
+          "categories": {
+            "items": {
+              "$ref": "#/components/schemas/CategoryView"
+            },
+            "title": "Categories",
             "type": "array"
           },
           "market_ratings": {
@@ -1514,6 +2198,64 @@
           }
         },
         "summary": "Health"
+      }
+    },
+    "/v1/features": {
+      "get": {
+        "description": "What the web app may offer. One switch decides both the button and whether runs start.",
+        "operationId": "features_v1_features_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeaturesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Features"
+      }
+    },
+    "/v1/requests": {
+      "post": {
+        "description": "Saved as requests/<date>/<id>.json: a local file in dev, Vercel Blob when deployed.",
+        "operationId": "request_report_v1_requests_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRequestIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportRequestOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Request Report"
       }
     },
     "/v1/runs": {

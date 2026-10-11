@@ -20,6 +20,8 @@ class FakeSearch(SearchProvider):
 
     def _search(self, query, include_domains, news_days, exclude_domains=None):
         company = query.split()[0]
+        if include_domains == ["softwareadvice.com"]:  # finding the company's tracked review page
+            return [SearchHit(f"https://www.softwareadvice.com/hr/{company.lower()}-profile", company, "")]
         if "official website" in query:
             return [SearchHit(f"https://{company.lower()}.com", company, f"{company} official site")]
         host = f"{company.lower()}.com"
@@ -33,6 +35,12 @@ class FakeSearch(SearchProvider):
         if exclude_domains:  # independent comparisons / round-ups
             host = "independent-reviews.net"
         return [SearchHit(f"https://{host}/{abs(hash(query)) % 9999}", query, text)]
+
+    def extract(self, urls):
+        """Tracked Software Advice pages carry a rating; other tracked sites can't be read."""
+        return {u: f"# {name} User Reviews\n" + REVIEW.replace("Acme Desk", name) + " Rated 4.6 out of 5 from 1,320 reviews."
+                for u in urls if "softwareadvice.com" in u
+                for name in [u.split("/")[-2].removesuffix("-profile").title()]}
 
 
 class FakeLLM:
@@ -62,7 +70,12 @@ class FakeLLM:
             return schema(
                 name="?",
                 positioning={"text": "AI-first help desk for growing teams", "sources": [first]},
-                key_capabilities=[{"text": "Fast setup", "sources": [review_id]}, {"text": "Invented", "sources": []}],
+                key_capabilities=[
+                    {"text": "Fast setup", "sources": [review_id],
+                     "evidence": [{"source": review_id, "text": "Setup took a single afternoon though"},
+                                  {"source": review_id, "text": "Setup is instant and flawless"}]},  # not on the page
+                    {"text": "Invented", "sources": []},
+                ],
                 pricing_tiers=[{"name": "Growth", "price": "$49 per agent/month", "sources": [first]}],
                 review_weaknesses=[{"text": "Reporting requires spreadsheet exports", "sources": [review_id]}],
                 ratings=[{"site": "G2", "rating": 4.6, "review_count": 1320, "source": review_id},
@@ -74,21 +87,28 @@ class FakeLLM:
                 ],
             )
         if name == "Battlecard":
+            # Reuse an excerpt from the profiles, as the prompt asks
+            ev = re.search(r'"evidence":\[\{"source":"(S\d+)","text":"([^"]+)"', prompt)
+            evidence = [{"source": ev.group(1), "text": ev.group(2)}] if ev else []
             return schema(
                 competitor="?",
                 tldr="We win on setup speed. We lose on brand.",
                 overview="Rival sells help desk software to enterprises.",
                 quick_dismiss="Rival is a solid enterprise pick, but setup takes months. We are live in an afternoon.",
-                where_we_win=[{"headline": "Setup in an afternoon", "detail": "No consultants needed.", "sources": [first]}],
+                where_we_win=[{"headline": "Setup in an afternoon", "evidence": evidence,
+                               "analysis": "Buyers can be live this week.", "use": "Ask how long their last rollout took.",
+                               "sources": []}],
                 where_we_lose=[{"headline": "Brand recognition", "counter": "Ask for a reference in their segment", "sources": [first]}],
                 landmines=[{"question": "How do you report on FRT by team?", "why": "Needs exports", "sources": [first]}],
                 objections=[{"objection": "They're the market leader", "response": "Leader ≠ fit", "sources": [first]}],
             )
         if name == "CapabilityMatrix":
+            m = re.search(r'## Rival\n.*?"review_weaknesses":\[\{"text":"[^"]*","sources":\["(S\d+)"', prompt)
+            rival_review = m.group(1) if m else review_id
             return schema(capabilities=[
                 {"name": "Reporting", "cells": [
                     {"company": "Acme", "status": "full", "sources": [first]},
-                    {"company": "Rival", "status": "partial", "note": "Exports only", "sources": [review_id]},
+                    {"company": "Rival", "status": "partial", "note": "Exports only", "sources": [rival_review]},
                     {"company": "Other", "status": "none", "sources": []},  # no evidence -> unknown
                 ]},
                 {"name": "Telepathy", "cells": []},  # nothing known -> row dropped

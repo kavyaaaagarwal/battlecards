@@ -24,3 +24,29 @@ export function ratingText(r: Rating): string {
 
 export const STATUS_LABEL = { full: "Full", partial: "Partial", none: "Not offered", unknown: "Unknown" } as const;
 export const VERDICT_LABEL = { lead: "▲ We lead", behind: "▼ They lead", even: "= Even", unknown: "? Unclear" } as const;
+
+export const KIND_LABEL = {
+  review: "Review site", community: "Forum", news: "News", reference: "Reference",
+  analysis: "Third-party article", vendor: "Vendor site",
+} as const;
+
+/** How well a claim is backed - the rule lives in Python (domain/support.py); this is just the wording. */
+export const SUPPORT_LABEL = {
+  corroborated: { label: "Corroborated", tip: "Verbatim evidence from 2+ independent sites" },
+  single_source: { label: "1 independent source", tip: "Verbatim evidence from one independent site - fine to use, worth a second source" },
+  vendor_claim: { label: "Vendor's claim", tip: "Only the company's own pages say this - present it as their claim, not a fact" },
+  cited_only: { label: "Check source", tip: "Cited, but no exact excerpt could be verified on the page - read the source before using" },
+} as const;
+
+export const siteOf = (s: { url: string }) => {
+  try { return new URL(s.url).hostname.replace(/^www\./, ""); } catch { return s.url; }
+};
+
+/** "We win when X. We lose when Y." -> the two halves, so each gets its own line. */
+export function splitTldr(tldr: string): [string, string | null] {
+  const m = tldr.match(/^(.*?)\s*(We (?:usually )?lose when.*)$/i);
+  return m ? [m[1], m[2]] : [tldr, null];
+}
+
+export const shortDate = (d: string) =>
+  new Date(`${d}T00:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });

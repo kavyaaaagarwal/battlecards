@@ -2,9 +2,21 @@
   "cards": [
     {
       "axis_lo": 2.5,
+      "edges": {
+        "implementation": -0.5,
+        "integrations": -0.5,
+        "pricing": 0.0,
+        "product": -0.25,
+        "rating": -0.366,
+        "support": -0.5,
+        "voice": -0.307
+      },
       "evidence": {
         "independent": 6,
+        "items": 11,
         "pct": 38,
+        "top_site": "paylocity.com",
+        "top_site_items": 4,
         "total": 16
       },
       "known": 8,
@@ -265,6 +277,27 @@
           "verdict": "even"
         }
       ],
+      "tags": {
+        "asks": [
+          "support",
+          "product",
+          "support"
+        ],
+        "losses": [
+          "product",
+          "product"
+        ],
+        "objections": [
+          "product",
+          "product",
+          "product"
+        ],
+        "wins": [
+          "product",
+          "product",
+          "implementation"
+        ]
+      },
       "tally": {
         "behind": 0,
         "even": 3,
@@ -274,9 +307,21 @@
     },
     {
       "axis_lo": 2.5,
+      "edges": {
+        "implementation": null,
+        "integrations": 0.0,
+        "pricing": 0.0,
+        "product": 0.0,
+        "rating": -0.871,
+        "support": -0.5,
+        "voice": -0.047
+      },
       "evidence": {
         "independent": 9,
+        "items": 11,
         "pct": 47,
+        "top_site": "netchex.com",
+        "top_site_items": 5,
         "total": 19
       },
       "known": 7,
@@ -527,6 +572,27 @@
           "verdict": "even"
         }
       ],
+      "tags": {
+        "asks": [
+          "support",
+          "product",
+          "product"
+        ],
+        "losses": [
+          "product",
+          "integrations"
+        ],
+        "objections": [
+          "product",
+          "product",
+          "integrations"
+        ],
+        "wins": [
+          "product",
+          "product",
+          "support"
+        ]
+      },
       "tally": {
         "behind": 0,
         "even": 6,
@@ -536,9 +602,21 @@
     },
     {
       "axis_lo": 1.0,
+      "edges": {
+        "implementation": null,
+        "integrations": -0.5,
+        "pricing": 0.0,
+        "product": -0.125,
+        "rating": -0.43,
+        "support": -0.5,
+        "voice": 0.212
+      },
       "evidence": {
         "independent": 8,
+        "items": 11,
         "pct": 62,
+        "top_site": "higherme.com",
+        "top_site_items": 7,
         "total": 13
       },
       "known": 7,
@@ -795,11 +873,186 @@
           "verdict": "even"
         }
       ],
+      "tags": {
+        "asks": [
+          "product",
+          "pricing",
+          "product"
+        ],
+        "losses": [
+          "integrations",
+          "voice"
+        ],
+        "objections": [
+          "integrations",
+          "pricing",
+          "voice"
+        ],
+        "wins": [
+          "product",
+          "product",
+          "product"
+        ]
+      },
       "tally": {
         "behind": 0,
         "even": 4,
         "lead": 3,
         "unknown": 1
+      }
+    }
+  ],
+  "categories": [
+    {
+      "basis": "4 capabilities",
+      "detail": {
+        "Netchex": "Hiring and onboarding tools: full \u00b7 Payroll for hourly workforces: full \u00b7 Ease of use and interface: full \u00b7 AI and automation features: full",
+        "Paycor": "Hiring and onboarding tools: full \u00b7 Payroll for hourly workforces: partial \u00b7 Ease of use and interface: full \u00b7 AI and automation features: full",
+        "Paylocity": "Hiring and onboarding tools: partial \u00b7 Payroll for hourly workforces: partial \u00b7 Ease of use and interface: full \u00b7 AI and automation features: full",
+        "isolved": "Hiring and onboarding tools: full \u00b7 Payroll for hourly workforces: full \u00b7 Ease of use and interface: full \u00b7 AI and automation features: full"
+      },
+      "id": "product",
+      "label": "Product",
+      "leader": null,
+      "scores": {
+        "Netchex": 1.0,
+        "Paycor": 0.875,
+        "Paylocity": 0.75,
+        "isolved": 1.0
+      },
+      "thin": [],
+      "values": {}
+    },
+    {
+      "basis": "1 capability",
+      "detail": {
+        "Netchex": "Pricing transparency: none",
+        "Paycor": "Pricing transparency: none",
+        "Paylocity": "Pricing transparency: none",
+        "isolved": "Pricing transparency: none"
+      },
+      "id": "pricing",
+      "label": "Pricing & value",
+      "leader": null,
+      "scores": {
+        "Netchex": 0.0,
+        "Paycor": 0.0,
+        "Paylocity": 0.0,
+        "isolved": 0.0
+      },
+      "thin": [],
+      "values": {}
+    },
+    {
+      "basis": "1 capability",
+      "detail": {
+        "Netchex": "Customer support quality: full",
+        "Paycor": "Customer support quality: partial",
+        "Paylocity": "Customer support quality: partial",
+        "isolved": "Customer support quality: partial"
+      },
+      "id": "support",
+      "label": "Support",
+      "leader": "Netchex",
+      "scores": {
+        "Netchex": 1.0,
+        "Paycor": 0.5,
+        "Paylocity": 0.5,
+        "isolved": 0.5
+      },
+      "thin": [],
+      "values": {}
+    },
+    {
+      "basis": "1 capability",
+      "detail": {
+        "Netchex": "Implementation speed and support: full",
+        "Paycor": "",
+        "Paylocity": "Implementation speed and support: partial",
+        "isolved": ""
+      },
+      "id": "implementation",
+      "label": "Implementation",
+      "leader": "Netchex",
+      "scores": {
+        "Netchex": 1.0,
+        "Paycor": null,
+        "Paylocity": 0.5,
+        "isolved": null
+      },
+      "thin": [],
+      "values": {}
+    },
+    {
+      "basis": "1 capability",
+      "detail": {
+        "Netchex": "Time and attendance integration: full",
+        "Paycor": "Time and attendance integration: partial",
+        "Paylocity": "Time and attendance integration: partial",
+        "isolved": "Time and attendance integration: full"
+      },
+      "id": "integrations",
+      "label": "Integrations & IT",
+      "leader": null,
+      "scores": {
+        "Netchex": 1.0,
+        "Paycor": 0.5,
+        "Paylocity": 0.5,
+        "isolved": 1.0
+      },
+      "thin": [],
+      "values": {}
+    },
+    {
+      "basis": "5 review sites, compared site by site",
+      "detail": {
+        "Netchex": "G2 4.6 (358 reviews) \u00b7 Software Advice 4.5 (165 reviews) \u00b7 TrustRadius 9/10 (31 reviews) \u00b7 Trustpilot 3 (29 reviews)",
+        "Paycor": "Software Advice 4.3 (3,074 reviews) \u00b7 Gartner Peer Insights 4.4 (12 reviews) \u00b7 Trustpilot 1.6 (165 reviews)",
+        "Paylocity": "TrustRadius 9/10 (review count not stated) \u00b7 Gartner Peer Insights 4.2 (48 reviews)",
+        "isolved": "Gartner Peer Insights 4.2 (55 reviews) \u00b7 TrustRadius 7.4/10 (345 reviews)"
+      },
+      "id": "rating",
+      "label": "Rating",
+      "leader": "Netchex",
+      "scores": {
+        "Netchex": 0.662,
+        "Paycor": 0.466,
+        "Paylocity": 0.582,
+        "isolved": 0.455
+      },
+      "thin": [
+        "Paylocity"
+      ],
+      "values": {
+        "Netchex": 3.91,
+        "Paycor": 3.71,
+        "Paylocity": 3.83,
+        "isolved": 3.7
+      }
+    },
+    {
+      "basis": "review volume across review sites",
+      "detail": {
+        "Netchex": "583 reviews across review sites",
+        "Paycor": "3,251 reviews across review sites",
+        "Paylocity": "48 reviews across review sites",
+        "isolved": "400 reviews across review sites"
+      },
+      "id": "voice",
+      "label": "Market voice",
+      "leader": "Paycor",
+      "scores": {
+        "Netchex": 0.788,
+        "Paycor": 1.0,
+        "Paylocity": 0.481,
+        "isolved": 0.741
+      },
+      "thin": [],
+      "values": {
+        "Netchex": 583.0,
+        "Paycor": 3251.0,
+        "Paylocity": 48.0,
+        "isolved": 400.0
       }
     }
   ],
@@ -904,6 +1157,7 @@
   ],
   "matrix": [
     {
+      "category": "integrations",
       "cells": [
         {
           "company": "Netchex",
@@ -945,6 +1199,7 @@
       "name": "Time and attendance integration"
     },
     {
+      "category": "product",
       "cells": [
         {
           "company": "Netchex",
@@ -988,6 +1243,7 @@
       "name": "Hiring and onboarding tools"
     },
     {
+      "category": "support",
       "cells": [
         {
           "company": "Netchex",
@@ -1034,6 +1290,7 @@
       "name": "Customer support quality"
     },
     {
+      "category": "product",
       "cells": [
         {
           "company": "Netchex",
@@ -1075,6 +1332,7 @@
       "name": "Payroll for hourly workforces"
     },
     {
+      "category": "product",
       "cells": [
         {
           "company": "Netchex",
@@ -1124,6 +1382,7 @@
       "name": "Ease of use and interface"
     },
     {
+      "category": "implementation",
       "cells": [
         {
           "company": "Netchex",
@@ -1161,6 +1420,7 @@
       "name": "Implementation speed and support"
     },
     {
+      "category": "pricing",
       "cells": [
         {
           "company": "Netchex",
@@ -1204,6 +1464,7 @@
       "name": "Pricing transparency"
     },
     {
+      "category": "product",
       "cells": [
         {
           "company": "Netchex",

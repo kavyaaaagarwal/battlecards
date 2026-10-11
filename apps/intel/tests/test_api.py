@@ -5,7 +5,7 @@ import pytest
 from conftest import FAKE_DEPS
 from fastapi.testclient import TestClient
 
-from intel.api import create_app
+from intel.api import create_app, seed_featured
 from intel.config import load_settings
 from intel.dispatch import SyncDispatcher
 from intel.seed import import_snapshot
@@ -21,6 +21,7 @@ def client(store, offline, monkeypatch):
     monkeypatch.setenv("LLM_PROVIDER", "anthropic")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
     monkeypatch.setenv("SEARCH_PROVIDER", "ddg")
+    monkeypatch.setenv("ALLOW_RUNS", "1")
     settings = load_settings("/nonexistent")
     settings.cache_ttl_hours = 0
     app = create_app(store=store, settings=settings, deps=FAKE_DEPS,
@@ -29,6 +30,7 @@ def client(store, offline, monkeypatch):
 
 
 def test_create_run_and_fetch_report(client):
+    assert client.get("/v1/features").json() == {"runs_enabled": True}
     r = client.post("/v1/runs", json=BODY)
     assert r.status_code == 202, r.text
     run_id = r.json()["run_id"]
@@ -37,6 +39,7 @@ def test_create_run_and_fetch_report(client):
     report = client.get(f"/v1/runs/{run_id}/report").json()
     assert report["company"] == "Acme" and report["battlecards"][0]["competitor"] == "Rival"
     assert "content" not in report["sources"][0]
+    assert {s["kind"] for s in report["sources"]} >= {"vendor", "review"}
     assert report["views"]["cards"][0]["evidence"]["total"] >= 1
     assert client.get(f"/v1/runs/{run_id}/export.md").text.startswith("# Competitive intelligence: Acme")
 
@@ -88,6 +91,7 @@ class RecordingDispatcher:
 def test_stalled_run_is_redispatched_on_resubmit(store, offline, monkeypatch):
     monkeypatch.setenv("LLM_PROVIDER", "anthropic")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    monkeypatch.setenv("ALLOW_RUNS", "1")
     settings = load_settings("/nonexistent")
     dispatcher = RecordingDispatcher()
     client = TestClient(create_app(store=store, settings=settings, deps=FAKE_DEPS, dispatcher=dispatcher))
@@ -112,5 +116,47 @@ def test_missing_blob_storage_on_vercel_is_a_clear_503(monkeypatch):
     monkeypatch.setenv("LLM_PROVIDER", "anthropic")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
     monkeypatch.setenv("SEARCH_PROVIDER", "ddg")
+    monkeypatch.setenv("ALLOW_RUNS", "1")
     r = TestClient(create_app(settings=load_settings("/nonexistent"))).post("/v1/runs", json=BODY)
     assert r.status_code == 503 and "Blob store" in r.json()["detail"]
+
+
+def test_runs_are_off_unless_allowed(store, monkeypatch):
+    monkeypatch.delenv("ALLOW_RUNS", raising=False)
+    monkeypatch.setenv("LLM_PROVIDER", "anthropic")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    dispatcher = RecordingDispatcher()
+    client = TestClient(create_app(store=store, settings=load_settings("/nonexistent"), dispatcher=dispatcher))
+    assert client.get("/v1/features").json() == {"runs_enabled": False}
+    r = client.post("/v1/runs", json=BODY)
+    assert r.status_code == 403 and dispatcher.started == []
+    assert store.list_keys("runs/") == []
+
+
+def test_report_requests_are_saved_not_run(store):
+    client = TestClient(create_app(store=store, settings=load_settings("/nonexistent")))
+    lead = {"name": "Asha Rao", "email": "asha@acme.com", "company": "Acme", "competitors": "Zendesk, Intercom"}
+    assert client.post("/v1/requests", json=lead).status_code == 202
+    [key] = store.list_keys("requests/")
+    saved = store.get_json(key)
+    assert saved["company"] == "Acme" and saved["role"] == "" and "received_at" in saved
+    assert store.list_keys("runs/") == []
+    assert client.post("/v1/requests", json={**lead, "email": "not-an-email"}).status_code == 422
+
+
+def test_featured_runs_are_seeded_once_and_never_overwritten(store, tmp_path):
+    (tmp_path / "abc1234567.json").write_text(json.dumps({"id": "abc1234567", "company": "Acme"}))
+    seed_featured(store, tmp_path)
+    assert store.get_json("runs/abc1234567.json")["company"] == "Acme"
+    store.put_json("runs/abc1234567.json", {"id": "abc1234567", "company": "Edited"})
+    seed_featured(store, tmp_path)
+    assert store.get_json("runs/abc1234567.json")["company"] == "Edited"
+
+
+def test_runs_listed_in_removed_are_deleted(store, tmp_path):
+    store.put_json("runs/aaaaaaaaaa.json", {"id": "aaaaaaaaaa"})
+    store.put_json("runs/bbbbbbbbbb.json", {"id": "bbbbbbbbbb"})
+    (tmp_path / "removed.txt").write_text("# comment\naaaaaaaaaa  # old duplicate\n")
+    seed_featured(store, tmp_path)
+    assert store.get_json("runs/aaaaaaaaaa.json") is None
+    assert store.get_json("runs/bbbbbbbbbb.json") is not None

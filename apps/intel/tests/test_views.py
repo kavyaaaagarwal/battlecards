@@ -21,7 +21,15 @@ def doc(**over):
 
 def test_evidence_pct_counts_unique_independent_sources():
     ev = build_views(doc())["cards"][0]["evidence"]
-    assert ev == {"total": 2, "independent": 1, "pct": 50}
+    assert {k: ev[k] for k in ("total", "independent", "pct")} == {"total": 2, "independent": 1, "pct": 50}
+
+
+def test_flags_when_most_insights_rest_on_one_site():
+    srcs = [{"id": "S1", "url": "https://blog.example.com/a-vs-b"}, {"id": "S2", "url": "https://g2.com/x"}]
+    card = {"competitor": "Rival", "where_we_win": [{"sources": ["S1"]}, {"sources": ["S1", "S2"]}],
+            "where_we_lose": [{"sources": ["S1"]}], "landmines": [], "objections": [], "proof_quotes": []}
+    ev = build_views(doc(sources=srcs, battlecards=[card]))["cards"][0]["evidence"]
+    assert (ev["top_site"], ev["top_site_items"], ev["items"]) == ("blog.example.com", 3, 3)
 
 
 def test_scorecard_excludes_unknown_and_flags_self_reported():

@@ -19,6 +19,7 @@ def bare_llm(provider="openrouter") -> LLM:
     llm.usage = {"calls": 0, "input_tokens": 0, "output_tokens": 0}
     llm._lock, llm.models_used, llm._json_mode = threading.Lock(), set(), True
     llm.deadline = None
+    LLM._needs_reasoning.clear()
     return llm
 
 
@@ -81,3 +82,27 @@ def test_expired_deadline_stops_without_calling_the_model():
     with pytest.raises(LLMError):
         llm.structured("sys", "prompt", Thing)
     assert called == []
+
+
+def test_model_that_requires_reasoning_gets_minimal_effort_and_cost_is_recorded():
+    import httpx
+    import openai
+
+    llm, sent = bare_llm(), []
+
+    def create(**kwargs):
+        sent.append(kwargs["extra_body"]["reasoning"])
+        if kwargs["extra_body"]["reasoning"] == {"effort": "none"}:
+            req = httpx.Request("POST", "https://openrouter.ai/api/v1/chat/completions")
+            raise openai.BadRequestError("Reasoning is mandatory for this endpoint and cannot be disabled.",
+                                         response=httpx.Response(400, request=req), body=None)
+        msg = SimpleNamespace(content='{"name": "x"}')
+        usage = SimpleNamespace(prompt_tokens=1000, completion_tokens=100, cost=0.003)
+        return SimpleNamespace(choices=[SimpleNamespace(message=msg, finish_reason="stop")],
+                               usage=usage, model=kwargs["model"], error=None)
+
+    llm._client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
+    llm._complete("sys", [{"role": "user", "content": "hi"}], 100)
+    llm._complete("sys", [{"role": "user", "content": "hi"}], 100)
+    assert sent == [{"effort": "none"}, {"effort": "minimal"}, {"effort": "minimal"}]  # remembered after one refusal
+    assert llm.usage["cost_usd"] == 0.006

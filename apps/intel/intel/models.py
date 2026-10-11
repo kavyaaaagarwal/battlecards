@@ -23,9 +23,24 @@ class Source(BaseModel):
         return self.origin.split(":", 1)[1] if self.origin.startswith("vendor:") else None
 
 
+class Excerpt(BaseModel):
+    """What a source actually says: copied verbatim, so a rep can check the claim at a glance."""
+    source: str
+    text: str = Field(description="8-35 words copied VERBATIM from the source that prove the claim")
+
+
+# How well a claim is backed, computed in code after verification (never by the model):
+#   corroborated  = verbatim evidence from 2+ independent sites
+#   single_source = verbatim evidence from one independent site
+#   vendor_claim  = only the company's own pages say so
+#   cited_only    = cited, but no verbatim excerpt survived - check the source before using
+Support = Literal["corroborated", "single_source", "vendor_claim", "cited_only"]
+
+
 class Claim(BaseModel):
     text: str
     sources: list[str] = Field(default_factory=list)
+    evidence: list[Excerpt] = Field(default_factory=list)
 
 
 class PriceTier(BaseModel):
@@ -61,6 +76,9 @@ class CompanyProfile(BaseModel):
     review_strengths: list[Claim] = Field(default_factory=list)
     review_weaknesses: list[Claim] = Field(default_factory=list)
     hiring_signals: list[Claim] = Field(default_factory=list)
+    integrations: list[Claim] = Field(default_factory=list)
+    customer_proof: list[Claim] = Field(default_factory=list)
+    implementation_support: list[Claim] = Field(default_factory=list)
     ratings: list[Rating] = Field(default_factory=list)
     quotes: list[Quote] = Field(default_factory=list)
 
@@ -69,18 +87,28 @@ class Landmine(BaseModel):
     question: str = Field(description="A question our rep asks that exposes a competitor weakness")
     why: str
     sources: list[str] = Field(default_factory=list)
+    evidence: list[Excerpt] = Field(default_factory=list)
+    support: Support | None = None
 
 
 class Objection(BaseModel):
     objection: str = Field(description="What a prospect says in favour of the competitor")
     response: str
     sources: list[str] = Field(default_factory=list)
+    evidence: list[Excerpt] = Field(default_factory=list)
+    support: Support | None = None
 
 
 class Point(BaseModel):
-    headline: str = Field(description="Scannable takeaway, max 10 words")
-    detail: str = Field("", description="One supporting sentence, max 25 words")
+    """One sales insight, in three visibly separate layers: what the sources say (evidence),
+    what we conclude from it (analysis) and what a rep does with it (use)."""
+    headline: str = Field(description="ONE claim, max 10 words")
+    detail: str = Field("", description="Legacy: one supporting sentence (older runs)")
+    evidence: list[Excerpt] = Field(default_factory=list)
+    analysis: str = Field("", description="Our inference from the evidence, max 25 words")
+    use: str = Field("", description="What the rep says or asks, max 25 words")
     sources: list[str] = Field(default_factory=list)
+    support: Support | None = None
 
 
 class Threat(Point):
@@ -130,6 +158,7 @@ class Change(BaseModel):
     company: str
     change: str
     why_it_matters: str
+    rep_action: str = Field("", description="What a rep should do differently because of this, max 20 words")
     severity: Literal["high", "medium", "low"]
     sources: list[str] = Field(default_factory=list)
 
@@ -147,6 +176,8 @@ class Cell(BaseModel):
 
 class Capability(BaseModel):
     name: str = Field(description="Buyer-facing capability, max 5 words")
+    category: Literal["product", "pricing", "support", "implementation", "integrations", "voice"] | None = Field(
+        None, description="The buying category this capability belongs to")
     cells: list[Cell] = Field(default_factory=list)
 
 

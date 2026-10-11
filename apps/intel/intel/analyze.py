@@ -10,6 +10,7 @@ from . import prompts
 from .config import Company, Config
 from .domain.origins import origin_label
 from .domain.ratings import number_in_text, verify_ratings  # noqa: F401  (number_in_text re-exported for tests)
+from .domain.support import by_strength
 from .domain.verify import Verifier, VerifyStats
 from .llm import LLM
 from .models import (
@@ -25,6 +26,14 @@ from .search import domain_of
 
 log = logging.getLogger(__name__)
 
+MIN_SOURCES_FOR_PROFILE, MIN_PROFILE_CLAIMS = 8, 3
+PROFILE_LISTS = ("target_customers", "key_capabilities", "recent_changes", "review_strengths", "review_weaknesses",
+                 "integrations", "customer_proof", "implementation_support")
+
+
+def count_claims(prof: CompanyProfile) -> int:
+    return sum(len(getattr(prof, k)) for k in PROFILE_LISTS) + len(prof.pricing_tiers)
+
 
 def format_sources(sources: list[Source]) -> str:
     blocks = []
@@ -38,14 +47,25 @@ def format_sources(sources: list[Source]) -> str:
 
 def _strip_ids(obj):
     if isinstance(obj, dict):
-        return {k: _strip_ids(v) for k, v in obj.items() if k not in ("sources", "source")}
+        return {k: _strip_ids(v) for k, v in obj.items() if k not in ("sources", "source", "evidence")}
     if isinstance(obj, list):
         return [_strip_ids(x) for x in obj]
     return obj
 
 
-def compact(model) -> str:
-    return json.dumps(model.model_dump(exclude_none=True), ensure_ascii=False, separators=(",", ":"))
+def _strip_evidence(obj):
+    if isinstance(obj, dict):
+        return {k: _strip_evidence(v) for k, v in obj.items() if k != "evidence"}
+    if isinstance(obj, list):
+        return [_strip_evidence(x) for x in obj]
+    return obj
+
+
+def compact(model, evidence: bool = True) -> str:
+    """Profiles as JSON. Excerpts are only needed where the model must quote them (battlecards);
+    elsewhere they would just cost tokens."""
+    data = model.model_dump(exclude_none=True)
+    return json.dumps(data if evidence else _strip_evidence(data), ensure_ascii=False, separators=(",", ":"))
 
 
 class Analyst:
@@ -53,7 +73,7 @@ class Analyst:
         self.cfg = cfg
         self.llm = llm
         self.sources = sources
-        self.verifier = Verifier(sources)
+        self.verifier = Verifier(sources, [c.name for c in cfg.all_companies])
         self.stats = VerifyStats()
 
     def _verified(self, obj, about: str | None = None):
@@ -83,6 +103,10 @@ class Analyst:
         prof.name, prof.domain = c.name, c.domain
         prof = self._verified(prof, about=c.name)
         self._verify_ratings(prof)
+        # Free models sometimes return a valid but empty profile; with plenty of sources that is a
+        # failed call, not a finding - raise so the stage retries instead of writing a blank battlecard.
+        if len(own) >= MIN_SOURCES_FOR_PROFILE and count_claims(prof) < MIN_PROFILE_CLAIMS:
+            raise ValueError(f"{c.name}: model returned a near-empty profile from {len(own)} sources")
         return prof
 
     def profiles(self) -> dict[str, CompanyProfile]:
@@ -108,11 +132,20 @@ class Analyst:
         # Their strengths and weaknesses are claims ABOUT them: our own pages don't count as proof.
         card.where_we_lose = self._verified(card.where_we_lose, about=competitor.name)
         card.landmines = self._verified(card.landmines, about=competitor.name)
-        # A battlecard must fit on one screen; models don't always respect the counts asked for.
-        card.where_we_win, card.where_we_lose = card.where_we_win[:3], card.where_we_lose[:3]
-        card.landmines, card.objections = card.landmines[:3], card.objections[:3]
-        card.proof_quotes = card.proof_quotes[:2]
+        # Strongest-backed first; the UI shows the top 3 and keeps the rest one click away.
+        card.where_we_win, card.where_we_lose = by_strength(card.where_we_win), by_strength(card.where_we_lose)
+        card.landmines, card.objections = by_strength(card.landmines), by_strength(card.objections)
+        card.proof_quotes = [q for q in card.proof_quotes if self._backs_us(q, competitor.name)][:2]
         return card
+
+    def _backs_us(self, q, them: str) -> bool:
+        """Proof must help our side: praise of us, or pain/switching stories about them -
+        never our own customers' complaints or their customers' praise."""
+        src = self.verifier.by_id.get(q.source)
+        if not src or src.category == "comparison":
+            return True
+        about = src.company
+        return about == them if q.sentiment in ("pain", "switching") else about != them
 
     def battlecards(self, profiles) -> list[Battlecard]:
         with ThreadPoolExecutor(max_workers=3) as pool:
@@ -121,7 +154,7 @@ class Analyst:
     def matrix(self, profiles: dict[str, CompanyProfile]) -> CapabilityMatrix:
         log.info("Building capability matrix")
         names = [c.name for c in self.cfg.all_companies]
-        block = "\n\n".join(f"## {n}\n{compact(p)}" for n, p in profiles.items())
+        block = "\n\n".join(f"## {n}\n{compact(p, evidence=False)}" for n, p in profiles.items())
         indie = [s for s in self.sources if s.category in ("comparison", "market", "alternatives") and not s.vendor]
         result = self.llm.structured(
             prompts.ANALYST_SYSTEM,
@@ -149,21 +182,21 @@ class Analyst:
     # ── stage 3 ───────────────────────────────────────────────
     def positioning(self, profiles: dict[str, CompanyProfile]) -> PositioningAnalysis:
         log.info("Analysing positioning landscape")
-        block = "\n\n".join(f"## {name}\n{compact(p)}" for name, p in profiles.items())
+        block = "\n\n".join(f"## {name}\n{compact(p, evidence=False)}" for name, p in profiles.items())
         result = self.llm.structured(
             prompts.ANALYST_SYSTEM, prompts.positioning_prompt(self.cfg.company.name, block), PositioningAnalysis
         )
         return self._verified(result)
 
     # ── stage 4 ───────────────────────────────────────────────
-    def changes(self, previous: dict, profiles: dict[str, CompanyProfile]) -> ChangeReport:
+    def changes(self, previous: dict, profiles: dict[str, CompanyProfile], measured: str = "") -> ChangeReport:
         log.info("Diffing against previous run (%s)", previous.get("run_date"))
         # Old source IDs mean nothing in this run - strip them so the model can't cite them
         prev_block = json.dumps(_strip_ids(previous.get("profiles", {})), ensure_ascii=False, separators=(",", ":"))
-        cur_block = "\n\n".join(f"## {n}\n{compact(p)}" for n, p in profiles.items())
+        cur_block = "\n\n".join(f"## {n}\n{compact(p, evidence=False)}" for n, p in profiles.items())
         report = self.llm.structured(
             prompts.ANALYST_SYSTEM,
-            prompts.diff_prompt(self.cfg.company.name, prev_block, cur_block),
+            prompts.diff_prompt(self.cfg.company.name, prev_block, cur_block, measured),
             ChangeReport,
         )
         return self._verified(report)

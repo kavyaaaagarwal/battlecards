@@ -41,6 +41,7 @@ class Config:
     runs_per_day: int = 30
     tavily_calls_per_day: int = 150
     run_mode: str = "inline"  # "inline" (thread, local dev) | "queue" (Vercel Queues)
+    allow_runs: bool = False  # off unless ALLOW_RUNS=1: visitors request reports, they don't start paid runs
 
     @property
     def all_companies(self) -> list[Company]:
@@ -114,6 +115,7 @@ def load_settings(env_file: str | Path | None = None) -> Config:
         runs_per_day=_int("RUNS_PER_DAY", 30),
         tavily_calls_per_day=_int("TAVILY_CALLS_PER_DAY", 150),
         run_mode=os.getenv("RUN_MODE", "inline").strip().lower() or "inline",
+        allow_runs=os.getenv("ALLOW_RUNS", "").strip().lower() in ("1", "true", "yes"),
     )
 
 

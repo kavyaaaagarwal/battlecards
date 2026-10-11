@@ -37,12 +37,17 @@ def test_full_run_produces_verified_report(tmp_path, monkeypatch, offline, store
     assert doc["profiles"]["Other"]["domain"] == "other.io"
     assert doc["stats"]["claims_dropped"] == 3 and doc["stats"]["quotes_dropped"] == 3
     assert all(len(p["quotes"]) == 1 for p in doc["profiles"].values())
-    assert [x["site"] for x in doc["profiles"]["Rival"]["ratings"]] == ["G2"]
+    # Only the tracked Software Advice page counts; the G2 page found by search does not
+    assert [x["site"] for x in doc["profiles"]["Rival"]["ratings"]] == ["Software Advice"]
     caps = doc["matrix"]["capabilities"]
     assert [c["name"] for c in caps] == ["Reporting"]
     assert [c["status"] for c in caps[0]["cells"]] == ["full", "partial", "unknown"]
     assert {"independent", "vendor:Rival"} <= {s["origin"] for s in doc["sources"]}
     assert doc["views"]["cards"][0]["evidence"]["total"] >= 1
+    # Excerpts flow from profiles into battlecards; one not on the page is dropped
+    win = doc["battlecards"][0]["where_we_win"][0]
+    assert win["evidence"] and win["support"] == "single_source" and win["sources"] == [win["evidence"][0]["source"]]
+    assert doc["stats"]["excerpts_dropped"] == 3
     assert doc["notes"]["Rival"].startswith("Rival's partner")
     assert doc["changes"] is None
     assert render_markdown(doc).startswith("# Competitive intelligence: Acme")

@@ -12,6 +12,22 @@ def _cite_md(ids, by_id) -> str:
     return " " + " ".join(f"[{i.lstrip('S')}]({by_id[i]['url']})" for i in ids if i in by_id)
 
 
+SUPPORT_MD = {"corroborated": "corroborated by 2+ independent sites", "single_source": "one independent source",
+              "vendor_claim": "vendor's own claim", "cited_only": "cited, no verbatim excerpt - check source"}
+
+
+def _layers(x: dict, c, use_key: str = "use") -> list[str]:
+    """Source says / our read / use it, as sub-bullets - only for runs that have excerpts."""
+    lines = [f"  - *Source says:* \"{e['text']}\"{c(e['source'])}" for e in x.get("evidence") or []]
+    if x.get("analysis"):
+        lines.append(f"  - *Our read (analysis):* {x['analysis']}")
+    if x.get(use_key):
+        lines.append(f"  - *Use it:* {x[use_key]}")
+    if x.get("support"):
+        lines.append(f"  - *Support:* {SUPPORT_MD[x['support']]}")
+    return lines
+
+
 def render_markdown(r: dict) -> str:
     by_id = {s["id"]: s for s in r["sources"]}
     c = lambda ids: _cite_md(ids, by_id)  # noqa: E731
@@ -52,20 +68,28 @@ def render_markdown(r: dict) -> str:
         for x in card["where_we_win"]:
             detail = f" {x['detail']}" if x.get("detail") else ""
             w(f"- **{x.get('headline') or x.get('text')}**{detail}{c(x['sources'])}")
+            for line in _layers(x, c):
+                w(line)
         w("\n### ⚠ Where they're strong (and how to counter)")
         for x in card["where_we_lose"]:
             detail = f" {x['detail']}" if x.get("detail") else ""
             w(f"- **{x.get('headline') or x.get('text')}**{detail}{c(x['sources'])}")
+            for line in _layers(x, c):
+                w(line)
             if x.get("counter"):
                 w(f"  - *Counter:* {x['counter']}")
         if card["landmines"]:
             w("\n### Landmines (questions to ask the prospect)")
             for x in card["landmines"]:
                 w(f"- **\"{x['question']}\"** — {x['why']}{c(x['sources'])}")
+                for line in _layers(x, c):
+                    w(line)
         if card["objections"]:
             w("\n### Objections")
             for x in card["objections"]:
                 w(f"- *\"{x['objection']}\"*  \n  → {x['response']}{c(x['sources'])}")
+                for line in _layers(x, c):
+                    w(line)
         if card.get("pricing_comparison"):
             p = card["pricing_comparison"]
             w(f"\n### Pricing\n{p['text']}{c(p['sources'])}")
@@ -87,6 +111,8 @@ def render_markdown(r: dict) -> str:
         for ch in r["changes"]["changes"]:
             w(f"- **[{ch['severity'].upper()}] {ch['company']}:** {ch['change']}{c(ch['sources'])}  ")
             w(f"  *Why it matters:* {ch['why_it_matters']}")
+            if ch.get("rep_action"):
+                w(f"  *Do:* {ch['rep_action']}")
         w("")
 
     pos = r["positioning"]
@@ -124,6 +150,9 @@ def render_markdown(r: dict) -> str:
             ("What reviewers like", "review_strengths"),
             ("What reviewers complain about", "review_weaknesses"),
             ("Hiring signals", "hiring_signals"),
+            ("Integrations", "integrations"),
+            ("Customer proof", "customer_proof"),
+            ("Implementation and support", "implementation_support"),
         ]:
             if p.get(key):
                 w(f"**{label}**")

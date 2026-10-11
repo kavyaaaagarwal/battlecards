@@ -1,10 +1,7 @@
 import type { CellView } from "@/lib/types";
-import { STATUS_LABEL, type SourceIndex, vendorOf } from "@/lib/report";
+import { STATUS_LABEL, type SourceIndex, siteOf, vendorOf } from "@/lib/report";
 
 type Ids = string[] | string | null | undefined;
-const siteOf = (s: { url: string }) => {
-  try { return new URL(s.url).hostname.replace(/^www\./, ""); } catch { return s.url; }
-};
 const list = (ids: Ids, index: SourceIndex) =>
   (typeof ids === "string" ? [ids] : ids ?? []).filter((i) => index.has(i));
 

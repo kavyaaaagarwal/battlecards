@@ -4,17 +4,21 @@ import { RunProgress } from "@/components/RunProgress";
 import { Appendix } from "@/components/report/Appendix";
 import { BattlecardView } from "@/components/report/Battlecard";
 import { TooltipLayer } from "@/components/report/ClientBits";
+import { DealBar } from "@/components/report/DealBar";
 import { Overview } from "@/components/report/Overview";
+import { dealQuery, parseDeal } from "@/lib/deal";
 import { intel } from "@/lib/intel";
 import { indexSources, slug } from "@/lib/report";
 
 export const dynamic = "force-dynamic";
 
-type Props = { params: Promise<{ id: string }>; searchParams: Promise<{ tab?: string }> };
+type Props = { params: Promise<{ id: string }>; searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 export default async function ReportPage({ params, searchParams }: Props) {
   const { id } = await params;
-  const { tab } = await searchParams;
+  const q = await searchParams;
+  const tab = typeof q.tab === "string" ? q.tab : undefined;
+  const deal = parseDeal(q);
   if (!/^[0-9a-f]{10}$/.test(id)) notFound();
 
   const { data: status } = await intel.GET("/v1/runs/{run_id}", { params: { path: { run_id: id } }, cache: "no-store" });
@@ -33,24 +37,26 @@ export default async function ReportPage({ params, searchParams }: Props) {
       <div className="eyebrow">{report.category || "Market"} · {report.run_date}</div>
       <h1>{report.company} vs {report.competitors.join(", ")}</h1>
       <p className="meta">
-        <b>{report.sources.length}</b> sources · every claim cited · <b>{dropped}</b> uncited claims or unverifiable quotes removed automatically
-        {" · "}<a href={`/api/runs/${id}/export`}>Download Markdown</a>
+        <span data-tip={`${dropped} uncited claims or unverifiable quotes were removed automatically`}><b>{report.sources.length}</b> sources, every claim cited</span>
+        {" · "}<a href={`/reports/${id}/print${dealQuery(deal)}`} target="_blank" rel="noopener">Download PDF</a>
       </p>
       {report.status === "partial" && <p className="hint">Some research stages didn&apos;t finish, so parts of this report may be missing.</p>}
       {report.degraded && <p className="hint">This run used fallback search, so it has fewer review sources.</p>}
 
+      <DealBar deal={deal} tab={active < 0 ? undefined : tab} />
+
       <nav className="tabs">
-        <Link href={`/reports/${id}`} className="tab" aria-current={active < 0 ? "page" : undefined}>Overview</Link>
+        <Link href={`/reports/${id}${dealQuery(deal)}`} className="tab" aria-current={active < 0 ? "page" : undefined}>Overview</Link>
         {report.battlecards.map((c, i) => (
-          <Link key={c.competitor} href={`/reports/${id}?tab=${slug(c.competitor)}`} className="tab" aria-current={i === active ? "page" : undefined}>
+          <Link key={c.competitor} href={`/reports/${id}${dealQuery(deal, { tab: slug(c.competitor) })}`} className="tab" aria-current={i === active ? "page" : undefined}>
             vs {c.competitor}
           </Link>
         ))}
       </nav>
 
       {active < 0
-        ? <Overview report={report} />
-        : <BattlecardView report={report} card={report.battlecards[active]} view={report.views.cards[active]} index={index} />}
+        ? <Overview report={report} deal={deal} />
+        : <BattlecardView report={report} card={report.battlecards[active]} view={report.views.cards[active]} index={index} deal={deal} />}
 
       <Appendix report={report} />
       <TooltipLayer />

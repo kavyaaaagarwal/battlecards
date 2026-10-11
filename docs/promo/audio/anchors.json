@@ -1,0 +1,236 @@
+{
+ "duration": 63.386,
+ "anchors": [
+  {
+   "audio": 0.15,
+   "design": 0.15
+  },
+  {
+   "audio": 1.95,
+   "design": 1.95
+  },
+  {
+   "audio": 3.9,
+   "design": 3.9
+  },
+  {
+   "audio": 5.99,
+   "design": 5.35
+  },
+  {
+   "audio": 7.952,
+   "design": 6.8
+  },
+  {
+   "audio": 10.158,
+   "design": 8.7
+  },
+  {
+   "audio": 12.016,
+   "design": 10.0
+  },
+  {
+   "audio": 13.869,
+   "design": 12.95
+  },
+  {
+   "audio": 14.705,
+   "design": 13.5
+  },
+  {
+   "audio": 16.136,
+   "design": 14.45
+  },
+  {
+   "audio": 18.209,
+   "design": 16.1
+  },
+  {
+   "audio": 20.043,
+   "design": 18.0
+  },
+  {
+   "audio": 20.612,
+   "design": 18.55
+  },
+  {
+   "audio": 21.193,
+   "design": 19.05
+  },
+  {
+   "audio": 21.495,
+   "design": 19.55
+  },
+  {
+   "audio": 22.69,
+   "design": 20.35
+  },
+  {
+   "audio": 25.114,
+   "design": 22.6
+  },
+  {
+   "audio": 25.834,
+   "design": 23.4
+  },
+  {
+   "audio": 26.821,
+   "design": 24.2
+  },
+  {
+   "audio": 29.615,
+   "design": 26.6
+  },
+  {
+   "audio": 31.633,
+   "design": 28.6
+  },
+  {
+   "audio": 32.237,
+   "design": 29.25
+  },
+  {
+   "audio": 33.038,
+   "design": 29.95
+  },
+  {
+   "audio": 34.106,
+   "design": 30.65
+  },
+  {
+   "audio": 34.768,
+   "design": 31.35
+  },
+  {
+   "audio": 36.293,
+   "design": 32.05
+  },
+  {
+   "audio": 39.201,
+   "design": 35.05
+  },
+  {
+   "audio": 41.291,
+   "design": 36.2
+  },
+  {
+   "audio": 43.891,
+   "design": 39.05
+  },
+  {
+   "audio": 45.679,
+   "design": 40.2
+  },
+  {
+   "audio": 48.796,
+   "design": 43.6
+  },
+  {
+   "audio": 51.486,
+   "design": 46.6
+  },
+  {
+   "audio": 52.287,
+   "design": 47.5
+  },
+  {
+   "audio": 56.233,
+   "design": 52.2
+  },
+  {
+   "audio": 57.475,
+   "design": 53.3
+  },
+  {
+   "audio": 59.124,
+   "design": 54.2
+  }
+ ],
+ "lines": [
+  {
+   "text": "Every deal is different.",
+   "start": 0.15,
+   "end": 1.404
+  },
+  {
+   "text": "Your battlecard isn't.",
+   "start": 1.95,
+   "end": 3.297
+  },
+  {
+   "text": "A CFO wants price. I.T. wants integrations. A renewal needs a defence.",
+   "start": 3.9,
+   "end": 9.798
+  },
+  {
+   "text": "Your rep gets one generic card, and makes up the rest.",
+   "start": 10.158,
+   "end": 13.269
+  },
+  {
+   "text": "Battlecards fixes that.",
+   "start": 13.869,
+   "end": 15.866
+  },
+  {
+   "text": "Name your rivals.",
+   "start": 16.136,
+   "end": 17.669
+  },
+  {
+   "text": "Weeks of scattered research. Reviews, forums, news, pricing pages, pulled together in about two minutes.",
+   "start": 18.209,
+   "end": 24.664
+  },
+  {
+   "text": "Current. Cited. Structured by what wins deals.",
+   "start": 25.114,
+   "end": 29.015
+  },
+  {
+   "text": "Now tell it about your deal.",
+   "start": 29.615,
+   "end": 31.333
+  },
+  {
+   "text": "Size. Prospect. Stage. Buyer. Situation.",
+   "start": 31.633,
+   "end": 35.813
+  },
+  {
+   "text": "In seconds, the card rebuilds around it.",
+   "start": 36.293,
+   "end": 38.661
+  },
+  {
+   "text": "A CFO negotiating? Pricing and objections lead.",
+   "start": 39.201,
+   "end": 43.381
+  },
+  {
+   "text": "I.T. in discovery? Integrations, and your sharpest questions.",
+   "start": 43.891,
+   "end": 48.256
+  },
+  {
+   "text": "Every point links to its proof.",
+   "start": 48.796,
+   "end": 50.886
+  },
+  {
+   "text": "Send the link, and your rep walks in with a card built for this deal.",
+   "start": 51.486,
+   "end": 55.573
+  },
+  {
+   "text": "Battlecards.",
+   "start": 56.233,
+   "end": 57.115
+  },
+  {
+   "text": "A card for every deal, not just every competitor.",
+   "start": 57.475,
+   "end": 60.586
+  }
+ ]
+}

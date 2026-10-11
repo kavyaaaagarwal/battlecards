@@ -16,9 +16,13 @@ from .cache import DiskCache
 from .config import Company, Config, slugify
 from .domain.origins import MARKET, NEWSWIRES, classify_origin  # noqa: F401
 from .models import Source
+from .review_pages import tracked_review_pages
 from .search import SearchHit, SearchProvider, domain_of, fetch_page
 
 log = logging.getLogger(__name__)
+
+# A tracked review page carries the overall rating plus a page of recent reviews
+REVIEW_PAGE_CHARS = 12_000
 
 REVIEW_SITES = [
     "g2.com", "capterra.com", "trustradius.com", "gartner.com", "getapp.com",
@@ -57,10 +61,14 @@ def plan_queries(c: Company, category_hint: str, vendor_domains: list[str]) -> l
         # What they say
         Query(n, "positioning", f"{n} {h} platform overview what is {n}".strip(), own),
         Query(n, "pricing", f"{n} pricing plans per month", own),
+        Query(n, "product_updates", f"{n} release notes what's new product updates", own),
+        Query(n, "customers", f"{n} customer story case study results", own),
+        Query(n, "integrations", f"{n} integrations marketplace partners", own),
         # What others say (news also covers launches; reviews also carry star ratings)
         Query(n, "news", f"{n} launches announces new", news_days=120),
-        Query(n, "reviews", f"{n} {h} reviews rating pros and cons".strip(), REVIEW_SITES),
-        Query(n, "complaints", f"{n} complaints problems honest experience", REVIEW_SITES + COMMUNITY_SITES),
+        # Ratings come only from the tracked review pages (review_pages.py); this finds review text
+        Query(n, "reviews", f"{n} {h} reviews pros and cons".strip(), REVIEW_SITES),
+        Query(n, "complaints", f"{n} complaints implementation support switching from", REVIEW_SITES + COMMUNITY_SITES),
         Query(n, "alternatives", f"{n} alternatives competitors {h}".strip(), exclude_domains=indie),
     ]
 
@@ -267,16 +275,24 @@ def collect_sources(cfg: Config, search: SearchProvider, cache: DiskCache, *, de
     # 3. Run it (DDG rate-limits aggressively, so be gentler there)
     workers = 4 if search.name == "tavily" else 2
     pool = ThreadPoolExecutor(max_workers=workers)
+    side = ThreadPoolExecutor(max_workers=1)  # its own thread, so it never holds up a search
+    review_pages = side.submit(tracked_review_pages, cfg.all_companies, search, cache.store)
     futures = {pool.submit(search.search, q.text, q.include_domains, q.news_days, q.exclude_domains): q for q in queries}
     results: list[tuple[Query, list[SearchHit]]] = []
+    tracked: list[tuple[Query, list[SearchHit]]] = []
     try:
         timeout = None if deadline is None else max(0.0, deadline - time.monotonic())
         for f in as_completed(futures, timeout=timeout):
             results.append((futures[f], f.result()))
+        timeout = None if deadline is None else max(0.0, deadline - time.monotonic())
+        for c, site, url, text in review_pages.result(timeout=timeout):
+            tracked.append((Query(c.name, "reviews", "tracked review page"),
+                            [SearchHit(url, f"{c.name} reviews on {site.label}", text)]))
     except TimeoutError:
         log.warning("Collection time limit reached: %d of %d searches finished", len(results), len(queries))
     finally:
         pool.shutdown(wait=False, cancel_futures=True)  # don't wait for searches still in flight
+        side.shutdown(wait=False)
     results.sort(key=lambda r: queries.index(r[0]))  # stable source numbering
     if stats is not None:
         stats.update(searches_done=len(results), searches_planned=len(queries))
@@ -319,10 +335,12 @@ def collect_sources(cfg: Config, search: SearchProvider, cache: DiskCache, *, de
         sources.append(src.model_copy(update={"id": f"S{len(sources) + 1}",
                                                "content": clean_text(src.content, cfg.max_chars_per_source)}))
     by_name = {c.name: c for c in cfg.all_companies}
-    for q, hits in homepages + results:
+    # Tracked review pages first, so a search that finds the same page can't replace them
+    for q, hits in tracked + homepages + results:
         for hit in hits:
             key = normalize_url(hit.url)
-            content = clean_text(hit.content, cfg.max_chars_per_source)
+            limit = REVIEW_PAGE_CHARS if q.text == "tracked review page" else cfg.max_chars_per_source
+            content = clean_text(hit.content, limit)
             if key in seen or len(content) < 80:
                 continue
             if q.company in by_name and not is_about(by_name[q.company], hit.url, hit.title, content):

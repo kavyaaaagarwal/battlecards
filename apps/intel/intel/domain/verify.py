@@ -8,7 +8,9 @@ from dataclasses import dataclass, field
 from pydantic import BaseModel
 from rapidfuzz import fuzz
 
-from ..models import Quote, Source
+from ..models import Excerpt, Quote, Source
+from .origins import MARKET
+from .support import rate_support
 
 # Models that represent a single factual statement - dropped if left with no valid source
 CITED_TYPES = {"Claim", "Point", "Threat", "PriceTier", "Landmine", "Objection", "SharedClaim", "WhiteSpace", "Change"}
@@ -21,6 +23,7 @@ class VerifyStats:
     bad_ids_removed: int = 0
     vendor_quotes_dropped: int = 0
     rival_only_dropped: int = 0
+    excerpts_dropped: int = 0
     dropped_examples: list[str] = field(default_factory=list)
 
     def merge(self, other: "VerifyStats") -> None:
@@ -29,6 +32,7 @@ class VerifyStats:
         self.bad_ids_removed += other.bad_ids_removed
         self.vendor_quotes_dropped += other.vendor_quotes_dropped
         self.rival_only_dropped += other.rival_only_dropped
+        self.excerpts_dropped += other.excerpts_dropped
         self.dropped_examples += other.dropped_examples
 
 
@@ -50,8 +54,10 @@ def quote_is_verbatim(quote: str, source_text: str) -> bool:
 
 
 class Verifier:
-    def __init__(self, sources: list[Source]):
+    def __init__(self, sources: list[Source], companies: list[str] | None = None):
         self.by_id = {s.id: s for s in sources}
+        # Names of the companies in this run; sources filed under one of them are about that company
+        self.companies = set(companies or [])
 
     def clean(self, obj: BaseModel, about: str | None = None) -> tuple[BaseModel, VerifyStats]:
         """`about`: the company these claims describe. A rival vendor's own site is not
@@ -63,7 +69,14 @@ class Verifier:
 
     def _usable(self, sid: str, about: str | None) -> bool:
         src = self.by_id.get(sid)
-        return bool(src) and not (about and src.vendor and src.vendor != about)
+        if not src or not about:
+            return bool(src)
+        if src.vendor and src.vendor != about:
+            return False
+        # A review of us is not evidence about them: pages are filed under the company they were
+        # searched for. Head-to-head comparisons and market round-ups cover several companies.
+        return src.vendor == about or src.company in (about, MARKET) or src.category == "comparison" \
+            or src.company not in self.companies
 
     def _walk(self, obj, stats: VerifyStats, about: str | None = None):
         if isinstance(obj, list):
@@ -84,6 +97,15 @@ class Verifier:
             stats.dropped_examples.append(f"quote: {obj.quote[:80]}")
             return None
 
+        if isinstance(obj, Excerpt):
+            # The text a rep sees as "what the source says" must really be on that page.
+            src = self.by_id.get(obj.source)
+            if src and self._usable(obj.source, about) and quote_is_verbatim(obj.text, src.content):
+                return obj
+            stats.excerpts_dropped += 1
+            stats.dropped_examples.append(f"excerpt: {obj.text[:80]}")
+            return None
+
         updates = {}
         rival_only = False
         for name in type(obj).model_fields:
@@ -96,6 +118,13 @@ class Verifier:
             elif isinstance(value, (BaseModel, list)):
                 updates[name] = self._walk(value, stats, about)
 
+        if "evidence" in updates and "sources" in updates:
+            # A verified excerpt is itself a citation; the evidence decides how well the claim is backed.
+            ev_ids = list(dict.fromkeys(e.source for e in updates["evidence"]))
+            updates["sources"] = list(dict.fromkeys(updates["sources"] + ev_ids))
+            rival_only = rival_only and not updates["sources"]
+            if "support" in type(obj).model_fields:
+                updates["support"] = rate_support(ev_ids, updates["sources"], self.by_id)
         new = obj.model_copy(update=updates)
         if type(obj).__name__ in CITED_TYPES and not getattr(new, "sources", None):
             if rival_only:

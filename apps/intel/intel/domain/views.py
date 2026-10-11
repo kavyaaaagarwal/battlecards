@@ -3,6 +3,10 @@
 The single implementation of the scoring rules; the web app only draws these numbers."""
 from __future__ import annotations
 
+from urllib.parse import urlparse
+
+from .categories import build_categories, category_of, point_tags
+
 SCORE = {"full": 2, "partial": 1, "none": 0}
 STATUS_LABEL = {"full": "Full", "partial": "Partial", "none": "Not offered", "unknown": "Unknown"}
 
@@ -24,6 +28,21 @@ def _card_ids(card: dict) -> list[str]:
     return list(dict.fromkeys(ids))
 
 
+def _concentration(card: dict, by_id: dict) -> tuple[str | None, int, int]:
+    """The site the most insights lean on: (site, insights citing it, insights). A card whose
+    insights all trace back to one blog post reads as well-sourced but isn't."""
+    items = [x for key in ("where_we_win", "where_we_lose", "landmines", "objections") for x in card.get(key) or []]
+    sites: dict[str, int] = {}
+    for x in items:
+        for site in {urlparse(by_id[i].get("url") or i).netloc.removeprefix("www.") or i
+                     for i in x.get("sources") or [] if i in by_id}:
+            sites[site] = sites.get(site, 0) + 1
+    if not sites:
+        return None, 0, len(items)
+    top = max(sites, key=lambda k: (sites[k], k))
+    return top, sites[top], len(items)
+
+
 def build_views(r: dict) -> dict:
     """Pre-computes everything the charts need, so the template only lays things out."""
     by_id = {s["id"]: s for s in r["sources"]}
@@ -31,7 +50,7 @@ def build_views(r: dict) -> dict:
     profiles = r.get("profiles", {})
     matrix = (r.get("matrix") or {}).get("capabilities") or []
     # A cell backed only by the company's own site is its claim, not independent evidence.
-    matrix = [{**cap, "cells": [{**c, "self": bool(c.get("sources")) and all(
+    matrix = [{**cap, "category": category_of(cap), "cells": [{**c, "self": bool(c.get("sources")) and all(
         _origin(by_id[i]) == c["company"] for i in c["sources"] if i in by_id)} for c in cap["cells"]]}
         for cap in matrix]
 
@@ -67,16 +86,22 @@ def build_views(r: dict) -> dict:
 
         ids = _card_ids(card)
         indie = sum(1 for i in ids if i in by_id and not _origin(by_id[i]))
+        top_site, top_n, n_items = _concentration(card, by_id)
         cards.append({
             "rows": rows, "tally": tally, "known": known,
             "ratings": ratings, "axis_lo": lo,
             "evidence": {"total": len(ids), "independent": indie,
-                         "pct": round(100 * indie / len(ids)) if ids else 0},
+                         "pct": round(100 * indie / len(ids)) if ids else 0,
+                         "top_site": top_site, "top_site_items": top_n, "items": n_items},
+            "tags": point_tags(card),
         })
 
     # Market overview: ratings table + capability grid for every company
     names = [us, *r["competitors"]]
     all_sites = list(dict.fromkeys(s for n in names for s in ratings_of(n)))
     market_ratings = [{"name": n, "by_site": ratings_of(n)} for n in names]
+    cats = build_categories(us, names, matrix, ratings_of)
+    for card, view in zip(r["battlecards"], cards, strict=True):
+        view["edges"] = cats["edges"].get(card["competitor"], {})
     return {"cards": cards, "names": names, "sites": all_sites, "market_ratings": market_ratings,
-            "matrix": matrix}
+            "matrix": matrix, "categories": cats["categories"]}

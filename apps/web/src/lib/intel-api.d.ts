@@ -21,6 +21,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/features": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Features
+         * @description What the web app may offer. One switch decides both the button and whether runs start.
+         */
+        get: operations["features_v1_features_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/requests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Request Report
+         * @description Saved as requests/<date>/<id>.json: a local file in dev, Vercel Blob when deployed.
+         */
+        post: operations["request_report_v1_requests_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/runs": {
         parameters: {
             query?: never;
@@ -141,6 +181,11 @@ export interface components {
         };
         /** Capability */
         Capability: {
+            /**
+             * Category
+             * @description The buying category this capability belongs to
+             */
+            category?: ("product" | "pricing" | "support" | "implementation" | "integrations" | "voice") | null;
             /** Cells */
             cells?: components["schemas"]["Cell"][];
             /**
@@ -156,6 +201,11 @@ export interface components {
         };
         /** CapabilityView */
         CapabilityView: {
+            /**
+             * Category
+             * @default product
+             */
+            category: string;
             /** Cells */
             cells: components["schemas"]["CellView"][];
             /** Name */
@@ -165,6 +215,10 @@ export interface components {
         CardView: {
             /** Axis Lo */
             axis_lo: number;
+            /** Edges */
+            edges?: {
+                [key: string]: number | null;
+            };
             evidence: components["schemas"]["Evidence"];
             /** Known */
             known: number;
@@ -172,7 +226,36 @@ export interface components {
             ratings: components["schemas"]["RatingPair"][];
             /** Rows */
             rows: components["schemas"]["CapRow"][];
+            tags?: components["schemas"]["PointTags"];
             tally: components["schemas"]["Tally"];
+        };
+        /** CategoryView */
+        CategoryView: {
+            /** Basis */
+            basis: string;
+            /** Detail */
+            detail: {
+                [key: string]: string;
+            };
+            /**
+             * Id
+             * @enum {string}
+             */
+            id: "product" | "pricing" | "support" | "implementation" | "integrations" | "rating" | "voice";
+            /** Label */
+            label: string;
+            /** Leader */
+            leader?: string | null;
+            /** Scores */
+            scores: {
+                [key: string]: number | null;
+            };
+            /** Thin */
+            thin?: string[];
+            /** Values */
+            values?: {
+                [key: string]: number | null;
+            };
         };
         /** Cell */
         Cell: {
@@ -226,6 +309,12 @@ export interface components {
             /** Company */
             company: string;
             /**
+             * Rep Action
+             * @description What a rep should do differently because of this, max 20 words
+             * @default
+             */
+            rep_action: string;
+            /**
              * Severity
              * @enum {string}
              */
@@ -242,6 +331,8 @@ export interface components {
         };
         /** Claim */
         Claim: {
+            /** Evidence */
+            evidence?: components["schemas"]["Excerpt"][];
             /** Sources */
             sources?: string[];
             /** Text */
@@ -267,12 +358,40 @@ export interface components {
             /** Name */
             name: string;
         };
+        /** CompanyMetrics */
+        CompanyMetrics: {
+            /**
+             * Independent
+             * @default 0
+             */
+            independent: number;
+            /** Ratings */
+            ratings?: {
+                [key: string]: components["schemas"]["RatingPoint"];
+            };
+            scorecard?: components["schemas"]["Scorecard"] | null;
+            /**
+             * Sources
+             * @default 0
+             */
+            sources: number;
+            /** Tiers */
+            tiers?: {
+                [key: string]: string;
+            };
+        };
         /** CompanyProfile */
         CompanyProfile: {
+            /** Customer Proof */
+            customer_proof?: components["schemas"]["Claim"][];
             /** Domain */
             domain?: string | null;
             /** Hiring Signals */
             hiring_signals?: components["schemas"]["Claim"][];
+            /** Implementation Support */
+            implementation_support?: components["schemas"]["Claim"][];
+            /** Integrations */
+            integrations?: components["schemas"]["Claim"][];
             /** Key Capabilities */
             key_capabilities?: components["schemas"]["Claim"][];
             /**
@@ -314,18 +433,68 @@ export interface components {
         Evidence: {
             /** Independent */
             independent: number;
+            /**
+             * Items
+             * @default 0
+             */
+            items: number;
             /** Pct */
             pct: number;
+            /** Top Site */
+            top_site?: string | null;
+            /**
+             * Top Site Items
+             * @default 0
+             */
+            top_site_items: number;
             /** Total */
             total: number;
+        };
+        /**
+         * Excerpt
+         * @description What a source actually says: copied verbatim, so a rep can check the claim at a glance.
+         */
+        Excerpt: {
+            /** Source */
+            source: string;
+            /**
+             * Text
+             * @description 8-35 words copied VERBATIM from the source that prove the claim
+             */
+            text: string;
+        };
+        /** FeaturesOut */
+        FeaturesOut: {
+            /** Runs Enabled */
+            runs_enabled: boolean;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
+        /** History */
+        History: {
+            /** Points */
+            points?: components["schemas"]["HistoryPoint"][];
+            /** Signals */
+            signals?: components["schemas"]["Signal"][];
+        };
+        /** HistoryPoint */
+        HistoryPoint: {
+            /** Companies */
+            companies: {
+                [key: string]: components["schemas"]["CompanyMetrics"];
+            };
+            /** Run Date */
+            run_date: string;
+            /** Run Id */
+            run_id: string;
+        };
         /** Landmine */
         Landmine: {
+            /** Evidence */
+            evidence?: components["schemas"]["Excerpt"][];
             /**
              * Question
              * @description A question our rep asks that exposes a competitor weakness
@@ -333,6 +502,8 @@ export interface components {
             question: string;
             /** Sources */
             sources?: string[];
+            /** Support */
+            support?: ("corroborated" | "single_source" | "vendor_claim" | "cited_only") | null;
             /** Why */
             why: string;
         };
@@ -347,6 +518,8 @@ export interface components {
         };
         /** Objection */
         Objection: {
+            /** Evidence */
+            evidence?: components["schemas"]["Excerpt"][];
             /**
              * Objection
              * @description What a prospect says in favour of the competitor
@@ -356,22 +529,58 @@ export interface components {
             response: string;
             /** Sources */
             sources?: string[];
+            /** Support */
+            support?: ("corroborated" | "single_source" | "vendor_claim" | "cited_only") | null;
         };
-        /** Point */
+        /**
+         * Point
+         * @description One sales insight, in three visibly separate layers: what the sources say (evidence),
+         *     what we conclude from it (analysis) and what a rep does with it (use).
+         */
         Point: {
             /**
+             * Analysis
+             * @description Our inference from the evidence, max 25 words
+             * @default
+             */
+            analysis: string;
+            /**
              * Detail
-             * @description One supporting sentence, max 25 words
+             * @description Legacy: one supporting sentence (older runs)
              * @default
              */
             detail: string;
+            /** Evidence */
+            evidence?: components["schemas"]["Excerpt"][];
             /**
              * Headline
-             * @description Scannable takeaway, max 10 words
+             * @description ONE claim, max 10 words
              */
             headline: string;
             /** Sources */
             sources?: string[];
+            /** Support */
+            support?: ("corroborated" | "single_source" | "vendor_claim" | "cited_only") | null;
+            /**
+             * Use
+             * @description What the rep says or asks, max 25 words
+             * @default
+             */
+            use: string;
+        };
+        /**
+         * PointTags
+         * @description Category of each talk-track point, index-aligned with the battlecard's lists.
+         */
+        PointTags: {
+            /** Asks */
+            asks?: ("product" | "pricing" | "support" | "implementation" | "integrations" | "rating" | "voice")[];
+            /** Losses */
+            losses?: ("product" | "pricing" | "support" | "implementation" | "integrations" | "rating" | "voice")[];
+            /** Objections */
+            objections?: ("product" | "pricing" | "support" | "implementation" | "integrations" | "rating" | "voice")[];
+            /** Wins */
+            wins?: ("product" | "pricing" | "support" | "implementation" | "integrations" | "rating" | "voice")[];
         };
         /** PositioningAnalysis */
         PositioningAnalysis: {
@@ -469,6 +678,20 @@ export interface components {
             them?: components["schemas"]["Rating"] | null;
             us?: components["schemas"]["Rating"] | null;
         };
+        /** RatingPoint */
+        RatingPoint: {
+            /**
+             * Out Of
+             * @default 5
+             */
+            out_of: number;
+            /** Rating */
+            rating: number;
+            /** Rating5 */
+            rating5: number;
+            /** Review Count */
+            review_count?: number | null;
+        };
         /** ReportOut */
         ReportOut: {
             /** Battlecards */
@@ -492,6 +715,7 @@ export interface components {
             facts?: {
                 [key: string]: components["schemas"]["CompanyFacts"];
             };
+            history?: components["schemas"]["History"];
             /** Id */
             id: string;
             matrix?: components["schemas"]["CapabilityMatrix"] | null;
@@ -534,6 +758,41 @@ export interface components {
                 [key: string]: number;
             };
             views: components["schemas"]["Views"];
+        };
+        /**
+         * ReportRequestIn
+         * @description A visitor registering interest in beta access. Saved for review; nothing runs.
+         */
+        ReportRequestIn: {
+            /** Company */
+            company: string;
+            /**
+             * Competitors
+             * @default
+             */
+            competitors: string;
+            /** Email */
+            email: string;
+            /** Name */
+            name: string;
+            /**
+             * Note
+             * @default
+             */
+            note: string;
+            /**
+             * Role
+             * @default
+             */
+            role: string;
+        };
+        /** ReportRequestOut */
+        ReportRequestOut: {
+            /**
+             * Ok
+             * @default true
+             */
+            ok: boolean;
         };
         /** RunRequest */
         RunRequest: {
@@ -596,6 +855,17 @@ export interface components {
              */
             status: "queued" | "running" | "succeeded" | "partial" | "failed";
         };
+        /** Scorecard */
+        Scorecard: {
+            /** Behind */
+            behind: number;
+            /** Even */
+            even: number;
+            /** Known */
+            known: number;
+            /** Lead */
+            lead: number;
+        };
         /** SharedClaim */
         SharedClaim: {
             /** Companies */
@@ -605,6 +875,22 @@ export interface components {
             /** Theme */
             theme: string;
         };
+        /** Signal */
+        Signal: {
+            /** Company */
+            company: string;
+            /** Good For Us */
+            good_for_us?: boolean | null;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "rating" | "reviews" | "pricing";
+            /** Since */
+            since: string;
+            /** Text */
+            text: string;
+        };
         /** SourceOut */
         SourceOut: {
             /** Category */
@@ -613,6 +899,12 @@ export interface components {
             company: string;
             /** Id */
             id: string;
+            /**
+             * Kind
+             * @default analysis
+             * @enum {string}
+             */
+            kind: "review" | "community" | "news" | "reference" | "analysis" | "vendor";
             /**
              * Origin
              * @default independent
@@ -642,6 +934,12 @@ export interface components {
         /** Threat */
         Threat: {
             /**
+             * Analysis
+             * @description Our inference from the evidence, max 25 words
+             * @default
+             */
+            analysis: string;
+            /**
              * Counter
              * @description How a rep neutralises this, max 20 words
              * @default
@@ -649,17 +947,27 @@ export interface components {
             counter: string;
             /**
              * Detail
-             * @description One supporting sentence, max 25 words
+             * @description Legacy: one supporting sentence (older runs)
              * @default
              */
             detail: string;
+            /** Evidence */
+            evidence?: components["schemas"]["Excerpt"][];
             /**
              * Headline
-             * @description Scannable takeaway, max 10 words
+             * @description ONE claim, max 10 words
              */
             headline: string;
             /** Sources */
             sources?: string[];
+            /** Support */
+            support?: ("corroborated" | "single_source" | "vendor_claim" | "cited_only") | null;
+            /**
+             * Use
+             * @description What the rep says or asks, max 25 words
+             * @default
+             */
+            use: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -678,6 +986,8 @@ export interface components {
         Views: {
             /** Cards */
             cards: components["schemas"]["CardView"][];
+            /** Categories */
+            categories?: components["schemas"]["CategoryView"][];
             /** Market Ratings */
             market_ratings: components["schemas"]["MarketRating"][];
             /** Matrix */
@@ -723,6 +1033,59 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     };
+                };
+            };
+        };
+    };
+    features_v1_features_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FeaturesOut"];
+                };
+            };
+        };
+    };
+    request_report_v1_requests_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReportRequestIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReportRequestOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

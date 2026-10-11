@@ -4,17 +4,31 @@
 """
 from __future__ import annotations
 
+import json
 import logging
+import uuid
 from datetime import datetime, timedelta, timezone
+from pathlib import Path as FilePath
 from types import SimpleNamespace
 from typing import Annotated
 
 from fastapi import FastAPI, HTTPException, Path, Query, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 
-from .api_models import CreateRunOut, ReportOut, RunStatusOut, RunSummary
+from .api_models import (
+    CreateRunOut,
+    FeaturesOut,
+    ReportOut,
+    ReportRequestIn,
+    ReportRequestOut,
+    RunStatusOut,
+    RunSummary,
+)
 from .config import load_settings, settings_problem
 from .dispatch import make_dispatcher
+from .domain.history import build_history, signals
+from .domain.support import source_kind
+from .domain.views import build_views
 from .render_md import render_markdown
 from .runs import RUN_ID_PATTERN, CapacityError, RunRequest, create_run, run_key
 from .store import StorageNotConfigured, make_store
@@ -23,6 +37,22 @@ log = logging.getLogger(__name__)
 RunId = Annotated[str, Path(pattern=RUN_ID_PATTERN)]
 DONE = ("succeeded", "partial")
 STALL_AFTER = timedelta(minutes=10)  # a stage never runs longer than ~4 minutes
+FEATURED = FilePath(__file__).parent / "featured"  # finished runs that ship with the code
+
+
+def seed_featured(store, folder: FilePath = FEATURED) -> None:
+    """Make the deployed store match intel/featured: copy in each featured run that is missing
+    (never overwriting), and delete each run listed in removed.txt. Production storage can only
+    be written from inside the deployment, so this is how showcase reports are curated."""
+    for path in sorted(folder.glob("*.json")):
+        key = run_key(path.stem)
+        if store.get_json(key) is None:
+            store.put_json(key, json.loads(path.read_text()))
+    removed = folder / "removed.txt"
+    ids = [ln.split("#")[0].strip() for ln in removed.read_text().splitlines()] if removed.exists() else []
+    for run_id in filter(None, ids):
+        if store.get_json(run_key(run_id)) is not None:
+            store.delete(run_key(run_id))
 
 
 def is_stalled(doc: dict) -> bool:
@@ -52,6 +82,10 @@ def create_app(*, store=None, settings=None, deps=None, dispatcher=None) -> Fast
     def get_store():
         if ctx.store is None:
             ctx.store = make_store()
+            try:
+                seed_featured(ctx.store)
+            except Exception:  # noqa: BLE001 - a seeding hiccup must never take the API down
+                log.exception("Seeding featured runs failed")
         return ctx.store
 
     def get_dispatcher():
@@ -72,6 +106,8 @@ def create_app(*, store=None, settings=None, deps=None, dispatcher=None) -> Fast
     @app.post("/v1/runs", status_code=202, response_model=CreateRunOut)
     def start_run(req: RunRequest) -> CreateRunOut:
         settings = get_settings()
+        if not settings.allow_runs:
+            raise HTTPException(403, "New research runs are turned off here. Request a report instead.")
         if problem := settings_problem(settings):
             raise HTTPException(503, f"Research is unavailable: {problem}")
         try:
@@ -82,6 +118,19 @@ def create_app(*, store=None, settings=None, deps=None, dispatcher=None) -> Fast
             get_dispatcher().start(doc["id"])
             doc = load(doc["id"])
         return CreateRunOut(run_id=doc["id"], status=doc["status"], reused=reused)
+
+    @app.get("/v1/features", response_model=FeaturesOut)
+    def features() -> FeaturesOut:
+        """What the web app may offer. One switch decides both the button and whether runs start."""
+        return FeaturesOut(runs_enabled=get_settings().allow_runs)
+
+    @app.post("/v1/requests", status_code=202, response_model=ReportRequestOut)
+    def request_report(req: ReportRequestIn) -> ReportRequestOut:
+        """Saved as requests/<date>/<id>.json: a local file in dev, Vercel Blob when deployed."""
+        now = datetime.now(timezone.utc)
+        get_store().put_json(f"requests/{now:%Y-%m-%d}/{uuid.uuid4().hex[:10]}.json",
+                             {**req.model_dump(), "received_at": now.isoformat(timespec="seconds")})
+        return ReportRequestOut()
 
     @app.get("/v1/runs", response_model=list[RunSummary])
     def list_runs(limit: Annotated[int, Query(ge=1, le=50)] = 20) -> list[RunSummary]:
@@ -99,8 +148,14 @@ def create_app(*, store=None, settings=None, deps=None, dispatcher=None) -> Fast
         doc = load(run_id)
         if doc["status"] not in DONE:
             raise HTTPException(409, "This run has not finished yet")
-        sources = [{k: v for k, v in s.items() if k != "content"} for s in doc["sources"]]
-        return ReportOut(**{**doc, "sources": sources, "positioning": doc.get("positioning") or None})
+        sources = [{**{k: v for k, v in s.items() if k != "content"}, "kind": source_kind(s)} for s in doc["sources"]]
+        store = get_store()
+        points = build_history([d for k in store.list_keys("runs/") if (d := store.get_json(k))], doc)
+        history = {"points": points, "signals": signals(points, doc["company"])}
+        # Views are rebuilt on read, so reports finished before a scoring rule changed still get it
+        views = build_views(doc) if doc.get("battlecards") is not None else doc.get("views")
+        return ReportOut(**{**doc, "sources": sources, "positioning": doc.get("positioning") or None,
+                            "history": history, "views": views})
 
     @app.get("/v1/runs/{run_id}/export.md", response_class=PlainTextResponse)
     def export_md(run_id: RunId) -> str:

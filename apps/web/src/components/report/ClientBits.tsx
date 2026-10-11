@@ -28,3 +28,18 @@ export function TooltipLayer() {
 export function PrintButton() {
   return <button className="btn" onClick={() => window.print()}>Print / PDF</button>;
 }
+
+/** Opens every collapsed section, then the save-as-PDF dialog. */
+export function AutoPrint() {
+  useEffect(() => {
+    document.querySelectorAll("details").forEach((d) => (d.open = true));
+    let gone = false;
+    document.fonts.ready.then(() => setTimeout(() => !gone && window.print(), 300));
+    return () => { gone = true; };
+  }, []);
+  return (
+    <div className="print-hint">
+      Choose <b>Save as PDF</b> as the destination. <button className="btn" onClick={() => window.print()}>Open again</button>
+    </div>
+  );
+}

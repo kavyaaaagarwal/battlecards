@@ -53,7 +53,7 @@ export function RunForm() {
       <input aria-label="Category" value={category} onChange={(e) => setCategory(e.target.value)} placeholder="e.g. cruise booking software (optional)" />
       {error && <p className="form-error" role="alert">{error}</p>}
       <button className="btn primary" type="submit" disabled={busy}>{busy ? "Starting…" : "Research this market"}</button>
-      <p className="hint" style={{ marginTop: 8 }}>Takes about 3-5 minutes. Uses free AI models and search, so a run may occasionally need a retry.</p>
+      <p className="hint" style={{ marginTop: 8 }}>Takes about 3–5 minutes. You can leave the page and come back to the report.</p>
     </form>
   );
 }

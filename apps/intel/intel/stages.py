@@ -11,6 +11,7 @@ from .analyze import Analyst
 from .cache import DiskCache
 from .collect import collect_sources
 from .config import Config
+from .domain.history import build_history, signals, signals_block
 from .domain.views import build_views
 from .llm import LLM
 from .models import CompanyProfile, Source
@@ -211,7 +212,9 @@ def finalize(ctx: StageContext) -> str:
         llm = ctx.llm()
         analyst = Analyst(ctx.cfg, llm, ctx.sources())
         try:
-            ctx.doc["changes"] = analyst.changes(previous, ctx.profiles()).model_dump()
+            points = build_history([previous], {**ctx.doc, "views": None})
+            measured = signals_block(signals(points, ctx.doc["company"]))
+            ctx.doc["changes"] = analyst.changes(previous, ctx.profiles(), measured).model_dump()
         except Exception as e:  # noqa: BLE001 - the diff is a nice-to-have
             log.warning("Skipped change diff: %s", e)
             note = "Change diff skipped. "

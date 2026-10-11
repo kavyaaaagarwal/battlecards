@@ -83,6 +83,11 @@ class SearchProvider:
     def _search(self, query, include_domains, news_days, exclude_domains=None) -> list[SearchHit]:  # pragma: no cover
         raise NotImplementedError
 
+    def extract(self, urls: list[str]) -> dict[str, str]:
+        """Text of known pages, by URL. Pages that couldn't be read are left out."""
+        texts = {u: fetch_page(u, self.cache) for u in urls}
+        return {u: t for u, t in texts.items() if t}
+
 
 class TavilySearch(SearchProvider):
     """Best quality for the money: search + cleaned page content in one call.
@@ -152,6 +157,44 @@ class TavilySearch(SearchProvider):
                 log.warning("Tavily error for %r: %s", query, e)
                 time.sleep(1.5)
         return self._fall_back(query, include_domains, news_days, exclude_domains)
+
+    EXTRACT_URL = "https://api.tavily.com/extract"
+    EXTRACT_BATCH = 20  # Tavily's per-request URL limit
+
+    def extract(self, urls: list[str]) -> dict[str, str]:
+        """Review sites refuse direct fetches (HTTP 403) but Tavily Extract can read them.
+        Basic depth = 1 credit per 5 pages read; failed pages are free."""
+        if self.refused:
+            return super().extract(urls)
+        out: dict[str, str] = {}
+        todo = []
+        for u in urls:
+            hit = self.cache.get_or_set("extract", u, lambda: None)  # read-only: misses aren't stored
+            if hit:
+                out[u] = hit
+            else:
+                todo.append(u)
+        for i in range(0, len(todo), self.EXTRACT_BATCH):
+            batch = todo[i:i + self.EXTRACT_BATCH]
+            self.api_calls += 1
+            try:
+                r = requests.post(self.EXTRACT_URL, json={"urls": batch, "extract_depth": "basic", "format": "markdown"},
+                                  headers={"Authorization": f"Bearer {self.api_key}"}, timeout=60)
+                if r.status_code in self.REFUSED:
+                    log.warning("Tavily refused the extract request (HTTP %s)", r.status_code)
+                    self.refused = True
+                    return {**out, **super().extract(todo[i:])}
+                r.raise_for_status()
+                data = r.json()
+            except requests.RequestException as e:
+                log.warning("Tavily extract error: %s", e)
+                continue
+            for res in data.get("results", []):
+                if text := res.get("raw_content"):
+                    out[res["url"]] = self.cache.get_or_set("extract", res["url"], lambda t=text: t)
+            for res in data.get("failed_results", []):
+                log.info("Tavily couldn't read %s: %s", res.get("url"), res.get("error"))
+        return out
 
 
 class DuckDuckGoSearch(SearchProvider):

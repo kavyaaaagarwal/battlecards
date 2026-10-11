@@ -9,11 +9,14 @@ from intel.search import SearchHit
 from intel.store import MemoryStore
 
 
-def test_query_plan_is_six_searches_per_company():
+def test_query_plan_covers_what_sales_asks_about():
     qs = plan_queries(Company("Acme", "acme.com"), "help desk", ["acme.com", "rival.io"])
-    assert [q.category for q in qs] == ["positioning", "pricing", "news", "reviews", "complaints", "alternatives"]
+    assert [q.category for q in qs] == ["positioning", "pricing", "product_updates", "customers", "integrations",
+                                        "news", "reviews", "complaints", "alternatives"]
+    own = {q.category for q in qs if q.include_domains == ["acme.com"]}
+    assert own == {"positioning", "pricing", "product_updates", "customers", "integrations"}
     reviews = next(q for q in qs if q.category == "reviews")
-    assert "rating" in reviews.text  # reviews + star ratings in one search
+    assert "pros and cons" in reviews.text  # review text; ratings come from the tracked pages
     assert next(q for q in qs if q.category == "alternatives").exclude_domains == ["acme.com", "rival.io"]
 
 
@@ -34,7 +37,7 @@ def test_collection_stops_at_the_deadline_and_keeps_what_it_has(offline):
     sources, _ = collect_sources(cfg, SlowSearch(cache, 3), cache, deadline=t0 + 0.5, stats=stats)
     assert time.monotonic() - t0 < 1.5
     assert sources and {s.category for s in sources} == {"pricing"}  # only finished searches are kept
-    assert stats["searches_planned"] == 2 * 6 + 1 + 1  # 6 per company + 1 comparison + 1 market
+    assert stats["searches_planned"] == 2 * 9 + 1 + 1  # 9 per company + 1 comparison + 1 market
     assert 1 <= stats["searches_done"] < stats["searches_planned"]
 
 
