@@ -176,7 +176,7 @@ export function BattlecardView({ report, card, view, index, deal = {} }: Props) 
             </div>
             {card.proof_quotes?.length ? (
               <div className="cell">
-                <div className="label">Customer quotes</div>
+                <div className="label">Key quotes</div>
                 {card.proof_quotes.map((q, i) => <SourceSays key={i} evidence={[{ source: q.source, text: q.quote }]} index={index} />)}
               </div>
             ) : null}
