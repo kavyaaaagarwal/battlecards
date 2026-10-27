@@ -167,7 +167,9 @@ export function BattlecardView({ report, card, view, index, deal = {} }: Props) 
                 <li key={i}>{x.text}<EvidenceBadge ids={x.sources} index={index} /></li>
               )) : <li className="empty">None found this run.</li>}</ul>
               {(report.profiles[them]?.review_weaknesses?.length ?? 0) > 0 && (<>
-                <div className="label" style={{ marginTop: 16 }}>What {them}&apos;s reviewers complain about</div>
+                <div className="label" style={{ marginTop: 16 }}>{(report.profiles[them]?.ratings?.length ?? 0) > 0
+                  ? <>What {them}&apos;s reviewers complain about</>
+                  : <>Vulnerabilities</>}</div>
                 <ul className="moves">{report.profiles[them]!.review_weaknesses!.map((x, i) => (
                   <li key={i}>{x.text}<EvidenceBadge ids={x.sources} index={index} /></li>))}</ul>
               </>)}
