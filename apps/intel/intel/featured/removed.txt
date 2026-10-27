@@ -1,3 +1,4 @@
 # Runs deleted from the deployed store on startup, one id per line.
 c41b2f21fa  # Zomato vs Swiggy: consumer apps, not a B2B showcase
 c70bc72564  # Netchex, 6 Oct: older duplicate of the featured 991021e274
+a3bee9b105  # superseded: stale first publish of the SenSen vs Genetec, Arrive US card
