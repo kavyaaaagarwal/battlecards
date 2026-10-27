@@ -3,9 +3,11 @@ import { RequestForm } from "@/components/RequestForm";
 import type { RunSummary } from "@/lib/types";
 
 /** Production: access is invite-only, so the visitor registers interest, and meanwhile is sent to
- *  the real reports to see what they'd get. One report per company, newest first. */
+ *  the real reports to see what they'd get. One report per company and market, newest first: a
+ *  company researched in two markets is two different reports, so both are worth showing. */
 export function BetaAccess({ runs }: { runs: RunSummary[] }) {
-  const reports = runs.filter((r, i) => runs.findIndex((x) => x.company === r.company) === i).slice(0, 4);
+  const key = (r: RunSummary) => `${r.company}\u0000${r.category}`;
+  const reports = runs.filter((r, i) => runs.findIndex((x) => key(x) === key(r)) === i).slice(0, 5);
   return (
     <section className="lp-try lp-beta" id="try">
       <div className="beta-left">
